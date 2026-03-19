@@ -1,0 +1,44 @@
+# IONOS Deploy Now - Build workflow
+# Uses npm install instead of npm ci (works with or without package-lock.json)
+# If IONOS created a different workflow, edit it and change "npm ci" to "npm install"
+
+name: Deploy to IONOS
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        env:
+          CI: true
+          SITE_URL: ${{ env.SITE_URL || 'https://example.com' }}
+        run: npm install
+
+      - name: Build
+        env:
+          CI: true
+          SITE_URL: ${{ env.SITE_URL || 'https://example.com' }}
+          DEPLOYMENT_FOLDER: out
+        run: npm run build
+
+      - name: Deploy to IONOS
+        uses: ionos-deploy-now/deploy-to-ionos-action@v1
+        with:
+          project-id: ${{ secrets.IONOS_PROJECT_ID }}
+          api-key: ${{ secrets.IONOS_API_KEY }}
+          dist-folder: out
