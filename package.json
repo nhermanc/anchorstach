@@ -5,6 +5,8 @@
 	"scripts": {
 		"dev": "node --openssl-legacy-provider ./node_modules/next/dist/bin/next dev",
 		"build": "node --openssl-legacy-provider ./node_modules/next/dist/bin/next build",
+		"build:deploy": "node scripts/generate-public-seo.mjs && node --openssl-legacy-provider ./node_modules/next/dist/bin/next build && node --openssl-legacy-provider ./node_modules/next/dist/bin/next export -o deploy",
+		"build:static": "npm run build:deploy",
 		"start": "node --openssl-legacy-provider ./node_modules/next/dist/bin/next start",
 		"lint": "next lint",
 		"fetch-upwork": "node scripts/fetch-upwork-testimonials.js",

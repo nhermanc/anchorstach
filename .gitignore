@@ -11,6 +11,11 @@
 # next.js
 /.next/
 /out/
+/deploy/
+
+# Generated for static export (recreated by npm run build:deploy)
+/public/sitemap.xml
+/public/robots.txt
 
 # production
 /build
