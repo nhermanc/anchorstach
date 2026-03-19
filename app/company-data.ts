@@ -192,6 +192,11 @@ export type WorkProjectItem = {
 	overview: string;
 	highlights: string[];
 	liveLink?: string;
+	platformLinks?: {
+		web?: string;
+		ios?: string;
+		android?: string;
+	};
 };
 
 export const workProjectItems: WorkProjectItem[] = [

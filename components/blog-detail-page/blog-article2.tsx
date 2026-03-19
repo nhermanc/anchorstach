@@ -8,8 +8,15 @@ import { useRouter } from "next/router";
 import GridItem from "../blog-page/blog-grid-item";
 import { blogItems } from "../../app/company-data";
 
-const BlogArticle2: FC = () => {
+type BlogArticle2Props = {
+	currentBlogId?: string;
+};
+
+const BlogArticle2: FC<BlogArticle2Props> = ({ currentBlogId }) => {
 	const router = useRouter();
+	const relatedBlogs = blogItems
+		.filter((item) => item.id !== currentBlogId)
+		.slice(0, 6);
 
 	return (
 		<Wrapper>
@@ -99,11 +106,13 @@ const BlogArticle2: FC = () => {
 				</RelatedArticle>
 
 				<GridWrapper>
-					{blogItems.slice(0, 6).map((item) => (
+					{relatedBlogs.map((item) => (
 						<GridItem
 							key={item.id}
 							src={item.image}
 							title={item.title}
+							blogId={item.id}
+							category={item.category}
 							name={item.authorName}
 							authorImageSrc={item.authorAvatar}
 						/>
