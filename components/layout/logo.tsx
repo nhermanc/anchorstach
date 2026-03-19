@@ -1,0 +1,72 @@
+/** @format */
+
+import styled from "styled-components";
+import Image from "next/image";
+import React, { memo } from "react";
+import { companyInfo } from "../../app/company-data";
+
+type Props = {
+	visible?: boolean;
+	isTransparent?: boolean;
+	burgerMenuStatus?: boolean;
+	SetBurgerMenuStatus?: (e: boolean) => void;
+};
+
+const Logo: React.FC<Props> = ({ isTransparent, visible }) => {
+	return (
+		<Wrapper isTransparent={isTransparent} visible={visible}>
+			<div
+				className='logo'
+				style={{
+					position: "relative",
+					cursor: "pointer",
+				}}>
+				<Image
+					className='logo-img'
+					src={companyInfo.logoPath}
+					alt={`${companyInfo.name} logo`}
+					layout='fill'
+					objectFit='contain'
+				/>
+			</div>
+			<div>{companyInfo.name}</div>
+		</Wrapper>
+	);
+};
+
+export default memo(Logo);
+
+const Wrapper = styled.div<Props>`
+	height: 6rem;
+	color: #0f0b33;
+	display: flex;
+	align-items: center;
+	text-transform: uppercase;
+	font-size: var(--size-5);
+	font-weight: bold;
+	position: relative;
+	z-index: 101;
+
+	* {
+		opacity: 0.99;
+		z-index: 101;
+	}
+
+	.logo {
+		width: 3.825rem;
+		height: 2.237rem;
+		display: flex;
+		align-items: center;
+		img {
+			display: block;
+		}
+	}
+
+	div {
+		font-weight: 600;
+		font-size: 24px;
+		letter-spacing: -6%;
+		color: ${(props) =>
+			props.isTransparent && !props.visible ? `#0f0b33` : `#0f0b33`};
+	}
+`;
