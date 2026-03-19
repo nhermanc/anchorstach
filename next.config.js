@@ -19,8 +19,12 @@ module.exports = {
 		NEXT_PUBLIC_MAP_BOX_ACCESS_TOKEN:
 			process.env.NEXT_PUBLIC_MAP_BOX_ACCESS_TOKEN,
 	},
-	// Required for `next export` — default Image Optimization API has no server on static hosts
+	// Next.js 11: `next export` only skips the image check when loader !== 'default'.
+	// `images.unoptimized` alone does NOT satisfy that check (Next 11 bug/oversight).
+	// Akamai loader + path "/" yields normal paths like /foo.jpg?imwidth=… (fine on static hosts).
 	images: {
+		loader: "akamai",
+		path: "/",
 		unoptimized: true,
 		domains: [],
 		deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],

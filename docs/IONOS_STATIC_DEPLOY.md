@@ -81,3 +81,7 @@ Commit **`.deploy-now/anchorstach/config.yaml`** (this repo includes it).
 ### `DEPLOYMENT_FOLDER` env
 
 Set this in the **build** step to match where the static site is produced (conceptually `deploy`). The **artifact** step’s **`folder: deploy`** must match that output directory name.
+
+### Next.js 11 + `next export` + `next/image`
+
+`next export` only checks that `images.loader !== 'default'`. **`images.unoptimized: true` alone does not fix that in Next 11.** This repo sets **`loader: 'akamai'`** and **`path: '/'`** so export succeeds; image URLs look like `/path/to.jpg?imwidth=…` (static hosts ignore the extra query).
