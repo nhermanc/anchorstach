@@ -34,6 +34,15 @@ deploy
 
 (Not `public` — that name is reserved for Next.js source assets.)
 
+## `.deploy-now/config.yaml`
+
+The **deploy-to-ionos** step requires a valid config with a top-level **`version`** (e.g. `1.0`) and a **`deploy:`** block. This repo includes:
+
+- **`.deploy-now/config.yaml`** — used by many **deploy-to-ionos** workflows
+- **`.deploy-now/anchorstach/config.yaml`** — if your workflow’s `config-file` points here (v2-style)
+
+Commit and push both if your IONOS project references them.
+
 ## Environment variable
 
 Optional: set `NEXT_PUBLIC_SITE_URL` in IONOS build env so sitemap URLs match your live domain.

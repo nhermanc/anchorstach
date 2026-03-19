@@ -1,4 +1,4 @@
-# IONOS Deploy Now — static site (workflow v2: .deploy-now/[project]/config.yaml)
+# IONOS Deploy Now — static site (workflow v1 / deploy-to-ionos)
 # https://docs.ionos.space/docs/deployment-configuration/
 
 version: 1.0
