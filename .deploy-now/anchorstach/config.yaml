@@ -1,0 +1,8 @@
+# IONOS Deploy Now — deployment rules (static site)
+# https://docs.ionos.space/docs/deployment-configuration/
+
+bootstrap:
+  excludes: []
+
+recurring:
+  excludes: []
