@@ -5,51 +5,14 @@ import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import StarIcon from "@material-ui/icons/Star";
 import Link from "next/link";
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState } from "react";
 import { companyInfo, testimonialItems } from "../../app/company-data";
 import type { TestimonialItem } from "../../app/company-data";
 
 const TESTIMONIAL: FC = () => {
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
-	const [items, setItems] = useState<TestimonialItem[]>(testimonialItems);
-
-	// Defer API work until the browser is idle so first paint / LCP stay unblocked.
-	useEffect(() => {
-		if (typeof window === "undefined") return;
-
-		let cancelled = false;
-		const load = () => {
-			if (cancelled) return;
-			fetch("/api/upwork-testimonials")
-				.then((res) => res.json())
-				.then((data) => {
-					if (cancelled) return;
-					if (data.testimonials && data.testimonials.length > 0) {
-						setItems(data.testimonials);
-						setCurrentIndex(0);
-					}
-				})
-				.catch(() => {});
-		};
-
-		// Prefer idle scheduling when available (Safari added ric later; DOM types assume it exists, so we feature-detect at runtime).
-		const ric = window.requestIdleCallback;
-		if (typeof ric === "function") {
-			const id = ric.call(window, load, { timeout: 4000 });
-			return () => {
-				cancelled = true;
-				window.cancelIdleCallback(id);
-			};
-		}
-
-		const t = setTimeout(load, 1500);
-		return () => {
-			cancelled = true;
-			clearTimeout(t);
-		};
-	}, []);
-
-	const displayItems = items.length > 0 ? items : testimonialItems;
+	/* Static / IONOS: no `/api/upwork-testimonials` — use bundled data only (no 404 in console). */
+	const displayItems: TestimonialItem[] = testimonialItems;
 	const safeIndex = displayItems.length > 0 ? currentIndex % displayItems.length : 0;
 	const currentTestimonial = displayItems[safeIndex] ?? displayItems[0];
 

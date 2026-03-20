@@ -51,9 +51,10 @@ Optional: set `NEXT_PUBLIC_SITE_URL` in IONOS build env so sitemap URLs match yo
 
 ## Notes
 
-- **API routes** (`/api/contact`, etc.) are **not** included in a static export. The **Contact** and **Hire Us** forms automatically fall back to **FormSubmit** when `/api/contact` is missing (HTML/404 response) or returns non-JSON. No change to your deploy command is required.
-- **FormSubmit:** The first submission may require confirming the destination email. For production, set **`NEXT_PUBLIC_FORMSUBMIT_TOKEN`** (after activating a form at formsubmit.co) in the IONOS build environment. Optionally set **`NEXT_PUBLIC_CONTACT_FORM_CLIENT=1`** to skip the useless `/api/contact` request on static hosting.
-- Standard **`npm run build`** still only creates `.next/` (for `next start` or Node hosting). Use **`npm run build:deploy`** for IONOS static hosting.
+- **Contact / Hire Us (static IONOS):** Forms POST from the browser to **FormSubmit** (see **`.env.example`**). No **`/api/contact`** in the live static site — avoids **404** in the console. For CI, set **`NEXT_PUBLIC_CONTACT_STATIC_ONLY=1`** at build time so submissions never target `/api/*` even if other env vars leak in. Optionally set **`NEXT_PUBLIC_FORMSUBMIT_FORM_ID`** after activating at [formsubmit.co](https://formsubmit.co).
+- **Testimonials:** The home page uses **static** data from `app/company-data.ts` only (no **`/api/upwork-testimonials`**), so static deploys do not hit missing API routes.
+- **Optional Node + SMTP:** Set **`NEXT_PUBLIC_USE_NODE_CONTACT_API=1`** locally with **`SMTP_*`** for **`next dev`**, or **`NEXT_PUBLIC_CONTACT_API_BASE_URL`** if the API is hosted separately.
+- Standard **`npm run build`** still only creates `.next/` (for `next start` or Node hosting). Use **`npm run build:deploy`** for IONOS **static** hosting only.
 - Local **`npm run dev`** uses **`scripts/run-dev.cjs`** + **`NEXT_USE_DEV_DIST`** → **`.next-dev/`** so dev never overwrites the production **`.next/`** cache.
 
 ---

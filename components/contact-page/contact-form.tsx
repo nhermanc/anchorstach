@@ -72,7 +72,8 @@ const ContactFormComponent: FC = () => {
 			reset();
 			setSubmitState({
 				loading: false,
-				successMessage: "Message sent successfully. We will contact you soon.",
+				successMessage:
+					"Message sent successfully. We will contact you soon.",
 				errorMessage: "",
 			});
 		} catch (error: any) {
