@@ -65,8 +65,8 @@ async function fetchWithPuppeteer() {
 				if (!Array.isArray(feedback)) return [];
 
 				const backgrounds = [
-					"/home/home2.jpg",
-					"/home/home1.jpg",
+					"/home/home2.webp",
+					"/home/home1.webp",
 					"/services/services10.jpg",
 					"/home/work4.jpg",
 				];
@@ -95,7 +95,7 @@ async function fetchWithPuppeteer() {
 						review: comment,
 						reviewerName: name,
 						reviewerRole: title,
-						reviewerAvatar: "/home/user.png",
+						reviewerAvatar: "/home/user.webp",
 						rating: typeof rating === "number" ? rating : 5,
 						backgroundImage: backgrounds[i % backgrounds.length],
 					};
@@ -126,10 +126,10 @@ async function fetchWithPuppeteer() {
 								review,
 								reviewerName: lines[0] || "Client",
 								reviewerRole: "Upwork Client",
-								reviewerAvatar: "/home/user.png",
+								reviewerAvatar: "/home/user.webp",
 								rating: 5,
 								backgroundImage:
-									["/home/home2.jpg", "/home/home1.jpg", "/services/services10.jpg", "/home/work4.jpg"][
+									["/home/home2.webp", "/home/home1.webp", "/services/services10.jpg", "/home/work4.jpg"][
 										i % 4
 									],
 							});

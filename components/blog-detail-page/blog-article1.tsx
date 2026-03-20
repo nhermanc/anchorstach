@@ -110,7 +110,7 @@ const AboutAsWrapper = styled.div`
 			rgba(255, 255, 255, 0.9),
 			rgba(255, 255, 255, 0.9)
 		),
-		url("/blog/blog.jpg");
+		url("/blog/blog.webp");
 	background-size: cover;
 	background-position: center;
 

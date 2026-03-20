@@ -44,7 +44,7 @@ const Wrapper = styled.div`
 		rgba(255, 255, 255, 0.94),
 		rgba(255, 255, 255, 0.94)
 	),
-	url("/blog/blog.jpg");
+	url("/blog/blog.webp");
 	background-position: center;
 	background-size: cover;
 	background-repeat: no-repeat;

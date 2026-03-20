@@ -1,7 +1,5 @@
 /** @format */
 
-import { store } from "../app/store";
-import { Provider } from "react-redux";
 import type { AppProps } from "next/app";
 import React from "react";
 import Head from "next/head";
@@ -9,6 +7,8 @@ import { useRouter } from "next/router";
 
 import "../styles/globals.css";
 import Layout from "../components/layout/layout";
+import AppShell from "../components/layout/app-shell";
+import PrefetchCoreRoutes from "../components/layout/prefetch-core-routes";
 import { companyInfo } from "../app/company-data";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -48,8 +48,8 @@ function MyApp({ Component, pageProps }: AppProps) {
 	const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
 
 	return (
-		<Provider store={store}>
-			<Layout>
+		<Layout>
+				<PrefetchCoreRoutes />
 				<Head>
 					<meta charSet="utf-8" />
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -83,14 +83,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 						}}
 					/>
 				</Head>
-				<Component {...pageProps} />
+				<AppShell>
+					<Component {...pageProps} />
+				</AppShell>
 			</Layout>
-		</Provider>
 	);
 }
 export default MyApp;
-
-// figma file
-// https://www.figma.com/file/Or3aXdkrEIJzcLdrqUEltF/PHOENIX-SOFTWARE-SOLUTIONS-WEBSITE?node-id=2%3A18
-
-// https://dev.to/franciscomendes10866/passing-props-to-child-components-in-react-using-typescript-2690

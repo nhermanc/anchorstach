@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { companyInfo } from "../../app/company-data";
+import { submitContactMessage } from "../../lib/submit-contact-form";
 
 type UserSubmitForm = {
 	name: string;
@@ -60,58 +61,13 @@ const ContactFormComponent: FC = () => {
 			errorMessage: "",
 		});
 
-		const requestController = new AbortController();
-		const requestTimeout = setTimeout(() => {
-			requestController.abort();
-		}, 12000);
-
 		try {
-			const response = await fetch("/api/contact", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(data),
-				signal: requestController.signal,
+			await submitContactMessage({
+				name: data.name,
+				email: data.email,
+				subject: data.subject,
+				emailSubject: `New contact form message from ${data.name}`,
 			});
-			clearTimeout(requestTimeout);
-
-			const responseData = await response.json();
-			if (!response.ok) {
-				throw new Error(responseData?.message || "Message sending failed.");
-			}
-
-			if (
-				responseData?.provider === "formsubmit-client" &&
-				responseData?.formSubmitEndpoint
-			) {
-				const providerResponse = await fetch(responseData.formSubmitEndpoint, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/json",
-					},
-					body: JSON.stringify({
-						name: data.name,
-						email: data.email,
-						message: data.subject,
-						_subject: `New contact form message from ${data.name}`,
-						_template: "table",
-						_captcha: "false",
-					}),
-				});
-
-				const providerData = await providerResponse.json();
-				if (
-					!providerResponse.ok ||
-					String(providerData?.success || "").toLowerCase() !== "true"
-				) {
-					throw new Error(
-						providerData?.message ||
-							"Provider did not confirm delivery. Please try again.",
-					);
-				}
-			}
 
 			reset();
 			setSubmitState({
@@ -120,7 +76,6 @@ const ContactFormComponent: FC = () => {
 				errorMessage: "",
 			});
 		} catch (error: any) {
-			clearTimeout(requestTimeout);
 			setSubmitState({
 				loading: false,
 				successMessage: "",
@@ -128,7 +83,7 @@ const ContactFormComponent: FC = () => {
 					error?.name === "AbortError"
 						? "Request timed out. Please try again."
 						: error?.message ||
-					"Unable to send message right now. Please try again shortly.",
+							"Unable to send message right now. Please try again shortly.",
 			});
 		}
 	};
@@ -425,7 +380,7 @@ const ContactForm = styled.div`
 		margin-bottom: 2rem;
 	}
 	.control {
-		margin-bottom: 2rem;
+		margin-bottom: 1rem;
 	}
 	.control label {
 		display: block;

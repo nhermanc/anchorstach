@@ -25,7 +25,7 @@ function MainNavigation() {
 	};
 
 	useEffect(() => {
-		window.addEventListener("scroll", toggleVisible);
+		window.addEventListener("scroll", toggleVisible, { passive: true });
 
 		if (
 			router.pathname == "/detail-blog" ||
@@ -40,7 +40,7 @@ function MainNavigation() {
 		return () => {
 			window.removeEventListener("scroll", toggleVisible);
 		};
-	}, []);
+	}, [router.pathname]);
 
 	return (
 		<React.Fragment>
@@ -57,8 +57,8 @@ function MainNavigation() {
 				isTransparent={isTransparent}
 				visible={visible}>
 				<CustomContainer>
-					<Link href='/'>
-						<a>
+					<Link href='/' prefetch={true} passHref>
+						<a onMouseEnter={() => router.prefetch("/")}>
 							<Logo isTransparent={isTransparent} visible={visible} />
 						</a>
 					</Link>
@@ -67,37 +67,62 @@ function MainNavigation() {
 							<li
 								className='hid-ss'
 								id={router.pathname == "/" ? "active" : ""}>
-								<Link href='/'>HOME</Link>
+								<Link href='/' prefetch={true} passHref>
+									<a onMouseEnter={() => router.prefetch("/")}>HOME</a>
+								</Link>
 							</li>
 							<li
 								className='hid-s'
 								id={router.pathname == "/work" ? "active" : ""}>
-								<Link href='/work'>EXPERENCES</Link>
+								<Link href='/work' prefetch={true}>
+									<a onMouseEnter={() => router.prefetch("/work")}>
+										EXPERENCES
+									</a>
+								</Link>
 							</li>
 							<li
 								className='hid-s'
 								id={router.pathname == "/services" ? "active" : ""}>
-								<Link href='/services'>SERVICES</Link>
+								<Link href='/services' prefetch={true} passHref>
+									<a onMouseEnter={() => router.prefetch("/services")}>
+										SERVICES
+									</a>
+								</Link>
 							</li>
 							<li
 								className='hid-s'
 								id={router.pathname == "/how-we-work" ? "active" : ""}>
-								<Link href='/how-we-work'>HOW WE WORK</Link>
+								<Link href='/how-we-work' prefetch={true} passHref>
+									<a
+										onMouseEnter={() => router.prefetch("/how-we-work")}>
+										HOW WE WORK
+									</a>
+								</Link>
 							</li>
 							<li
 								className='hid-s'
 								id={router.pathname == "/blog" ? "active" : ""}>
-								<Link href='/blog'>BLOG</Link>
+								<Link href='/blog' prefetch={true} passHref>
+									<a onMouseEnter={() => router.prefetch("/blog")}>BLOG</a>
+								</Link>
 							</li>
 							<li
 								className='hid-m'
 								id={router.pathname == "/about-us" ? "active" : ""}>
-								<Link href='/about-us'>ABOUT US</Link>
+								<Link href='/about-us' prefetch={true}>
+									<a onMouseEnter={() => router.prefetch("/about-us")}>
+										ABOUT US
+									</a>
+								</Link>
 							</li>
 							<li
 								className='hid-m'
 								id={router.pathname == "/contact" ? "active" : ""}>
-								<Link href='/contact'>CONTACT US</Link>
+								<Link href='/contact' prefetch={true} passHref>
+									<a onMouseEnter={() => router.prefetch("/contact")}>
+										CONTACT US
+									</a>
+								</Link>
 							</li>
 
 							<li className='hid-big'>
@@ -116,12 +141,13 @@ function MainNavigation() {
 							</li>
 						</ul>
 					</nav>
-					<button
-						onClick={() => {
-							router.push("/contact");
-						}}>
-						GET STARTED
-					</button>
+					<Link href='/contact' prefetch={true} passHref>
+						<a
+							className='nav-cta'
+							onMouseEnter={() => router.prefetch("/contact")}>
+							GET STARTED
+						</a>
+					</Link>
 				</CustomContainer>
 			</Header>
 			{burgerMenuStatus && (
@@ -226,13 +252,14 @@ const Header = styled.header`
 			transition: var(--transition-duration);
 		}
 	}
-	button {
+	a.nav-cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
 		width: 148px;
 		height: 48px;
 		font: inherit;
 		cursor: pointer;
-		border: 0;
-		outline: none;
 		border: 2px solid #0f0b33;
 		background-color: #0f0b33;
 		color: white;
@@ -241,6 +268,7 @@ const Header = styled.header`
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 		transition-duration: var(--transition-duration);
 		min-width: fit-content;
+		text-decoration: none;
 		&:hover,
 		&:active {
 			background-color: #1d1852;

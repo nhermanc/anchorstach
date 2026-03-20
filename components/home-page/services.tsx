@@ -49,7 +49,7 @@ const serviceVisuals: Record<string, ServiceVisual> = {
 
 const defaultServiceVisual: ServiceVisual = {
 	icon: <WebIcon style={{ color: "white", fontSize: "1.7rem" }} />,
-	backgroundImage: "/home/home1.jpg",
+	backgroundImage: "/home/home1.webp",
 };
 
 const Services: FC = () => {

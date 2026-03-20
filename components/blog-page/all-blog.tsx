@@ -9,7 +9,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 import BlogGrid from "./blog-grid";
-import { blogItems } from "../../app/company-data";
 
 interface BlogItem {
 	id: string;
@@ -46,9 +45,8 @@ const AllBlog: React.FC<Props> = ({
 	const router = useRouter();
 	const BLOGS_PER_PAGE = 7; /* 1 featured + 6 grid items */
 	const [currentPage, setCurrentPage] = useState<number>(1);
-	const [featuredAvatarSrc, setFeaturedAvatarSrc] = useState<string>(
-		"/about-us/avatar-placeholder.svg",
-	);
+	/** Only set after load error — keeps first paint identical on server & client (no hydration mismatch). */
+	const [featuredAvatarFailed, setFeaturedAvatarFailed] = useState(false);
 
 	const totalPages = Math.max(1, Math.ceil(items.length / BLOGS_PER_PAGE));
 
@@ -67,14 +65,18 @@ const AllBlog: React.FC<Props> = ({
 		return items.slice(start, start + BLOGS_PER_PAGE);
 	}, [items, currentPage]);
 
-	const featuredBlog = paginatedItems[0] || items[0] || blogItems[0];
+	const featuredBlog = paginatedItems[0] ?? items[0];
 	const gridItems = paginatedItems.slice(1);
 
+	const featuredAuthorAvatar =
+		featuredBlog?.authorAvatar || "/about-us/avatar-placeholder.svg";
+	const featuredAvatarSrc = featuredAvatarFailed
+		? "/about-us/avatar-placeholder.svg"
+		: featuredAuthorAvatar;
+
 	useEffect(() => {
-		setFeaturedAvatarSrc(
-			featuredBlog?.authorAvatar || "/about-us/avatar-placeholder.svg",
-		);
-	}, [featuredBlog]);
+		setFeaturedAvatarFailed(false);
+	}, [featuredAuthorAvatar]);
 
 	return (
 		<Wrapper>
@@ -108,62 +110,73 @@ const AllBlog: React.FC<Props> = ({
 					</BlogTopContainer>
 
 					<AnimatedPageContent key={currentPage}>
-						<MiddleContainer>
-							<ImageContainer
-								style={{
-									position: "relative",
-									cursor: "pointer",
-								}}>
-								<Image
-									src={featuredBlog.image}
-									alt='Hero Image'
-									layout='fill'
-									objectFit='cover'
-								/>
-							</ImageContainer>
-							<ContentSection>
-								<h2 style={{ color: "var(--color-grey-800)" }}>{featuredBlog.title}</h2>
-								<div className='user'>
-									<AuthorPhoto
-										src={featuredAvatarSrc}
-										alt={featuredBlog.authorName}
-										onError={() =>
-											setFeaturedAvatarSrc("/about-us/avatar-placeholder.svg")
-										}
-									/>
-									<p className='name' style={{ color: "var(--color-grey-800)" }}>
-										{featuredBlog.authorName}
-									</p>
-									<p>
-										<span>Author</span>
-									</p>
-								</div>
-								<div className='article'>
-									<p>{featuredBlog.excerpt}</p>
-								</div>
+						{featuredBlog ? (
+							<>
+								<MiddleContainer>
+									<ImageContainer
+										style={{
+											position: "relative",
+											cursor: "pointer",
+										}}>
+										<Image
+											src={featuredBlog.image}
+											alt='Hero Image'
+											layout='fill'
+											objectFit='cover'
+										/>
+									</ImageContainer>
+									<ContentSection>
+										<h2 style={{ color: "var(--color-grey-800)" }}>
+											{featuredBlog.title}
+										</h2>
+										<div className='user'>
+											<AuthorPhoto
+												src={featuredAvatarSrc}
+												alt={featuredBlog.authorName}
+												onError={() => setFeaturedAvatarFailed(true)}
+											/>
+											<p
+												className='name'
+												style={{ color: "var(--color-grey-800)" }}>
+												{featuredBlog.authorName}
+											</p>
+											<p>
+												<span>Author</span>
+											</p>
+										</div>
+										<div className='article'>
+											<p>{featuredBlog.excerpt}</p>
+										</div>
 
-								<HiddenImageContainer>
-									<Image
-										src={featuredBlog.image}
-										alt='Hero Image'
-										width={500}
-										height={400}
-										layout='responsive'
-									/>
-								</HiddenImageContainer>
+										<HiddenImageContainer>
+											<Image
+												src={featuredBlog.image}
+												alt='Hero Image'
+												width={500}
+												height={400}
+												layout='responsive'
+											/>
+										</HiddenImageContainer>
 
-								<CustomButton
-									onClick={() => {
-										router.push({
-											pathname: "/detail-blog",
-											query: { blog: featuredBlog.id },
-										});
-									}}>
-									READ MORE
-								</CustomButton>
-							</ContentSection>
-						</MiddleContainer>
-						<BlogGrid items={gridItems} />
+										<CustomButton
+											onClick={() => {
+												router.push({
+													pathname: "/detail-blog",
+													query: { blog: featuredBlog.id },
+												});
+											}}>
+											READ MORE
+										</CustomButton>
+									</ContentSection>
+								</MiddleContainer>
+								<BlogGrid items={gridItems} />
+							</>
+						) : (
+							<EmptyResults>
+								<p>No articles match your filters.</p>
+								<p className='hint'>Try another category or search term.</p>
+							</EmptyResults>
+						)}
 					</AnimatedPageContent>
 					<PaginationContainer>
 						<IconButton
@@ -450,6 +463,20 @@ const HiddenImageContainer = styled.div`
 	img {
 		object-fit: cover;
 		display: block;
+	}
+`;
+
+const EmptyResults = styled.div`
+	text-align: center;
+	padding: 3rem 1.5rem;
+	color: var(--color-grey-700, #5c5a6b);
+	font-weight: 600;
+
+	.hint {
+		margin-top: 0.5rem;
+		font-weight: 500;
+		font-size: 0.95rem;
+		color: var(--color-grey-500, #8a8799);
 	}
 `;
 

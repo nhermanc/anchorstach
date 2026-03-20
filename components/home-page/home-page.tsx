@@ -1,13 +1,39 @@
 /** @format */
 
+import dynamic from "next/dynamic";
 import React, { FC } from "react";
 
 import Hero from "./hero";
-import Services from "./services";
-import AboutUsCom from "./about-us";
-import Work from "./work";
-import TESTIMONIAL from "./testimonial";
 import MainNavigation from "../layout/main-navigation";
+import HomeSectionPlaceholder from "./home-section-placeholder";
+
+const Services = dynamic(() => import("./services"), {
+	loading: () => (
+		<HomeSectionPlaceholder minHeight="36rem" aria-label="Loading services" />
+	),
+	ssr: true,
+});
+
+const AboutUsCom = dynamic(() => import("./about-us"), {
+	loading: () => (
+		<HomeSectionPlaceholder minHeight="28rem" aria-label="Loading about section" />
+	),
+	ssr: true,
+});
+
+const Work = dynamic(() => import("./work"), {
+	loading: () => (
+		<HomeSectionPlaceholder minHeight="32rem" aria-label="Loading work section" />
+	),
+	ssr: true,
+});
+
+const TESTIMONIAL = dynamic(() => import("./testimonial"), {
+	loading: () => (
+		<HomeSectionPlaceholder minHeight="26rem" aria-label="Loading testimonials" />
+	),
+	ssr: true,
+});
 
 const HomePageComponent: FC = () => {
 	return (

@@ -35,7 +35,7 @@ export const serviceItems: ServiceItem[] = [
 		detailHeading: "Modern web platforms built for performance and growth",
 		detailDescription:
 			"We design and deliver conversion-focused websites, customer portals, and web applications with scalable architecture, fast load times, and search-friendly structure.",
-		heroImage: "/home/work1.jpg",
+		heroImage: "/home/work1.webp",
 		highlights: [
 			"High-performance websites and web applications",
 			"SEO-ready architecture, metadata, and content structure",
@@ -58,7 +58,7 @@ export const serviceItems: ServiceItem[] = [
 			"Business-ready iOS and Android apps with smooth user experiences",
 		detailDescription:
 			"We build mobile products that combine clean UX, stable architecture, and measurable product outcomes from MVP to full-scale release.",
-		heroImage: "/home/work2.jpg",
+		heroImage: "/home/work2.webp",
 		highlights: [
 			"Native-like performance across iOS and Android",
 			"Secure API integration and offline-capable app flows",
@@ -167,13 +167,13 @@ export const homeProjectItems = [
 		title: "Anchor CRM Dashboard",
 		slug: "anchor-crm-dashboard",
 		category: "Web Solutions",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 	},
 	{
 		title: "FleetOps Mobile App",
 		slug: "fleetops-mobile-app",
 		category: "App Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 	},
 	{
 		title: "Retail ERP Odoo Suite",
@@ -204,7 +204,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "LightOn AI",
 		slug: "lighton-ai",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "Webflow Website",
 		liveLink: "https://www.lighton.ai/",
 		overview:
@@ -219,7 +219,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Pantera Technology",
 		slug: "pantera-technology",
 		category: "Web Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "Webflow Website",
 		liveLink: "https://www.panteratechnology.com/",
 		overview:
@@ -294,7 +294,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Zello",
 		slug: "zello",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "Next.js Website",
 		liveLink: "https://zello.com/",
 		overview:
@@ -309,7 +309,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Trilogy Energy Solutions",
 		slug: "trilogy-energy-solutions",
 		category: "Web Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "Next.js Website",
 		liveLink: "https://trilogyes.com/",
 		overview:
@@ -384,7 +384,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Resolution Medical",
 		slug: "resolution-medical",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://resolutionmedical.com/",
 		overview:
@@ -399,7 +399,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Material",
 		slug: "material-inc",
 		category: "Web Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://www.material.inc/",
 		overview:
@@ -474,7 +474,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Grand Design Build",
 		slug: "grand-design-build",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://granddesignbuild.com/",
 		overview:
@@ -489,7 +489,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Canyon Design Build",
 		slug: "canyon-design-build",
 		category: "Web Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://canyondesignbuild.com/",
 		overview:
@@ -564,7 +564,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Flex",
 		slug: "get-flex",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://getflex.com/",
 		overview:
@@ -579,7 +579,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Giati Elements",
 		slug: "giati-elements",
 		category: "Web Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://giatielements.com/",
 		overview:
@@ -654,7 +654,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Velocity Electronics",
 		slug: "velocity-electronics",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://velocityelectronics.com/",
 		overview:
@@ -669,7 +669,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Gridstone Power",
 		slug: "gridstone-power",
 		category: "Web Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://gridstonepower.com/",
 		overview:
@@ -744,7 +744,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Automate Labels",
 		slug: "automate-labels",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://www.automatelabels.com/",
 		overview:
@@ -759,7 +759,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Sublime Systems",
 		slug: "sublime-systems",
 		category: "Web Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "WordPress Website",
 		liveLink: "https://sublime-systems.com/",
 		overview:
@@ -834,7 +834,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Pupsi Home",
 		slug: "pupsi-home",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "Squarespace Website",
 		liveLink: "https://www.pupsihome.co.uk/",
 		overview:
@@ -849,7 +849,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Bathroom Discounters",
 		slug: "bathroom-discounters-figma",
 		category: "UI/UX Design",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "Figma Prototype",
 		liveLink:
 			"https://www.figma.com/proto/7CYc01OO6krLtNifKqOcx7/Bathroom-Discounters?node-id=1-2",
@@ -911,7 +911,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Pay for Stripe",
 		slug: "pay-for-stripe",
 		category: "App Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "Finance Application",
 		liveLink: "https://apps.apple.com/us/app/pay-for-stripe/id1440091081?mt=8",
 		overview:
@@ -926,7 +926,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Freeletics: Workouts & Fitness",
 		slug: "freeletics-workouts-fitness",
 		category: "App Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "Fitness Application",
 		liveLink: "https://apps.apple.com/us/app/freeletics-workout-fitness/id654810212",
 		overview:
@@ -1005,7 +1005,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Citi Bike",
 		slug: "citi-bike",
 		category: "App Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "Mobility Application",
 		liveLink: "https://apps.apple.com/us/app/citi-bike/id641194843",
 		overview:
@@ -1020,7 +1020,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "C_SUITE",
 		slug: "c-suite-news",
 		category: "App Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "News Application",
 		liveLink: "https://apps.apple.com/us/app/c-suite/id1514478644",
 		overview:
@@ -1103,7 +1103,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Untold",
 		slug: "untold-festival-app",
 		category: "App Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "Event Application",
 		liveLink: "https://itunes.apple.com/us/app/untold/id1019269879?mt=8",
 		overview:
@@ -1118,7 +1118,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "SPIN Car Buying App",
 		slug: "spin-car-buying-app",
 		category: "App Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "Automotive Marketplace Application",
 		liveLink:
 			"https://apps.apple.com/us/app/spin-car-buying-app/id1133713615#?platform=iphone",
@@ -1233,7 +1233,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "AI-Powered Analytics Dashboard",
 		slug: "ai-analytics-dashboard",
 		category: "AI Integration & Platforms",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		projectType: "AI Platform",
 		overview:
 			"Intelligent analytics platform using machine learning for predictive insights, anomaly detection, and automated reporting.",
@@ -1247,7 +1247,7 @@ export const workProjectItems: WorkProjectItem[] = [
 		title: "Smart Document Processing",
 		slug: "smart-document-processing",
 		category: "AI Integration & Platforms",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		projectType: "AI Solution",
 		overview:
 			"AI-driven document extraction and classification system for automated data entry and workflow automation.",
@@ -1346,9 +1346,9 @@ export const blogItems = [
 		id: "web-performance-strategy",
 		title: "Web Performance Strategies That Improve Conversions",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Faster websites create better user experiences and stronger business results.",
 		content:
@@ -1358,9 +1358,9 @@ export const blogItems = [
 		id: "modern-business-website",
 		title: "What Makes a Modern Business Website Effective",
 		category: "Web Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"A strong business website should communicate value clearly and guide users to action.",
 		content:
@@ -1372,7 +1372,7 @@ export const blogItems = [
 		category: "Web Development",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Technical SEO decisions made early can save time and improve visibility later.",
 		content:
@@ -1384,7 +1384,7 @@ export const blogItems = [
 		category: "Web Development",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Scalability starts with decisions made long before traffic begins to grow.",
 		content:
@@ -1396,7 +1396,7 @@ export const blogItems = [
 		category: "Web Development",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"High-converting landing pages focus on clarity, trust, and a strong next step.",
 		content:
@@ -1408,7 +1408,7 @@ export const blogItems = [
 		category: "Web Development",
 		image: "/services/services10.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Internal portals should simplify work, not add more complexity for teams.",
 		content:
@@ -1418,9 +1418,9 @@ export const blogItems = [
 		id: "mobile-app-mvp",
 		title: "How to Define a Mobile App MVP Clearly",
 		category: "Mobile App Solutions",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"A well-defined MVP reduces waste and helps teams release with confidence.",
 		content:
@@ -1432,7 +1432,7 @@ export const blogItems = [
 		category: "Mobile App Solutions",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Strong mobile planning balances user experience, engineering quality, and release speed.",
 		content:
@@ -1444,7 +1444,7 @@ export const blogItems = [
 		category: "Mobile App Solutions",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"First impressions on mobile are short, and onboarding often determines retention.",
 		content:
@@ -1456,7 +1456,7 @@ export const blogItems = [
 		category: "Mobile App Solutions",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"The right mobile stack depends on product goals, team structure, and future roadmap.",
 		content:
@@ -1466,9 +1466,9 @@ export const blogItems = [
 		id: "app-store-launch-checklist",
 		title: "A Practical Checklist for App Store Launch Readiness",
 		category: "Mobile App Solutions",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Launch success depends on more than finishing the codebase.",
 		content:
@@ -1480,7 +1480,7 @@ export const blogItems = [
 		category: "Mobile App Solutions",
 		image: "/services/services10.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Good analytics reveal how users behave, where they drop off, and what needs improvement.",
 		content:
@@ -1492,7 +1492,7 @@ export const blogItems = [
 		category: "Odoo Development",
 		image: "/services/services10.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Odoo becomes most valuable when it is aligned with real business processes.",
 		content:
@@ -1502,9 +1502,9 @@ export const blogItems = [
 		id: "odoo-custom-module-guide",
 		title: "When Custom Odoo Modules Make Sense",
 		category: "Odoo Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Customization should solve a real operational problem, not create unnecessary complexity.",
 		content:
@@ -1514,9 +1514,9 @@ export const blogItems = [
 		id: "odoo-crm-workflows",
 		title: "Improving Sales Workflows with Odoo CRM",
 		category: "Odoo Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Structured CRM workflows help teams move faster and follow up more consistently.",
 		content:
@@ -1528,7 +1528,7 @@ export const blogItems = [
 		category: "Odoo Development",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Inventory clarity supports faster operations and more reliable decision-making.",
 		content:
@@ -1540,7 +1540,7 @@ export const blogItems = [
 		category: "Odoo Development",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Automation creates value when it saves time, reduces errors, and improves accountability.",
 		content:
@@ -1552,7 +1552,7 @@ export const blogItems = [
 		category: "Odoo Development",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Many implementation issues come from unclear scope and weak process mapping.",
 		content:
@@ -1564,7 +1564,7 @@ export const blogItems = [
 		category: "AI Integration & Platforms",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"AI can reduce repetitive support effort while keeping teams focused on high-value work.",
 		content:
@@ -1576,7 +1576,7 @@ export const blogItems = [
 		category: "AI Integration & Platforms",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Internal AI use-cases often create fast value with lower risk than customer-facing systems.",
 		content:
@@ -1586,9 +1586,9 @@ export const blogItems = [
 		id: "ai-feature-design",
 		title: "Designing AI Features Users Actually Trust",
 		category: "AI Integration & Platforms",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Trust in AI comes from clarity, transparency, and predictable system behavior.",
 		content:
@@ -1600,7 +1600,7 @@ export const blogItems = [
 		category: "AI Integration & Platforms",
 		image: "/services/services10.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"A roadmap prevents scattered experiments and keeps AI aligned with business goals.",
 		content:
@@ -1610,9 +1610,9 @@ export const blogItems = [
 		id: "ai-knowledge-assistants",
 		title: "AI Knowledge Assistants for Faster Decision-Making",
 		category: "AI Integration & Platforms",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Knowledge assistants help teams find answers quickly across fragmented information sources.",
 		content:
@@ -1624,7 +1624,7 @@ export const blogItems = [
 		category: "AI Integration & Platforms",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Automation becomes useful when quality, accountability, and review are built in.",
 		content:
@@ -1636,7 +1636,7 @@ export const blogItems = [
 		category: "Blockchain Solutions",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Blockchain is most effective when trust, auditability, and shared records are essential.",
 		content:
@@ -1648,7 +1648,7 @@ export const blogItems = [
 		category: "Blockchain Solutions",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Smart contracts should reflect real process rules, not just technical possibilities.",
 		content:
@@ -1660,7 +1660,7 @@ export const blogItems = [
 		category: "Blockchain Solutions",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Tokenization can create new process models when linked to actual business value.",
 		content:
@@ -1672,7 +1672,7 @@ export const blogItems = [
 		category: "Blockchain Solutions",
 		image: "/services/services10.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Wallet integration should feel secure, simple, and understandable for end users.",
 		content:
@@ -1682,9 +1682,9 @@ export const blogItems = [
 		id: "blockchain-audit-readiness",
 		title: "Designing Blockchain Products with Audit Readiness in Mind",
 		category: "Blockchain Solutions",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Security review should shape how blockchain products are designed from the start.",
 		content:
@@ -1694,9 +1694,9 @@ export const blogItems = [
 		id: "dapp-user-experience",
 		title: "Why User Experience Matters in dApp Development",
 		category: "Blockchain Solutions",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Complex blockchain products still need simple, human-centered product design.",
 		content:
@@ -1708,7 +1708,7 @@ export const blogItems = [
 		category: "Desktop Software",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Desktop software remains valuable for secure, stable, and performance-heavy workflows.",
 		content:
@@ -1720,7 +1720,7 @@ export const blogItems = [
 		category: "Desktop Software",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Offline capability is critical in many real operational environments.",
 		content:
@@ -1732,7 +1732,7 @@ export const blogItems = [
 		category: "Desktop Software",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Internal tools should support speed, clarity, and operational consistency.",
 		content:
@@ -1744,7 +1744,7 @@ export const blogItems = [
 		category: "Desktop Software",
 		image: "/services/services10.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Business desktop applications need strong security planning beyond basic access control.",
 		content:
@@ -1754,9 +1754,9 @@ export const blogItems = [
 		id: "desktop-dashboard-design",
 		title: "Designing Desktop Dashboards for Operational Clarity",
 		category: "Desktop Software",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Operational dashboards should help teams act faster, not just display more data.",
 		content:
@@ -1766,9 +1766,9 @@ export const blogItems = [
 		id: "custom-software-advantage",
 		title: "Why Custom Software Can Outperform Generic Tools",
 		category: "Custom Software",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Custom software creates value when a business needs process fit, not feature overload.",
 		content:
@@ -1778,9 +1778,9 @@ export const blogItems = [
 		id: "product-discovery-workshop",
 		title: "Why Product Discovery Should Come Before Development",
 		category: "Custom Software",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Discovery helps teams define problems clearly before committing time and budget.",
 		content:
@@ -1792,7 +1792,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"API-first thinking improves flexibility, integration readiness, and long-term maintainability.",
 		content:
@@ -1804,7 +1804,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Scalable SaaS products require more than feature delivery alone.",
 		content:
@@ -1816,7 +1816,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Adoption depends on usability, relevance, and clear operational benefit.",
 		content:
@@ -1828,7 +1828,7 @@ export const blogItems = [
 		category: "Business Systems",
 		image: "/services/services10.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Disconnected systems often create reporting delays and operational blind spots.",
 		content:
@@ -1838,9 +1838,9 @@ export const blogItems = [
 		id: "erp-implementation-strategy",
 		title: "ERP Implementation Strategy for Sustainable Growth",
 		category: "Business Systems",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"ERP success depends on process alignment, not just software installation.",
 		content:
@@ -1850,9 +1850,9 @@ export const blogItems = [
 		id: "internal-systems-modernization",
 		title: "Modernizing Internal Systems Without Disrupting Operations",
 		category: "Business Systems",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Modernization works best when it respects how teams operate today.",
 		content:
@@ -1864,7 +1864,7 @@ export const blogItems = [
 		category: "Business Systems",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Useful dashboards turn operational data into faster and better decisions.",
 		content:
@@ -1876,7 +1876,7 @@ export const blogItems = [
 		category: "Business Systems",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Automation should remove bottlenecks while keeping control and visibility intact.",
 		content:
@@ -1886,9 +1886,9 @@ export const blogItems = [
 		id: "design-thinking-for-software",
 		title: "Why Design Thinking Still Matters in Software Projects",
 		category: "Web Development",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Strong products are built around real user needs, not assumptions.",
 		content:
@@ -1900,7 +1900,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Clear documentation supports stronger collaboration and fewer project surprises.",
 		content:
@@ -1912,7 +1912,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Quality assurance becomes more important as features, users, and integrations increase.",
 		content:
@@ -1924,7 +1924,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Stable releases depend on planning, communication, and clear deployment processes.",
 		content:
@@ -1936,7 +1936,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/services/services10.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Prioritization becomes easier when features are tied to outcomes instead of opinions.",
 		content:
@@ -1946,9 +1946,9 @@ export const blogItems = [
 		id: "ui-ux-for-business-platforms",
 		title: "UI and UX Principles for Business Platforms",
 		category: "Web Development",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Business software should feel clear, efficient, and easy to navigate.",
 		content:
@@ -1960,7 +1960,7 @@ export const blogItems = [
 		category: "AI Integration & Platforms",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Better product decisions come from meaningful signals, not just more data.",
 		content:
@@ -1972,7 +1972,7 @@ export const blogItems = [
 		category: "Web Development",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Customer portals should reduce support effort while improving the client experience.",
 		content:
@@ -1984,7 +1984,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Multi-platform products need a clear strategy for consistency and maintainability.",
 		content:
@@ -1994,9 +1994,9 @@ export const blogItems = [
 		id: "software-maintenance-value",
 		title: "Why Ongoing Software Maintenance Protects Business Value",
 		category: "Custom Software",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Maintenance keeps products secure, stable, and ready for future growth.",
 		content:
@@ -2006,9 +2006,9 @@ export const blogItems = [
 		id: "business-automation-at-scale",
 		title: "Scaling Business Automation Without Losing Control",
 		category: "Business Systems",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Automation at scale needs visibility, exception handling, and responsible governance.",
 		content:
@@ -2020,7 +2020,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/services/services10.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Future-ready platforms are built to adapt without constant rework.",
 		content:
@@ -2032,7 +2032,7 @@ export const blogItems = [
 		category: "Business Systems",
 		image: "/home/work3.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Digital transformation succeeds when it improves daily work in measurable ways.",
 		content:
@@ -2044,7 +2044,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/home/work4.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Reliable delivery comes from disciplined engineering, not rushed execution.",
 		content:
@@ -2056,7 +2056,7 @@ export const blogItems = [
 		category: "Custom Software",
 		image: "/home/work5.jpg",
 		authorName: "Nelson Hermous",
-		authorAvatar: "/about-us/nelson.png",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"The best software projects are shaped by business goals, not just feature lists.",
 		content:
@@ -2068,7 +2068,7 @@ export const teamMembers = [
 	{
 		name: "Nelson Hermance",
 		role: "Founder & CEO",
-		image: "/about-us/nelson.png",
+		image: "/about-us/avatar-placeholder.svg",
 		email: "nhermance@anchorstacktech.com",
 		whatsapp: "https://wa.me/13122595011",
 		linkedin: "https://www.linkedin.com/in/nelson-hermance-a7a67410/",
@@ -2076,7 +2076,7 @@ export const teamMembers = [
 	{
 		name: "Dairon Jan Lamprea Rotelo",
 		role: "CTO",
-		image: "/about-us/dairon.png",
+		image: "/about-us/dairon.webp",
 		email: "daironjan@anchorstacktech.com",
 		whatsapp: "https://wa.me/639381963281",
 		linkedin: "https://www.linkedin.com/in/dairon-jan-rotelo-822a48391",
@@ -2084,7 +2084,7 @@ export const teamMembers = [
 	{
 		name: "Elizabeth Hermance",
 		role: "HR Manager",
-		image: "/about-us/betsy.png",
+		image: "/about-us/betsy.webp",
 		email: "elizabeth.hermance@anchorstacktech.com",
 		whatsapp: "https://wa.me/13088503206",
 		linkedin: "https://www.linkedin.com/",
@@ -2092,7 +2092,7 @@ export const teamMembers = [
 	{
 		name: "Chao Wang",
 		role: "Lead Software Engineer",
-		image: "/about-us/chao.png",
+		image: "/about-us/chao.webp",
 		email: "chaowang.tech@anchorstacktech.com",
 		whatsapp: "https://wa.me/13088503206",
 		linkedin: "https://www.linkedin.com/",
@@ -2100,7 +2100,7 @@ export const teamMembers = [
 	{
 		name: "Yaya Sow",
 		role: "Senior AI Engineer",
-		image: "/about-us/yaya.png",
+		image: "/about-us/yaya.webp",
 		email: "hello@anchorstacktech.com",
 		whatsapp: "https://wa.me/13088503206",
 		linkedin: "https://www.linkedin.com/",
@@ -2108,7 +2108,7 @@ export const teamMembers = [
 	{
 		name: "Aboubacry Oumar Tall",
 		role: "Senior Odoo Developer",
-		image: "/about-us/tall.png",
+		image: "/about-us/tall.webp",
 		email: "hello@anchorstacktech.com",
 		whatsapp: "https://wa.me/22448004894",
 		linkedin: "https://www.linkedin.com/in/aboubacry-tall-3883b9209/",
@@ -2116,7 +2116,7 @@ export const teamMembers = [
 	{
 		name: "Abdoul Aziz Diop",
 		role: "Senior Mobile Engineer",
-		image: "/about-us/abdoul.png",
+		image: "/about-us/abdoul.webp",
 		email: "hello@anchorstacktech.com",
 		whatsapp: "https://wa.me/13088503206",
 		linkedin: "https://www.linkedin.com/",
@@ -2124,7 +2124,7 @@ export const teamMembers = [
 	{
 		name: "Lester Bonganay Paderan",
 		role: "Senior Software Engineer",
-		image: "/about-us/lester.png",
+		image: "/about-us/lester.webp",
 		email: "lesterpaderan@anchorstacktech.com",
 		whatsapp: "https://wa.me/639940294186",
 		linkedin: "https://www.linkedin.com/in/lester-bonganay-paderan-59030b3a8/",
@@ -2132,7 +2132,7 @@ export const teamMembers = [
 	{
 		name: "Zarah Santos Rivera",
 		role: "Senior Blockchain Developer",
-		image: "/about-us/zarah.png",
+		image: "/about-us/zarah.webp",
 		email: "zarah.rivera@anchorstacktech.com",
 		whatsapp: "https://wa.me/639913301582",
 		linkedin: "https://www.linkedin.com/in/zarah-rivera-6693523a5/",
@@ -2158,9 +2158,9 @@ export const testimonialItems: TestimonialItem[] = [
 			"AnchorStackTech is a professional web development company that helped us build a fast, modern, and user-friendly business website. Their team communicated clearly, delivered on time, and improved both our online presence and customer experience.",
 		reviewerName: "Daniel Foster",
 		reviewerRole: "CEO, BrightPath Consulting",
-		reviewerAvatar: "/home/user.png",
+		reviewerAvatar: "/home/user.webp",
 		rating: 5,
-		backgroundImage: "/home/home2.jpg",
+		backgroundImage: "/home/home2.webp",
 	},
 	{
 		id: "web-development-seo-review",
@@ -2171,7 +2171,7 @@ export const testimonialItems: TestimonialItem[] = [
 		reviewerRole: "Founder, NorthBridge Consulting",
 		reviewerAvatar: "/home/user1.jpg",
 		rating: 5,
-		backgroundImage: "/home/home2.jpg",
+		backgroundImage: "/home/home2.webp",
 	},
 	{
 		id: "mobile-app-solutions-review",
@@ -2182,7 +2182,7 @@ export const testimonialItems: TestimonialItem[] = [
 		reviewerRole: "Product Manager, BrightPath Apps",
 		reviewerAvatar: "/home/user2.jpg",
 		rating: 5,
-		backgroundImage: "/home/home1.jpg",
+		backgroundImage: "/home/home1.webp",
 	},
 	{
 		id: "app-development-review",
@@ -2193,7 +2193,7 @@ export const testimonialItems: TestimonialItem[] = [
 		reviewerRole: "Operations Manager, SwiftRoute Logistics",
 		reviewerAvatar: "/home/user3.jpg",
 		rating: 5,
-		backgroundImage: "/home/home2.jpg",
+		backgroundImage: "/home/home2.webp",
 	},
 	{
 		id: "erp-business-systems-review",
@@ -2215,7 +2215,7 @@ export const testimonialItems: TestimonialItem[] = [
 		reviewerRole: "Finance & Operations Manager, Urban Retail Group",
 		reviewerAvatar: "/home/user5.jpg",
 		rating: 5,
-		backgroundImage: "/home/home2.jpg",
+		backgroundImage: "/home/home2.webp",
 	},
 	{
 		id: "blockchain-solutions-review",
@@ -2226,7 +2226,7 @@ export const testimonialItems: TestimonialItem[] = [
 		reviewerRole: "Co-Founder, NovaChain Labs",
 		reviewerAvatar: "/home/user6.jpg",
 		rating: 5,
-		backgroundImage: "/home/home2.jpg",
+		backgroundImage: "/home/home2.webp",
 	},
 	{
 		id: "blockchain-development-review",
@@ -2237,7 +2237,7 @@ export const testimonialItems: TestimonialItem[] = [
 		reviewerRole: "Founder, Web3 Product Studio",
 		reviewerAvatar: "/home/user7.jpg",
 		rating: 5,
-		backgroundImage: "/home/home2.jpg",
+		backgroundImage: "/home/home2.webp",
 	},
 	{
 		id: "ai-solutions-review",
@@ -2259,7 +2259,7 @@ export const testimonialItems: TestimonialItem[] = [
 		reviewerRole: "Head of Innovation, VeloGrid",
 		reviewerAvatar: "/home/user9.jpg",
 		rating: 5,
-		backgroundImage: "/home/home2.jpg",
+		backgroundImage: "/home/home2.webp",
 	},
 	{
 		id: "desktop-software-review",
@@ -2270,7 +2270,7 @@ export const testimonialItems: TestimonialItem[] = [
 		reviewerRole: "IT Lead, CoreOps Systems",
 		reviewerAvatar: "/home/user10.jpg",
 		rating: 5,
-		backgroundImage: "/home/home2.jpg",
+		backgroundImage: "/home/home2.webp",
 	},
 	{
 		id: "desktop-development-review",
@@ -2281,7 +2281,7 @@ export const testimonialItems: TestimonialItem[] = [
 		reviewerRole: "Technical Operations Manager, Northgate Manufacturing",
 		reviewerAvatar: "/home/user11.jpg",
 		rating: 5,
-		backgroundImage: "/home/home2.jpg",
+		backgroundImage: "/home/home2.webp",
 	},
 ];
 

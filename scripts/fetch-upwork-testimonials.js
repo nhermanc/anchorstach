@@ -35,8 +35,8 @@ async function fetchTestimonials() {
 				[];
 			if (Array.isArray(feedback) && feedback.length > 0) {
 				const backgrounds = [
-					"/home/home2.jpg",
-					"/home/home1.jpg",
+					"/home/home2.webp",
+					"/home/home1.webp",
 					"/services/services10.jpg",
 					"/home/work4.jpg",
 				];
@@ -46,7 +46,7 @@ async function fetchTestimonials() {
 					review: item.comment || item.feedback || "",
 					reviewerName: item.client?.name || item.clientName || "Client",
 					reviewerRole: item.job?.title || "Upwork Client",
-					reviewerAvatar: "/home/user.png",
+					reviewerAvatar: "/home/user.webp",
 					rating: item.rating || item.score || 5,
 					backgroundImage: backgrounds[i % backgrounds.length],
 				}));

@@ -17,10 +17,18 @@ class MyDocument extends Document {
 					/>
 					<link
 						rel='stylesheet'
-						href='https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Poppins:wght@300;400;600;700&display=swap'
+						href='https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=Poppins:wght@400;500;600;700&display=swap'
 					/>
 				</Head>
 				<body suppressHydrationWarning>
+					{/* Shown until _app hydrates — avoids unstyled flash; removed in AppShell */}
+					<div
+						id='app-boot-splash'
+						className='app-boot-splash'
+						aria-busy='true'
+						aria-label='Loading'>
+						<div className='app-boot-splash__spinner' aria-hidden='true' />
+					</div>
 					<Main />
 					<NextScript />
 					{/* // for add Portal */}

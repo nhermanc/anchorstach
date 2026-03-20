@@ -10,8 +10,10 @@
 
 # next.js
 /.next/
+/.next-dev/
 /out/
 /deploy/
+/analyze/
 
 # Generated for static export (recreated by npm run build:deploy)
 /public/sitemap.xml

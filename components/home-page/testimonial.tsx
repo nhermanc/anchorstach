@@ -13,16 +13,40 @@ const TESTIMONIAL: FC = () => {
 	const [currentIndex, setCurrentIndex] = useState<number>(0);
 	const [items, setItems] = useState<TestimonialItem[]>(testimonialItems);
 
+	// Defer API work until the browser is idle so first paint / LCP stay unblocked.
 	useEffect(() => {
-		fetch("/api/upwork-testimonials")
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.testimonials && data.testimonials.length > 0) {
-					setItems(data.testimonials);
-					setCurrentIndex(0);
-				}
-			})
-			.catch(() => {});
+		if (typeof window === "undefined") return;
+
+		let cancelled = false;
+		const load = () => {
+			if (cancelled) return;
+			fetch("/api/upwork-testimonials")
+				.then((res) => res.json())
+				.then((data) => {
+					if (cancelled) return;
+					if (data.testimonials && data.testimonials.length > 0) {
+						setItems(data.testimonials);
+						setCurrentIndex(0);
+					}
+				})
+				.catch(() => {});
+		};
+
+		// Prefer idle scheduling when available (Safari added ric later; DOM types assume it exists, so we feature-detect at runtime).
+		const ric = window.requestIdleCallback;
+		if (typeof ric === "function") {
+			const id = ric.call(window, load, { timeout: 4000 });
+			return () => {
+				cancelled = true;
+				window.cancelIdleCallback(id);
+			};
+		}
+
+		const t = setTimeout(load, 1500);
+		return () => {
+			cancelled = true;
+			clearTimeout(t);
+		};
 	}, []);
 
 	const displayItems = items.length > 0 ? items : testimonialItems;

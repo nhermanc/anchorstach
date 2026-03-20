@@ -3,7 +3,6 @@ import styled from "styled-components";
 import React from "react";
 
 import Grid from "./grid";
-import Calendar from "../../calendar/calendar";
 
 const Body: React.FC = () => {
 	return (
@@ -14,8 +13,6 @@ const Body: React.FC = () => {
 			</Greeting>
 
 			<Grid />
-
-			{/* <Calendar /> */}
 		</Wrapper>
 	);
 };

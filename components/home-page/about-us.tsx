@@ -56,11 +56,12 @@ const AboutUsCom: FC = () => {
 
 					<HiddenImageContainer>
 						<Image
-							src='/home/home2.jpg'
-							alt='Hero Image'
+							src='/home/home2.webp'
+							alt='About section'
 							width={500}
 							height={400}
 							layout='responsive'
+							loading='lazy'
 						/>
 					</HiddenImageContainer>
 

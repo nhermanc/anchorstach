@@ -16,8 +16,8 @@ type TestimonialItem = {
 function extractTestimonialsFromHtml(html: string): TestimonialItem[] {
 	const testimonials: TestimonialItem[] = [];
 	const backgrounds = [
-		"/home/home2.jpg",
-		"/home/home1.jpg",
+		"/home/home2.webp",
+		"/home/home1.webp",
 		"/services/services10.jpg",
 		"/home/work4.jpg",
 	];
@@ -67,7 +67,7 @@ function extractTestimonialsFromHtml(html: string): TestimonialItem[] {
 									review: comment,
 									reviewerName: name,
 									reviewerRole: title,
-									reviewerAvatar: "/home/user.png",
+									reviewerAvatar: "/home/user.webp",
 									rating: typeof rating === "number" ? rating : 5,
 									backgroundImage: backgrounds[i % backgrounds.length],
 								});
@@ -97,7 +97,7 @@ function extractTestimonialsFromHtml(html: string): TestimonialItem[] {
 							review: item.comment,
 							reviewerName: item.client?.name || "Client",
 							reviewerRole: item.job?.title || "Client",
-							reviewerAvatar: "/home/user.png",
+							reviewerAvatar: "/home/user.webp",
 							rating: item.rating || 5,
 							backgroundImage: backgrounds[i % backgrounds.length],
 						});
@@ -129,7 +129,7 @@ function extractTestimonialsFromHtml(html: string): TestimonialItem[] {
 								review: comment.substring(0, 500),
 								reviewerName: name || "Client",
 								reviewerRole: "Upwork Client",
-								reviewerAvatar: "/home/user.png",
+								reviewerAvatar: "/home/user.webp",
 								rating: 5,
 								backgroundImage: backgrounds[i % backgrounds.length],
 							});

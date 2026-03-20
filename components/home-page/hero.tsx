@@ -1,6 +1,7 @@
 /** @format */
 
 import Image from "next/image";
+import Link from "next/link";
 import styled from "styled-components";
 import {
 	FC,
@@ -11,12 +12,10 @@ import {
 	useRef,
 	useState,
 } from "react";
-import { useRouter } from "next/router";
 
-const heroSlides = ["/home/slide1.png", "/home/slide2.png", "/home/slide3.png"];
+const heroSlides = ["/home/slide1.webp", "/home/slide2.webp", "/home/slide3.webp"];
 
 const Hero: FC = () => {
-	const router = useRouter();
 	const [activeSlide, setActiveSlide] = useState<number>(0);
 	const [isPaused, setIsPaused] = useState<boolean>(false);
 	const [slidesToRender, setSlidesToRender] = useState<number>(1);
@@ -28,13 +27,19 @@ const Hero: FC = () => {
 		return () => clearTimeout(t);
 	}, []);
 
-	const goNext = useCallback(() => {
-		setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+	const ensureAllSlides = useCallback(() => {
+		setSlidesToRender(heroSlides.length);
 	}, [heroSlides.length]);
 
+	const goNext = useCallback(() => {
+		ensureAllSlides();
+		setActiveSlide((prev) => (prev + 1) % heroSlides.length);
+	}, [ensureAllSlides, heroSlides.length]);
+
 	const goPrev = useCallback(() => {
+		ensureAllSlides();
 		setActiveSlide((prev) => (prev - 1 + heroSlides.length) % heroSlides.length);
-	}, [heroSlides.length]);
+	}, [ensureAllSlides, heroSlides.length]);
 
 	useEffect(() => {
 		if (isPaused || slidesToRender < 2) {
@@ -68,7 +73,7 @@ const Hero: FC = () => {
 	};
 
 	return (
-		<HeroWrapper style={{ position: "relative" }}>
+		<HeroWrapper>
 			<CustomContainer>
 				<ContentContainer>
 					<h1>
@@ -95,12 +100,9 @@ const Hero: FC = () => {
 						</div>
 					</JobsContain>
 
-					<CustomButton
-						onClick={() => {
-							router.push("/contact");
-						}}>
-						GET STARTED
-					</CustomButton>
+					<Link href='/contact' prefetch passHref>
+						<CustomButton>GET STARTED</CustomButton>
+					</Link>
 				</ContentContainer>
 
 				<ImageContainer
@@ -115,17 +117,22 @@ const Hero: FC = () => {
 						dragStartX.current = null;
 						setIsPaused(false);
 					}}>
-					{heroSlides.map((slideSrc, index) => (
+					{heroSlides.slice(0, slidesToRender).map((slideSrc, index) => (
 						<SlideFrame key={slideSrc} $isActive={activeSlide === index}>
 							<SlideImageWrapper>
 								<Image
 									src={slideSrc}
-									alt='Hero Image'
+									alt={
+										index === 0
+											? "AnchorStackTech — software and technology solutions"
+											: ""
+									}
 									layout='fill'
 									objectFit='contain'
 									objectPosition='center'
 									priority={index === 0}
-									sizes='(max-width: 768px) 100vw, 40.5rem'
+									loading={index === 0 ? undefined : "lazy"}
+									sizes='(max-width: 768px) 100vw, min(40.5rem, 45vw)'
 								/>
 							</SlideImageWrapper>
 						</SlideFrame>
@@ -159,11 +166,16 @@ const Hero: FC = () => {
 							<SlideImageWrapper>
 								<Image
 									src={slideSrc}
-									alt='Hero Image'
+									alt={
+										index === 0
+											? "AnchorStackTech — software and technology solutions"
+											: ""
+									}
 									layout='fill'
 									objectFit='contain'
 									objectPosition='center'
 									priority={index === 0}
+									loading={index === 0 ? undefined : "lazy"}
 									sizes='100vw'
 								/>
 							</SlideImageWrapper>
@@ -197,19 +209,10 @@ const HeroWrapper = styled.div`
 	width: 100vw;
 	color: #0f0b33;
 	background: #f8fafc;
-	/* background-image: linear-gradient(
-		to right,
-		rgba(0, 208, 176, 0.4),
-		rgba(15, 11, 51, 0.3),
-		#0f0b33
-	); */
 	padding: 3.5rem 9%;
 	padding-top: 9rem;
-
-	* {
-		opacity: 0.99;
-		z-index: 50;
-	}
+	/* Stable stacking without forcing opacity on every descendant (hurts compositing / CLS). */
+	isolation: isolate;
 
 	@media (min-width: 768px) {
 		padding: 4.5rem 9%;
@@ -255,7 +258,7 @@ const ContentContainer = styled.div`
 
 const CustomContainer = styled.div`
 	position: relative;
-	z-index: 100;
+	z-index: 1;
 	width: 100%;
 	max-width: var(--max-width);
 	overflow: hidden;
@@ -270,15 +273,19 @@ const CustomContainer = styled.div`
 	}
 `;
 
+/* Fixed aspect box reserves space before the LCP image paints → lower CLS */
 const ImageContainer = styled.div`
 	flex: 1;
 	position: relative;
 	width: 40.5rem;
-	min-width: 40.5rem;
+	min-width: min(40.5rem, 100%);
 	max-width: 100%;
-	height: 43.563rem;
+	aspect-ratio: 648 / 697;
 	max-height: 43.5625rem;
+	height: auto;
+	min-height: 20rem;
 	overflow: hidden;
+	contain: layout style;
 	img {
 		display: block;
 	}
@@ -308,7 +315,8 @@ const JobsContain = styled.div`
 	}
 `;
 
-const CustomButton = styled.button`
+/* Anchor for Link passHref + keyboard accessibility */
+const CustomButton = styled.a`
 	min-width: 190px;
 	height: 48px;
 	font: inherit;
@@ -318,10 +326,15 @@ const CustomButton = styled.button`
 	padding: 0.5rem 1rem;
 	border-radius: 4px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
-	transition-duration: var(--transition-duration);
+	transition: background-color 0.2s ease, border-color 0.2s ease;
 	color: white;
 	margin-top: 3rem;
-	display: block;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	text-decoration: none;
+	box-sizing: border-box;
 	&:hover {
 		background: #1d1852;
 		border-color: #1d1852;
@@ -334,8 +347,10 @@ const CustomButton = styled.button`
 const HiddenImageContainer = styled.div`
 	position: relative;
 	width: 100%;
-	height: clamp(14rem, 54vw, 22rem);
+	height: clamp(14rem, 56vw, 22rem);
+	min-height: 14rem;
 	overflow: hidden;
+	contain: layout style;
 	@media (min-width: 768px) {
 		display: none;
 	}
@@ -344,14 +359,13 @@ const HiddenImageContainer = styled.div`
 	}
 `;
 
+/* Opacity-only crossfade: avoids transform animations that trigger layout/paint work (Lighthouse). */
 const SlideFrame = styled.div<{ $isActive: boolean }>`
 	position: absolute;
 	inset: 0;
 	opacity: ${(props) => (props.$isActive ? 1 : 0)};
-	transform: ${(props) =>
-		props.$isActive ? "scale(1)" : "scale(1.015)"};
-	transition: opacity 700ms ease-in-out, transform 700ms ease-in-out;
-	will-change: opacity, transform;
+	visibility: ${(props) => (props.$isActive ? "visible" : "hidden")};
+	transition: opacity 0.45s ease;
 	pointer-events: none;
 `;
 
@@ -380,7 +394,7 @@ const SlideImageWrapper = styled.div`
 const SliderButton = styled.button`
 	position: absolute;
 	top: 50%;
-	transform: translateY(-50%);
+	transform: translate3d(0, -50%, 0);
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
@@ -394,7 +408,7 @@ const SliderButton = styled.button`
 	font-size: 28px;
 	line-height: 1;
 	z-index: 3;
-	transition: 0.2s ease;
+	transition: background-color 0.2s ease;
 
 	&.left {
 		left: 12px;

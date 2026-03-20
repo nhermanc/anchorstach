@@ -74,7 +74,7 @@ const Landing: FC = () => {
 
 						<HiddenImageContainer>
 							<Image
-								src='/services/services1.jpg'
+								src='/services/services1.webp'
 								alt='services Image'
 								width={500}
 								height={400}
@@ -97,7 +97,7 @@ const Landing: FC = () => {
 								cursor: "pointer",
 							}}>
 							<Image
-								src='/services/services1.jpg'
+								src='/services/services1.webp'
 								alt='services Image'
 								layout='fill'
 								objectFit='cover'
@@ -110,9 +110,9 @@ const Landing: FC = () => {
 
 				<ThirdContainer>
 					<GridContainer>
-						<GridItem src='/services/services2.jpg' title='Work Title' />
-						<GridItem src='/services/services3.jpg' title='Work Title' />
-						<GridItem src='/services/services4.jpg' title='Work Title' />
+						<GridItem src='/services/services2.webp' title='Work Title' />
+						<GridItem src='/services/services3.webp' title='Work Title' />
+						<GridItem src='/services/services4.webp' title='Work Title' />
 					</GridContainer>
 				</ThirdContainer>
 
@@ -124,7 +124,7 @@ const Landing: FC = () => {
 								cursor: "pointer",
 							}}>
 							<Image
-								src='/services/services5.jpg'
+								src='/services/services5.webp'
 								alt='services Image'
 								layout='fill'
 								objectFit='cover'
@@ -157,7 +157,7 @@ const Landing: FC = () => {
 
 						<HiddenImageContainer>
 							<Image
-								src='/services/services5.jpg'
+								src='/services/services5.webp'
 								alt='services Image'
 								width={500}
 								height={400}
@@ -176,9 +176,9 @@ const Landing: FC = () => {
 
 				<FifthContainer>
 					<GridContainer>
-						<GridItem src='/services/servcies17.jpg' title='Work Title' />
-						<GridItem src='/services/services6.jpg' title='Work Title' />
-						<GridItem src='/services/services7.jpg' title='Work Title' />
+						<GridItem src='/services/servcies17.webp' title='Work Title' />
+						<GridItem src='/services/services6.webp' title='Work Title' />
+						<GridItem src='/services/services7.webp' title='Work Title' />
 					</GridContainer>
 				</FifthContainer>
 			</Wrapper>

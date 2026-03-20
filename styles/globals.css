@@ -56,7 +56,6 @@ body {
 	--size-16: 4rem;
 	--size-20: 5rem;
 	--size-40: 10rem;
-	font-family: "Roboto", sans-serif;
 	font-family: "Poppins", sans-serif;
 	background: #f8fafc;
 	color: #0f0b33;
@@ -95,27 +94,100 @@ ul {
 	list-style: none;
 }
 
-::-webkit-input-placeholder {
-	/* Chrome/Opera/Safari */
+/* Single rule: smaller bundle than four vendor blocks */
+::placeholder {
 	font-size: 0.85rem;
 	color: #6f6d85;
 	font-weight: 400;
+	opacity: 1;
 }
-::-moz-placeholder {
-	/* Firefox 19+ */
-	font-size: 0.85rem;
-	color: #6f6d85;
-	font-weight: 400;
+
+/* ----- App boot splash (see _document.tsx) + route transitions (_app AppShell) ----- */
+.app-boot-splash {
+	position: fixed;
+	inset: 0;
+	z-index: 2147483646;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: #f8fafc;
+	transition: opacity 0.28s ease, visibility 0.28s ease;
+	contain: strict;
 }
-:-ms-input-placeholder {
-	/* IE 10+ */
-	font-size: 0.85rem;
-	color: #6f6d85;
-	font-weight: 400;
+
+.app-boot-splash.app-boot-splash--hide {
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
 }
-:-moz-placeholder {
-	/* Firefox 18- */
-	font-size: 0.85rem;
-	color: #6f6d85;
-	font-weight: 400;
+
+.app-boot-splash__spinner {
+	width: 2.5rem;
+	height: 2.5rem;
+	border: 3px solid rgba(15, 11, 51, 0.1);
+	border-top-color: var(--color-secondary, #00d0b0);
+	border-radius: 50%;
+	animation: app-boot-spin 0.65s linear infinite;
+}
+
+@keyframes app-boot-spin {
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+/* Thin top bar during client navigations */
+.route-progress-bar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	z-index: 99998;
+	pointer-events: none;
+	background: linear-gradient(
+		90deg,
+		var(--color-secondary, #00d0b0),
+		var(--color-primary-400, #732392)
+	);
+	transform: scaleX(0);
+	transform-origin: left center;
+	opacity: 0;
+	transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
+}
+
+.route-progress-bar[data-visible="true"] {
+	opacity: 1;
+	transform: scaleX(1);
+}
+
+.page-transition-wrap {
+	transition: opacity 0.22s ease;
+}
+
+.page-transition-wrap--busy {
+	opacity: 0.88;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.app-boot-splash {
+		transition: opacity 0.15s ease;
+	}
+
+	.app-boot-splash__spinner {
+		animation: none;
+		border-top-color: var(--color-secondary, #00d0b0);
+		opacity: 0.85;
+	}
+
+	.route-progress-bar,
+	.route-progress-bar[data-visible="true"],
+	.page-transition-wrap,
+	.page-transition-wrap--busy {
+		transition: none;
+	}
+
+	.page-transition-wrap--busy {
+		opacity: 1;
+	}
 }

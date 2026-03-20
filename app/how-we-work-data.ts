@@ -14,7 +14,7 @@ export const howWeWorkSteps: HowWeWorkStep[] = [
 		title: "Discovery & Planning",
 		description:
 			"We start by understanding your business goals, technical requirements, and success metrics. Our team conducts workshops, stakeholder interviews, and requirement analysis to create a clear project roadmap.",
-		image: "/home/work1.jpg",
+		image: "/home/work1.webp",
 		learnMoreLink: "/contact",
 	},
 	{
@@ -23,7 +23,7 @@ export const howWeWorkSteps: HowWeWorkStep[] = [
 		title: "Design & Prototyping",
 		description:
 			"Our designers create wireframes, user flows, and high-fidelity prototypes. You'll see and interact with the product vision before a single line of code is written, ensuring alignment from day one.",
-		image: "/home/work2.jpg",
+		image: "/home/work2.webp",
 		learnMoreLink: "/services",
 	},
 	{

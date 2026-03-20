@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import UIParagraph from "../ui/paragraph";
+import { submitContactMessage } from "../../lib/submit-contact-form";
 
 type UserSubmitForm = {
 	name: string;
@@ -57,22 +58,12 @@ const HirUsPageComponent: FC = () => {
 		});
 
 		try {
-			const response = await fetch("/api/contact", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					name: data.name,
-					email: data.email,
-					subject: `Hire Us Request\nPhone: ${data.phone}\n\n${data.description}`,
-				}),
+			await submitContactMessage({
+				name: data.name,
+				email: data.email,
+				subject: `Hire Us Request\nPhone: ${data.phone}\n\n${data.description}`,
+				emailSubject: `New Hire Us request from ${data.name}`,
 			});
-
-			const responseData = await response.json();
-			if (!response.ok) {
-				throw new Error(responseData?.message || "Message sending failed.");
-			}
 
 			reset();
 			setSubmitState({
@@ -86,8 +77,10 @@ const HirUsPageComponent: FC = () => {
 				loading: false,
 				successMessage: "",
 				errorMessage:
-					error?.message ||
-					"Unable to send hiring request right now. Please try again.",
+					error?.name === "AbortError"
+						? "Request timed out. Please try again."
+						: error?.message ||
+							"Unable to send hiring request right now. Please try again.",
 			});
 		}
 	};
@@ -112,7 +105,7 @@ const HirUsPageComponent: FC = () => {
 						cursor: "pointer",
 					}}>
 					<Image
-						src='/hir-us/img1.jpg'
+						src='/hir-us/img1.webp'
 						alt='Hir Us Image'
 						layout='fill'
 						objectFit='cover'
@@ -121,7 +114,7 @@ const HirUsPageComponent: FC = () => {
 
 				<HiddenImageContainer>
 					<Image
-						src='/hir-us/img1.jpg'
+						src='/hir-us/img1.webp'
 						alt='Hir Us Image'
 						width={500}
 						height={400}

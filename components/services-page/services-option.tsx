@@ -36,7 +36,7 @@ const ServicesOption: FC = () => {
 
 					<HiddenImageContainer>
 						<Image
-							src='/services/services8.jpg'
+							src='/services/services8.webp'
 							alt='services Image'
 							width={500}
 							height={400}
@@ -64,7 +64,7 @@ const ServicesOption: FC = () => {
 							cursor: "pointer",
 						}}>
 						<Image
-							src='/services/services8.jpg'
+							src='/services/services8.webp'
 							alt='services Image'
 							layout='fill'
 							objectFit='cover'
@@ -77,9 +77,9 @@ const ServicesOption: FC = () => {
 
 			<ThirdContainer>
 				<GridContainer>
-					<GridItem src='/services/services9.jpg' title='Work Title' />
-					<GridItem src='/services/services11.jpg' title='Work Title' />
-					<GridItem src='/services/services12.jpg' title='Work Title' />
+					<GridItem src='/services/services9.webp' title='Work Title' />
+					<GridItem src='/services/services11.webp' title='Work Title' />
+					<GridItem src='/services/services12.webp' title='Work Title' />
 				</GridContainer>
 			</ThirdContainer>
 		</Wrapper>

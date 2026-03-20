@@ -190,7 +190,7 @@ const TeamInfo = styled.div`
 				rgba(15, 11, 51, 0.75),
 				rgba(15, 11, 51, 0.75)
 			),
-			url("/about-us/about2.png");
+			url("/about-us/about2.webp");
 		background-size: cover;
 		background-position: center;
 		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);

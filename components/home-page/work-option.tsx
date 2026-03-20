@@ -23,7 +23,7 @@ const GridItem: FC = () => {
 									width: "46.875rem",
 								}}>
 								<Image
-									src='/home/work1.jpg'
+									src='/home/work1.webp'
 									alt='qsak Image'
 									layout='fill'
 									objectFit='cover'
@@ -65,7 +65,7 @@ const GridItem: FC = () => {
 									width: "21.875rem",
 								}}>
 								<Image
-									src='/home/work2.jpg'
+									src='/home/work2.webp'
 									alt='qsak Image'
 									layout='fill'
 									objectFit='cover'

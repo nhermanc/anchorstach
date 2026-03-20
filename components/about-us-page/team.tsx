@@ -20,7 +20,7 @@ const Team: FC = () => {
 								cursor: "pointer",
 							}}>
 							<Image
-								src='/about-us/about2.png'
+								src='/about-us/about2.webp'
 								alt='about-us Image'
 								layout='fill'
 								objectFit='cover'

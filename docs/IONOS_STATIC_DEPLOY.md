@@ -49,8 +49,10 @@ Optional: set `NEXT_PUBLIC_SITE_URL` in IONOS build env so sitemap URLs match yo
 
 ## Notes
 
-- **API routes** (`/api/contact`, etc.) are **not** included in a static export. The contact form needs another backend (e.g. Formspree) if you rely only on static hosting.
+- **API routes** (`/api/contact`, etc.) are **not** included in a static export. The **Contact** and **Hire Us** forms automatically fall back to **FormSubmit** when `/api/contact` is missing (HTML/404 response) or returns non-JSON. No change to your deploy command is required.
+- **FormSubmit:** The first submission may require confirming the destination email. For production, set **`NEXT_PUBLIC_FORMSUBMIT_TOKEN`** (after activating a form at formsubmit.co) in the IONOS build environment. Optionally set **`NEXT_PUBLIC_CONTACT_FORM_CLIENT=1`** to skip the useless `/api/contact` request on static hosting.
 - Standard **`npm run build`** still only creates `.next/` (for `next start` or Node hosting). Use **`npm run build:deploy`** for IONOS static hosting.
+- Local **`npm run dev`** uses **`scripts/run-dev.cjs`** + **`NEXT_USE_DEV_DIST`** → **`.next-dev/`** so dev never overwrites the production **`.next/`** cache.
 
 ---
 
@@ -94,3 +96,12 @@ Set this in the **build** step to match where the static site is produced (conce
 ### Next.js 11 + `next export` + `next/image`
 
 `next export` only checks that `images.loader !== 'default'`. **`images.unoptimized: true` alone does not fix that in Next 11.** This repo sets **`loader: 'akamai'`** and **`path: '/'`** so export succeeds; image URLs look like `/path/to.jpg?imwidth=…` (static hosts ignore the extra query).
+
+### Cache lifetimes (Lighthouse)
+
+`next.config.js` **`headers()`** apply when you run **`next start`** (or hosts that forward them). **`next export`** writes plain files: **IONOS / your CDN must set cache headers**, e.g.:
+
+- **`/_next/static/*`** — long TTL (**1 year**, **immutable**) — filenames are content-hashed.
+- **Images under `/images/` or `public/`** — sensible **`max-age`** (e.g. 7–30 days) or versioned filenames if you need instant updates.
+
+Without this, Lighthouse reports short or missing cache TTL for JS/CSS.

@@ -4,11 +4,13 @@ import styled from "styled-components";
 import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import ReactDOM from "react-dom";
 
 import BackDrop from "../ui/backdrop";
 
 const SideBar = ({ burgerMenuStatus, SetBurgerMenuStatus, isTransparent }) => {
+	const router = useRouter();
 	// Portal
 	return (
 		<BackDrop>
@@ -31,43 +33,68 @@ const SideBar = ({ burgerMenuStatus, SetBurgerMenuStatus, isTransparent }) => {
 							onClick={() => {
 								SetBurgerMenuStatus(false);
 							}}>
-							<Link href='/'>Home</Link>
+							<Link href='/' prefetch={true} passHref>
+								<a onMouseEnter={() => router.prefetch("/")}>Home</a>
+							</Link>
 						</li>
 						<li
 							onClick={() => {
 								SetBurgerMenuStatus(false);
 							}}>
-							<Link href='/work'>Experiences</Link>
+							<Link href='/work' prefetch={true} passHref>
+								<a onMouseEnter={() => router.prefetch("/work")}>
+									Experiences
+								</a>
+							</Link>
 						</li>
 						<li
 							onClick={() => {
 								SetBurgerMenuStatus(false);
 							}}>
-							<Link href='/services'>Services</Link>
+							<Link href='/services' prefetch={true} passHref>
+								<a onMouseEnter={() => router.prefetch("/services")}>
+									Services
+								</a>
+							</Link>
 						</li>
 						<li
 							onClick={() => {
 								SetBurgerMenuStatus(false);
 							}}>
-							<Link href='/how-we-work'>How We Work</Link>
+							<Link href='/how-we-work' prefetch={true} passHref>
+								<a
+									onMouseEnter={() => router.prefetch("/how-we-work")}>
+									How We Work
+								</a>
+							</Link>
 						</li>
 						<li
 							onClick={() => {
 								SetBurgerMenuStatus(false);
 							}}>
-							<Link href='/blog'>Blog</Link>
+							<Link href='/blog' prefetch={true} passHref>
+								<a onMouseEnter={() => router.prefetch("/blog")}>Blog</a>
+							</Link>
 						</li>
 						<li
 							onClick={() => {
 								SetBurgerMenuStatus(false);
 							}}>
-							<Link href='/about-us'>About us</Link>
+							<Link href='/about-us' prefetch={true}>
+								<a onMouseEnter={() => router.prefetch("/about-us")}>
+									About us
+								</a>
+							</Link>
 						</li>
 						<li
 							onClick={() => {
 								SetBurgerMenuStatus(false);
 							}}>
-							<Link href='/contact'>Contact us</Link>
+							<Link href='/contact' prefetch={true} passHref>
+								<a onMouseEnter={() => router.prefetch("/contact")}>
+									Contact us
+								</a>
+							</Link>
 						</li>
 					</ul>
 				</ModalOverlay>,

@@ -99,6 +99,26 @@ npm run dev
 yarn dev
 ```
 
+### Blank page / `404` on chunks, or `500` + `Cannot destructure property 'components'`
+
+That usually means the **Next cache was mixed** (running `next dev` and `next build` against the same `.next` folder). The dev server then reads a bad `build-manifest.json` and cannot load pages.
+
+**This repo fixes that by default:** `npm run dev` runs `scripts/run-dev.cjs`, which sets `NEXT_USE_DEV_DIST` so Next writes to **`.next-dev`**. `npm run build` / `npm run start` / export use **`.next`**.  
+**Don’t run `npx next dev` for daily work** unless you accept a shared `.next` folder again (or run `npm run dev:clean` first).
+
+If anything still looks stuck, wipe both caches and restart:
+
+```bash
+npm run dev:clean
+npm run dev
+```
+
+Or in one step:
+
+```bash
+npm run dev:fresh
+```
+
 # Environment
 
 - TODO

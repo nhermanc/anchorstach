@@ -14,7 +14,7 @@ const Home: NextPage = () => {
 				<title>{companyInfo.name} | {companyInfo.tagline}</title>
 				<meta name="description" content={companyInfo.seoDescription} />
 				<link rel="canonical" href={companyInfo.siteUrl} />
-				<link rel="preload" href="/home/slide1.png" as="image" />
+				<link rel="preload" href="/home/slide1.webp" as="image" />
 			</Head>
 			<HomePageComponent />
 		</>

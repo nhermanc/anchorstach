@@ -119,9 +119,9 @@ const WorkFeed: FC = () => {
 						</CustomButton>
 						<div className='users'>
 							<div className='image'>
-								<Avatar src='/work/work1.png' />
-								<Avatar src='/work/work2.png' />
-								<Avatar src='/work/work3.png' />
+								<Avatar src='/home/user1.jpg' />
+								<Avatar src='/home/user2.jpg' />
+								<Avatar src='/home/user3.jpg' />
 							</div>
 							<div className='details'>
 								<h3 style={{ color: "var(--color-grey-500)" }}>Core Delivery Team</h3>

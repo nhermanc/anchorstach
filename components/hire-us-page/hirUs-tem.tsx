@@ -93,7 +93,7 @@ const HirUsPageComponentTemp: FC = () => {
 						cursor: "pointer",
 					}}>
 					<Image
-						src='/hir-us/img1.jpg'
+						src='/hir-us/img1.webp'
 						alt='Hir Us Image'
 						layout='fill'
 						objectFit='cover'
@@ -102,7 +102,7 @@ const HirUsPageComponentTemp: FC = () => {
 
 				<HiddenImageContainer>
 					<Image
-						src='/hir-us/img1.jpg'
+						src='/hir-us/img1.webp'
 						alt='Hir Us Image'
 						width={500}
 						height={400}
