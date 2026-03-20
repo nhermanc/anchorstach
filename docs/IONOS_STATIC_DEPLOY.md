@@ -51,9 +51,9 @@ Optional: set `NEXT_PUBLIC_SITE_URL` in IONOS build env so sitemap URLs match yo
 
 ## Notes
 
-- **Contact / Hire Us (static IONOS):** Forms POST from the browser to **FormSubmit** (see **`.env.example`**). No **`/api/contact`** in the live static site — avoids **404** in the console. For CI, set **`NEXT_PUBLIC_CONTACT_STATIC_ONLY=1`** at build time so submissions never target `/api/*` even if other env vars leak in. Optionally set **`NEXT_PUBLIC_FORMSUBMIT_FORM_ID`** after activating at [formsubmit.co](https://formsubmit.co).
-- **Testimonials:** The home page uses **static** data from `app/company-data.ts` only (no **`/api/upwork-testimonials`**), so static deploys do not hit missing API routes.
-- **Optional Node + SMTP:** Set **`NEXT_PUBLIC_USE_NODE_CONTACT_API=1`** locally with **`SMTP_*`** for **`next dev`**, or **`NEXT_PUBLIC_CONTACT_API_BASE_URL`** if the API is hosted separately.
+- **Contact / Hire Us (static):** **FormSubmit** shows “needs Activation” until you click the link in email sent to **hello@anchorstacktech.com**. Easiest fix without Node: set **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`** from [web3forms.com](https://web3forms.com) on the static build. **SMTP:** **`NEXT_PUBLIC_CONTACT_API_BASE_URL`** + **`contact-smtp-api`** — see **`docs/IONOS_CONTACT_SMTP.md`**. Details in **`.env.example`**.
+- **Testimonials:** Static data from `app/company-data.ts` only (no **`/api/upwork-testimonials`**).
+- **Local dev + SMTP:** **`next dev`** + **`SMTP_*`** + **`NEXT_PUBLIC_USE_NODE_CONTACT_API=1`** → same-origin **`/api/contact`**.
 - Standard **`npm run build`** still only creates `.next/` (for `next start` or Node hosting). Use **`npm run build:deploy`** for IONOS **static** hosting only.
 - Local **`npm run dev`** uses **`scripts/run-dev.cjs`** + **`NEXT_USE_DEV_DIST`** → **`.next-dev/`** so dev never overwrites the production **`.next/`** cache.
 

@@ -31,6 +31,43 @@ function getContactApiUrl(): string {
 	return "/api/contact";
 }
 
+/**
+ * [Web3Forms](https://web3forms.com) — no “activate form” step for visitors; owner creates a free access key once.
+ */
+async function submitViaWeb3Forms(
+	input: SubmitContactInput,
+	accessKey: string,
+	signal?: AbortSignal,
+): Promise<void> {
+	const res = await fetch("https://api.web3forms.com/submit", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			Accept: "application/json",
+		},
+		body: JSON.stringify({
+			access_key: accessKey,
+			name: input.name,
+			email: input.email,
+			subject: input.emailSubject,
+			message: input.subject,
+		}),
+		signal,
+	});
+
+	const data = (await res.json().catch(() => ({}))) as {
+		success?: boolean;
+		message?: string;
+	};
+
+	if (!res.ok || data.success !== true) {
+		throw new Error(
+			data?.message ||
+				"Could not send your message. Please try again or email us directly.",
+		);
+	}
+}
+
 async function submitViaFormSubmit(
 	input: SubmitContactInput,
 	signal?: AbortSignal,
@@ -61,8 +98,14 @@ async function submitViaFormSubmit(
 		!res.ok ||
 		String(data?.success ?? "").toLowerCase() !== "true"
 	) {
+		const raw = String(data?.message || "");
+		if (/activation|activate form|activate your form/i.test(raw)) {
+			throw new Error(
+				`Please email us at ${companyInfo.email} for now. (FormSubmit: open the activation email sent to that inbox and click the link — or add NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY for static sites; see .env.example.)`,
+			);
+		}
 		throw new Error(
-			data?.message ||
+			raw ||
 				"Could not send your message. Please try again or email us directly.",
 		);
 	}
@@ -115,12 +158,16 @@ function envFlagTrue(v: string | undefined): boolean {
 /**
  * Contact + Hire Us.
  *
- * **IONOS static (`next export`):** there is no `/api/contact`. By default this posts to
- * **FormSubmit** from the browser (no SMTP on IONOS). Set **`NEXT_PUBLIC_CONTACT_STATIC_ONLY=1`**
- * in the IONOS build env to guarantee FormSubmit even if other vars are set by mistake.
+ * **SMTP (static IONOS + `contact-smtp-api`):** set **`NEXT_PUBLIC_CONTACT_API_BASE_URL`**
+ * in the **static** build (no trailing slash). That always wins over FormSubmit flags.
  *
- * **Optional Node API:** `NEXT_PUBLIC_CONTACT_API_BASE_URL` or `NEXT_PUBLIC_USE_NODE_CONTACT_API=1`
- * (local SMTP via `next dev` / `next start` only — not for static `deploy/`).
+ * **Web3Forms (static, no activation email):** set **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`**
+ * from [web3forms.com](https://web3forms.com) on the static build — recommended if you do not use SMTP API.
+ *
+ * **FormSubmit:** requires a one-time “Activate form” click in **hello@anchorstacktech.com** (or use
+ * **`NEXT_PUBLIC_FORMSUBMIT_FORM_ID`** after activation). Otherwise visitors see an activation error.
+ *
+ * **Local SMTP:** `next dev` + `SMTP_*` + **`NEXT_PUBLIC_USE_NODE_CONTACT_API=1`**.
  */
 export async function submitContactMessage(
 	input: SubmitContactInput,
@@ -133,6 +180,7 @@ export async function submitContactMessage(
 		process.env.NEXT_PUBLIC_USE_NODE_CONTACT_API?.trim(),
 	);
 	const apiBase = process.env.NEXT_PUBLIC_CONTACT_API_BASE_URL?.trim();
+	const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
 
 	let timeoutId: ReturnType<typeof setTimeout> | undefined;
 	let internalController: AbortController | undefined;
@@ -146,12 +194,26 @@ export async function submitContactMessage(
 		})();
 
 	try {
-		if (staticOnly || (!useNodeApi && !apiBase)) {
+		/* External SMTP API always first (so STATIC_ONLY cannot block it). */
+		if (apiBase) {
+			await submitViaNextApi(input, signal);
+			return;
+		}
+		/* Static-friendly: Web3Forms needs no visitor-facing FormSubmit activation. */
+		if (web3Key) {
+			await submitViaWeb3Forms(input, web3Key, signal);
+			return;
+		}
+		if (staticOnly) {
 			await submitViaFormSubmit(input, signal);
 			return;
 		}
+		if (useNodeApi) {
+			await submitViaNextApi(input, signal);
+			return;
+		}
 
-		await submitViaNextApi(input, signal);
+		await submitViaFormSubmit(input, signal);
 	} finally {
 		if (timeoutId !== undefined) {
 			globalThis.clearTimeout(timeoutId);
