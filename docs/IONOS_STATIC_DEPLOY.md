@@ -26,6 +26,8 @@ run: |
   npm run build:deploy
 ```
 
+**`npm ci` requires a committed `package-lock.json` that matches `package.json`.** After adding or changing dependencies locally, run `npm install` and commit the updated lockfile. This repo’s **`.npmrc`** sets `legacy-peer-deps=true` (peer conflicts with Next 11 + MUI); ensure `.npmrc` is committed so CI uses the same behavior.
+
 Set the **publish / deployment folder** to:
 
 ```text
