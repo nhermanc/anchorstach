@@ -51,7 +51,7 @@ Optional: set `NEXT_PUBLIC_SITE_URL` in IONOS build env so sitemap URLs match yo
 
 ## Notes
 
-- **Contact / Hire Us (static):** **FormSubmit** shows “needs Activation” until you click the link in email sent to **hello@anchorstacktech.com**. Easiest fix without Node: set **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`** from [web3forms.com](https://web3forms.com) on the static build. **SMTP:** **`NEXT_PUBLIC_CONTACT_API_BASE_URL`** + **`contact-smtp-api`** — see **`docs/IONOS_CONTACT_SMTP.md`**. Details in **`.env.example`**.
+- **Contact / Hire Us (static):** submissions use **Web3Forms** by default (no FormSubmit activation). Override or rotate with **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`**. **SMTP:** **`NEXT_PUBLIC_CONTACT_API_BASE_URL`** + **`contact-smtp-api`** — see **`docs/IONOS_CONTACT_SMTP.md`**. Details in **`.env.example`**.
 - **Testimonials:** Static data from `app/company-data.ts` only (no **`/api/upwork-testimonials`**).
 - **Local dev + SMTP:** **`next dev`** + **`SMTP_*`** + **`NEXT_PUBLIC_USE_NODE_CONTACT_API=1`** → same-origin **`/api/contact`**.
 - Standard **`npm run build`** still only creates `.next/` (for `next start` or Node hosting). Use **`npm run build:deploy`** for IONOS **static** hosting only.

@@ -3,6 +3,13 @@
 import { companyInfo } from "../app/company-data";
 import type { ContactApiPayload } from "./contact-payload";
 
+/**
+ * Web3Forms delivers to the inbox configured at web3forms.com — no FormSubmit “activate form” step.
+ * Baked in so static export / CI (e.g. IONOS) works without build-time secrets. Override with
+ * `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`; restrict allowed domains in the Web3Forms dashboard.
+ */
+const DEFAULT_WEB3FORMS_ACCESS_KEY = "c12c2493-5c4f-4314-b892-e77d3d6baeeb";
+
 export type SubmitContactInput = {
 	name: string;
 	email: string;
@@ -161,8 +168,9 @@ function envFlagTrue(v: string | undefined): boolean {
  * **SMTP (static IONOS + `contact-smtp-api`):** set **`NEXT_PUBLIC_CONTACT_API_BASE_URL`**
  * in the **static** build (no trailing slash). That always wins over FormSubmit flags.
  *
- * **Web3Forms (static, no activation email):** set **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`**
- * from [web3forms.com](https://web3forms.com) on the static build — recommended if you do not use SMTP API.
+ * **Web3Forms (static, no activation email):** a default access key is used when you are not on the Node
+ * API path; override with **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`** from [web3forms.com](https://web3forms.com)
+ * to rotate the key.
  *
  * **FormSubmit:** requires a one-time “Activate form” click in **hello@anchorstacktech.com** (or use
  * **`NEXT_PUBLIC_FORMSUBMIT_FORM_ID`** after activation). Otherwise visitors see an activation error.
@@ -180,7 +188,10 @@ export async function submitContactMessage(
 		process.env.NEXT_PUBLIC_USE_NODE_CONTACT_API?.trim(),
 	);
 	const apiBase = process.env.NEXT_PUBLIC_CONTACT_API_BASE_URL?.trim();
-	const web3Key = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+	const web3FromEnv = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
+	const web3Key =
+		web3FromEnv ||
+		(!apiBase && !useNodeApi ? DEFAULT_WEB3FORMS_ACCESS_KEY : "");
 
 	let timeoutId: ReturnType<typeof setTimeout> | undefined;
 	let internalController: AbortController | undefined;
