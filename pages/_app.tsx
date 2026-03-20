@@ -4,6 +4,7 @@ import type { AppProps } from "next/app";
 import React from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { GoogleTagManager } from "@next/third-parties/google";
 
 import "../styles/globals.css";
 import Layout from "../components/layout/layout";
@@ -46,9 +47,12 @@ function MyApp({ Component, pageProps }: AppProps) {
 	};
 
 	const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION;
+	const gtmId =
+		process.env.NEXT_PUBLIC_GTM_ID?.trim() || "GTM-PHPX26N3";
 
 	return (
 		<Layout>
+				<GoogleTagManager gtmId={gtmId} />
 				<PrefetchCoreRoutes />
 				<Head>
 					<meta charSet="utf-8" />
