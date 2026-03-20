@@ -2068,7 +2068,7 @@ export const teamMembers = [
 	{
 		name: "Nelson Hermance",
 		role: "Founder & CEO",
-		image: "/about-us/avatar-placeholder.svg",
+		image: "/about-us/nelson.webp",
 		email: "nhermance@anchorstacktech.com",
 		whatsapp: "https://wa.me/13122595011",
 		linkedin: "https://www.linkedin.com/in/nelson-hermance-a7a67410/",
@@ -2103,7 +2103,7 @@ export const teamMembers = [
 		image: "/about-us/yaya.webp",
 		email: "hello@anchorstacktech.com",
 		whatsapp: "https://wa.me/13088503206",
-		linkedin: "https://www.linkedin.com/",
+		linkedin: "https://www.linkedin.com/in/yaya-sow-a6135a38a/",
 	},
 	{
 		name: "Aboubacry Oumar Tall",
@@ -2118,8 +2118,8 @@ export const teamMembers = [
 		role: "Senior Mobile Engineer",
 		image: "/about-us/abdoul.webp",
 		email: "hello@anchorstacktech.com",
-		whatsapp: "https://wa.me/13088503206",
-		linkedin: "https://www.linkedin.com/",
+		whatsapp: "https://wa.me/13233329742",
+		linkedin: "https://www.linkedin.com/in/abdoul-aziz-diop-dev/",
 	},
 	{
 		name: "Lester Bonganay Paderan",

@@ -90,11 +90,15 @@ export default Work;
 const WorkWrapper = styled.section`
 	position: relative;
 	min-height: auto;
-	padding: 3.5rem 9% !important;
+	padding: 3.5rem clamp(1rem, 4vw, 9%) !important;
 	background: #eef2f7;
 	color: #0f0b33;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+	overflow-x: hidden;
 	@media (min-width: 768px) {
-		padding: 4.5rem 9% !important;
+		padding: 4.5rem clamp(1rem, 4vw, 9%) !important;
 	}
 `;
 
@@ -110,16 +114,24 @@ const GridContainer = styled.div`
 	width: 100%;
 	max-width: var(--max-width1250);
 	display: grid;
-	grid-template-columns: repeat(3, minmax(0, 1fr));
+	grid-template-columns: 1fr;
 	gap: 1.5rem;
 	margin: 0 auto;
+	justify-content: center;
+	justify-items: stretch;
+	box-sizing: border-box;
 
-	@media (max-width: 992px) {
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+	@media (min-width: 601px) {
+		grid-template-columns: repeat(
+			auto-fit,
+			minmax(min(100%, 260px), 360px)
+		);
+		justify-content: center;
 	}
 
-	@media (max-width: 600px) {
-		grid-template-columns: 1fr;
+	@media (min-width: 1200px) {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		justify-content: stretch;
 	}
 `;
 

@@ -40,8 +40,8 @@ export default ScrollToTopComponent;
 
 const ScrollToTopWrapper = styled.div`
 	position: fixed;
-	right: 1rem;
-	bottom: 5rem;
+	right: clamp(0.5rem, 3vw, 1.25rem);
+	bottom: clamp(1rem, 5vh, 5rem);
 	min-width: 3rem;
 	min-height: 3rem;
 	z-index: 9999999;

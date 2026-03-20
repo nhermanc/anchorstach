@@ -96,6 +96,18 @@ const SideBar = ({ burgerMenuStatus, SetBurgerMenuStatus, isTransparent }) => {
 								</a>
 							</Link>
 						</li>
+						<li className='sidebar-cta'>
+							<Link href='/contact' prefetch={true} passHref>
+								<a
+									className='sidebar-cta-link'
+									onMouseEnter={() => router.prefetch("/contact")}
+									onClick={() => {
+										SetBurgerMenuStatus(false);
+									}}>
+									GET STARTED
+								</a>
+							</Link>
+						</li>
 					</ul>
 				</ModalOverlay>,
 				document.getElementById("modal--overlay--root"),
@@ -139,5 +151,28 @@ const ModalOverlay = styled.div`
 		font-size: 1.1;
 		color: black;
 		cursor: pointer;
+	}
+	li.sidebar-cta {
+		border-bottom: none;
+		padding-top: 1.25rem;
+		margin-top: 0.25rem;
+	}
+	a.sidebar-cta-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		min-height: 48px;
+		padding: 0.5rem 1rem;
+		background: #0f0b33;
+		color: #ffffff !important;
+		border-radius: 4px;
+		font-weight: bold;
+		font-size: 0.9rem;
+		text-decoration: none;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+	}
+	a.sidebar-cta-link:hover {
+		background: #1d1852;
 	}
 `;

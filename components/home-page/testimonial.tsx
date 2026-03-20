@@ -162,13 +162,16 @@ export default TESTIMONIAL;
 
 const Wrapper = styled.div`
 	background: #e5e5e5;
-	padding: 3.5rem 9%;
+	padding: 3.5rem clamp(1rem, 4vw, 9%);
 	color: #0f0b33;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
 
 	@media (min-width: 768px) {
-		padding: 4.5rem 9%;
+		padding: 4.5rem clamp(1rem, 4vw, 9%);
 		padding-bottom: 4.5rem;
-		padding-left: 0;
 	}
 
 	@media (min-width: 1500px) {
@@ -182,19 +185,29 @@ const CustomContainer = styled.div`
 	overflow: hidden;
 	margin: 0 auto;
 	position: relative;
+	padding: 0 clamp(0.25rem, 2vw, 0.5rem);
+	box-sizing: border-box;
 `;
 
 const TopContainer = styled.div`
 	margin-bottom: 2.5rem;
-	gap: 60px;
+	gap: clamp(1.5rem, 4vw, 3.75rem);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+
 	@media (min-width: 768px) {
-		display: flex;
-		justify-content: space-between;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		align-items: stretch;
 	}
 
 	.first-content {
 		height: 220px;
+		width: 100%;
 		max-width: 700px;
+		margin: 0 auto;
 		background-position: center;
 		background-size: cover;
 		color: #0f0b33;
@@ -203,14 +216,17 @@ const TopContainer = styled.div`
 		justify-content: center;
 		padding: 2rem 1rem;
 		overflow: hidden;
+		box-sizing: border-box;
 
 		@media (min-width: 768px) {
-			height: 575px;
-			width: 705px;
-			max-width: 700px;
+			height: auto;
+			min-height: 320px;
+			max-height: 575px;
+			flex: 1 1 min(100%, 700px);
+			max-width: min(100%, 700px);
 			align-items: center;
 			justify-content: flex-start;
-			padding: 5rem 1rem;
+			padding: clamp(2rem, 5vw, 5rem) clamp(1rem, 3vw, 1.5rem);
 		}
 
 		h2 {
@@ -226,11 +242,12 @@ const TopContainer = styled.div`
 			@media (min-width: 768px) {
 				font-style: normal;
 				font-weight: bold;
-				font-size: 52px;
+				font-size: clamp(1.5rem, 3.5vw + 0.5rem, 3.25rem);
 				line-height: 150%;
-				max-width: 382px;
-				margin: 2rem 0;
-				margin-right: 1rem;
+				max-width: min(100%, 382px);
+				margin: 2rem auto;
+				margin-right: auto;
+				text-align: center;
 			}
 		}
 
@@ -295,16 +312,20 @@ const TopContainer = styled.div`
 const TestimonialContainer = styled.div`
 	position: relative;
 	margin: 2rem 0;
-	flex: 1;
+	width: 100%;
+	max-width: 520px;
+	flex: 1 1 320px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	min-height: 280px;
-	padding: 0 3rem;
+	padding: 0 clamp(2.5rem, 8vw, 4rem);
+	box-sizing: border-box;
 
 	@media (min-width: 768px) {
 		min-height: 320px;
-		padding: 0 4rem;
+		margin-left: auto;
+		margin-right: auto;
 	}
 `;
 
@@ -353,9 +374,9 @@ const SlideIndicator = styled.p`
 `;
 
 const BottomContainer = styled.div`
-	@media (min-width: 768px) {
-		padding-left: 9%;
-	}
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 `;
 
 const WorkSection = styled.div`

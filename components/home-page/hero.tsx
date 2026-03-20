@@ -206,17 +206,24 @@ export default memo(Hero);
 const HeroWrapper = styled.div`
 	position: relative;
 	min-height: 75vh;
-	width: 100vw;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 	color: #0f0b33;
 	background: #f8fafc;
-	padding: 3.5rem 9%;
+	padding: 3.5rem clamp(1rem, 4vw, 9%);
 	padding-top: 9rem;
 	/* Stable stacking without forcing opacity on every descendant (hurts compositing / CLS). */
 	isolation: isolate;
 
 	@media (min-width: 768px) {
-		padding: 4.5rem 9%;
+		padding: 4.5rem clamp(1rem, 4vw, 9%);
 		padding-top: 10rem;
+	}
+
+	@media (max-width: 1199px) {
+		min-height: auto;
+		padding-bottom: 3rem;
 	}
 `;
 
@@ -233,6 +240,9 @@ const ContentContainer = styled.div`
 		font-size: 3.5rem;
 		line-height: 150%;
 		margin-bottom: 1.5rem;
+		@media (max-width: 1199px) and (min-width: 769px) {
+			font-size: clamp(1.85rem, 2.5rem + 1.5vw, 3rem);
+		}
 		@media (max-width: 768px) {
 			font-size: 2rem;
 		}
@@ -251,8 +261,11 @@ const ContentContainer = styled.div`
 		line-height: var(--line-height);
 		font-size: 1.1rem;
 	}
-	@media (max-width: 768px) {
-		max-width: 100vw;
+	@media (max-width: 1199px) {
+		max-width: 100%;
+		margin-right: 0;
+		width: 100%;
+		flex: none;
 	}
 `;
 
@@ -268,6 +281,15 @@ const CustomContainer = styled.div`
 	color: #0f0b33;
 	padding-left: 4px;
 	justify-content: space-between;
+	align-items: flex-start;
+	gap: 1.5rem;
+	@media (max-width: 1199px) {
+		flex-direction: column;
+		flex-wrap: nowrap;
+		align-items: stretch;
+		min-height: 0;
+		padding-left: 0;
+	}
 	@media (max-width: 768px) {
 		flex-wrap: wrap;
 	}
@@ -289,7 +311,8 @@ const ImageContainer = styled.div`
 	img {
 		display: block;
 	}
-	@media (max-width: 768px) {
+	/* Tablet + mobile: use stacked carousel (HiddenImageContainer) */
+	@media (max-width: 1199px) {
 		display: none;
 	}
 `;
@@ -301,7 +324,7 @@ const JobsContain = styled.div`
 	max-width: 400px;
 	min-width: 300px;
 
-	@media (max-width: 568px) {
+	@media (max-width: 480px) {
 		display: none;
 	}
 	.job-success {
@@ -347,15 +370,16 @@ const CustomButton = styled.a`
 const HiddenImageContainer = styled.div`
 	position: relative;
 	width: 100%;
-	height: clamp(14rem, 56vw, 22rem);
+	max-width: 42rem;
+	margin-left: auto;
+	margin-right: auto;
+	height: clamp(14rem, 48vw, 24rem);
 	min-height: 14rem;
 	overflow: hidden;
 	contain: layout style;
-	@media (min-width: 768px) {
+	margin-top: 1.5rem;
+	@media (min-width: 1200px) {
 		display: none;
-	}
-	@media (max-width: 768px) {
-		margin-top: 1.5rem;
 	}
 `;
 

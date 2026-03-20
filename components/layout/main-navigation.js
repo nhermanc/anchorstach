@@ -65,23 +65,23 @@ function MainNavigation() {
 					<nav className='show'>
 						<ul>
 							<li
-								className='hid-ss'
+								className='desktop-nav-item'
 								id={router.pathname == "/" ? "active" : ""}>
 								<Link href='/' prefetch={true} passHref>
 									<a onMouseEnter={() => router.prefetch("/")}>HOME</a>
 								</Link>
 							</li>
 							<li
-								className='hid-s'
+								className='desktop-nav-item'
 								id={router.pathname == "/work" ? "active" : ""}>
 								<Link href='/work' prefetch={true}>
 									<a onMouseEnter={() => router.prefetch("/work")}>
-										EXPERENCES
+										EXPERIENCES
 									</a>
 								</Link>
 							</li>
 							<li
-								className='hid-s'
+								className='desktop-nav-item'
 								id={router.pathname == "/services" ? "active" : ""}>
 								<Link href='/services' prefetch={true} passHref>
 									<a onMouseEnter={() => router.prefetch("/services")}>
@@ -90,7 +90,7 @@ function MainNavigation() {
 								</Link>
 							</li>
 							<li
-								className='hid-s'
+								className='desktop-nav-item'
 								id={router.pathname == "/how-we-work" ? "active" : ""}>
 								<Link href='/how-we-work' prefetch={true} passHref>
 									<a
@@ -100,14 +100,14 @@ function MainNavigation() {
 								</Link>
 							</li>
 							<li
-								className='hid-s'
+								className='desktop-nav-item'
 								id={router.pathname == "/blog" ? "active" : ""}>
 								<Link href='/blog' prefetch={true} passHref>
 									<a onMouseEnter={() => router.prefetch("/blog")}>BLOG</a>
 								</Link>
 							</li>
 							<li
-								className='hid-m'
+								className='desktop-nav-item'
 								id={router.pathname == "/about-us" ? "active" : ""}>
 								<Link href='/about-us' prefetch={true}>
 									<a onMouseEnter={() => router.prefetch("/about-us")}>
@@ -116,7 +116,7 @@ function MainNavigation() {
 								</Link>
 							</li>
 							<li
-								className='hid-m'
+								className='desktop-nav-item'
 								id={router.pathname == "/contact" ? "active" : ""}>
 								<Link href='/contact' prefetch={true} passHref>
 									<a onMouseEnter={() => router.prefetch("/contact")}>
@@ -125,7 +125,7 @@ function MainNavigation() {
 								</Link>
 							</li>
 
-							<li className='hid-big'>
+							<li className='mobile-menu-trigger' aria-label='Open menu'>
 								<MenuIcon
 									style={{
 										cursor: "pointer",
@@ -166,12 +166,14 @@ export default MainNavigation;
 
 const CustomContainer = styled.div`
 	width: 100%;
+	min-width: 0;
 	height: 7rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	max-width: 87.5rem;
 	margin: 0 auto;
+	gap: clamp(0.5rem, 2vw, 1.25rem);
 `;
 
 const Header = styled.header`
@@ -187,38 +189,55 @@ const Header = styled.header`
 		#ffffff
 	)`};
 	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
 	height: 7rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 0 9%;
-	width: 100vw;
+	padding: 0 clamp(1rem, 4vw, 9%);
 	top: 0;
+	overflow-x: hidden;
 	a {
 		color: ${(props) =>
 			props.isTransparent && !props.visible ? `#0f0b33` : `#0f0b33`};
 	}
 	nav {
-		flex: 1;
-		@media (min-width: 568px) {
-			min-width: 20rem;
-			max-width: 40rem;
+		flex: 1 1 auto;
+		min-width: 0;
+		display: flex;
+		justify-content: center;
+		@media (min-width: 1200px) {
+			min-width: 0;
+			max-width: none;
+		}
+		@media (max-width: 1199px) {
+			flex: 0 0 auto;
+			justify-content: flex-end;
 		}
 		ul {
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			@media (max-width: 568px) {
+			flex-wrap: nowrap;
+			min-width: 0;
+			@media (max-width: 1199px) {
 				justify-content: flex-end;
 			}
 			li {
-				margin: 0 var(--size-4);
+				margin: 0 clamp(0.25rem, 1vw, 0.65rem);
 				transition: var(--transition-duration);
 				min-width: fit-content;
 				a {
 					display: block;
 					transition: var(--transition-duration);
 					border-bottom: 2px solid transparent;
+					font-size: clamp(0.65rem, 0.55rem + 0.35vw, 0.8rem);
+					letter-spacing: 0.02em;
+					white-space: nowrap;
+					@media (min-width: 1400px) {
+						font-size: 0.85rem;
+					}
 					&:hover,
 					&:active {
 						border-bottom: 2px solid var(--color-secondary);
@@ -226,25 +245,20 @@ const Header = styled.header`
 					}
 				}
 			}
-			li.hid-m {
-				@media (max-width: 991px) {
-					display: none;
+			li.desktop-nav-item {
+				@media (max-width: 1199px) {
+					display: none !important;
 				}
 			}
-		}
-		li.hid-s {
-			@media (max-width: 768px) {
+			li.mobile-menu-trigger {
 				display: none;
-			}
-		}
-		li.hid-ss {
-			@media (max-width: 568px) {
-				display: none;
-			}
-		}
-		li.hid-big {
-			@media (min-width: 568px) {
-				display: none;
+				list-style: none;
+				margin: 0;
+				@media (max-width: 1199px) {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
 			}
 		}
 		li#active a {
@@ -256,25 +270,29 @@ const Header = styled.header`
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 148px;
+		flex: 0 0 auto;
+		width: auto;
+		min-width: 7.5rem;
+		max-width: 100%;
 		height: 48px;
 		font: inherit;
+		font-size: clamp(0.7rem, 0.65rem + 0.25vw, 0.875rem);
 		cursor: pointer;
 		border: 2px solid #0f0b33;
 		background-color: #0f0b33;
 		color: white;
-		padding: 0.5rem 1rem;
+		padding: 0.5rem clamp(0.5rem, 1.5vw, 1rem);
 		border-radius: 4px;
 		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 		transition-duration: var(--transition-duration);
-		min-width: fit-content;
 		text-decoration: none;
+		white-space: nowrap;
 		&:hover,
 		&:active {
 			background-color: #1d1852;
 			border-color: #1d1852;
 		}
-		@media (max-width: 568px) {
+		@media (max-width: 480px) {
 			display: none;
 		}
 	}
