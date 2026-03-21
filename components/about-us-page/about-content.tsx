@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Image from "next/image";
 import { FC, memo, useRef, useEffect } from "react";
 
+import { strategicPartner } from "../../app/company-data";
+
 const AboutContent: FC = () => {
 	const autoScrollToBottomRef = useRef<HTMLDivElement>(null);
 
@@ -41,6 +43,22 @@ const AboutContent: FC = () => {
 					</p>
 				</LeftContainer>
 			</Container>
+
+			<PartnerBanner>
+				<p>
+					<strong>Strategic partner:</strong> AnchorStackTech works with{" "}
+					<a
+						href={strategicPartner.url}
+						target='_blank'
+						rel='noopener noreferrer'>
+						{strategicPartner.name}
+					</a>{" "}
+					— {strategicPartner.tagline.toLowerCase()}. When your roadmap
+					includes AI that answers buyers, captures leads, and supports sales
+					on the web and social, we are happy to point you to their platform
+					while we handle custom builds and integrations for your stack.
+				</p>
+			</PartnerBanner>
 
 			<ImageWrapper
 				style={{
@@ -125,6 +143,43 @@ const LeftContainer = styled.div`
 	@media (min-width: 968px) {
 		font-size: 1.1rem;
 		margin-top: -2rem;
+	}
+`;
+
+const PartnerBanner = styled.div`
+	max-width: var(--max-width1250);
+	margin: 2rem auto 0;
+	padding: 1.25rem 1.5rem;
+	border-radius: 8px;
+	border-left: 4px solid var(--color-secondary);
+	background: rgba(255, 255, 255, 0.85);
+	box-shadow: 0 2px 12px rgba(15, 11, 51, 0.06);
+	line-height: var(--line-height);
+	color: #0f0b33;
+
+	p {
+		margin: 0;
+		font-size: 0.98rem;
+	}
+
+	a {
+		color: var(--color-secondary);
+		font-weight: 600;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	a:hover {
+		color: #00b89a;
+	}
+
+	@media (min-width: 968px) {
+		margin-top: 2.5rem;
+		font-size: 1.05rem;
+
+		p {
+			font-size: inherit;
+		}
 	}
 `;
 

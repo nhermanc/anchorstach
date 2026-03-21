@@ -15,6 +15,24 @@ export const companyInfo = {
 		"AnchorStackTech provides web, app, Odoo, blockchain, AI integration, and desktop application development services. Empowering innovation.",
 };
 
+/**
+ * Strategic partner — surfaced on the homepage and footer. Opens in a new tab.
+ * @see https://www.linka.ai/
+ */
+export const strategicPartner = {
+	name: "Linka AI",
+	url: "https://www.linka.ai/",
+	tagline: "Custom AI sales agents for websites, social, and messaging",
+	intro:
+		"We are proud to partner with Linka AI—a platform that helps businesses launch personalized AI agents trained on their content to answer questions, capture leads, and drive sales across their website and social channels.",
+	bullets: [
+		"Deploy agents where buyers already are: your site, link-in-bio, DMs, and more.",
+		"Ground responses in your real pages, products, and FAQs so answers stay accurate and on-brand.",
+		"Connect to the tools you already use and turn conversations into qualified leads and revenue.",
+	],
+	ctaLabel: "Explore Linka AI",
+};
+
 export type ServiceItem = {
 	title: string;
 	slug: string;

@@ -11,6 +11,7 @@ import GridItem from "../work-page/grid-item";
 import {
 	getServiceBySlug,
 	serviceItems,
+	strategicPartner,
 	workProjectItems,
 } from "../../app/company-data";
 
@@ -100,6 +101,22 @@ const ServiceDetailComponent: FC = () => {
 							<h1>{service.title}</h1>
 							<h2>{service.detailHeading}</h2>
 							<p>{service.detailDescription}</p>
+							{service.slug === "ai-solutions" && (
+								<PartnerCallout>
+									<p>
+										<strong>Strategic partner:</strong> We work with{" "}
+										<a
+											href={strategicPartner.url}
+											target='_blank'
+											rel='noopener noreferrer'>
+											{strategicPartner.name}
+										</a>{" "}
+										for teams that want AI sales agents on their website,
+										link-in-bio, and social channels—alongside the custom AI
+										features and integrations we design and ship for you.
+									</p>
+								</PartnerCallout>
+							)}
 							<ActionButton
 								type='button'
 								onClick={() => {
@@ -229,6 +246,32 @@ const HeroContent = styled.article`
 		color: #6f6d85;
 		line-height: var(--line-height);
 		max-width: 44rem;
+	}
+`;
+
+const PartnerCallout = styled.div`
+	margin-top: 1rem;
+	padding: 1rem 1.1rem;
+	border-radius: 6px;
+	border-left: 4px solid var(--color-secondary);
+	background: #f8fbff;
+
+	p {
+		margin: 0;
+		color: #0f0b33;
+		font-size: 0.95rem;
+		line-height: 1.65;
+	}
+
+	a {
+		color: var(--color-secondary);
+		font-weight: 600;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	a:hover {
+		color: #00b89a;
 	}
 `;
 

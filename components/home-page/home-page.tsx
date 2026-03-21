@@ -14,6 +14,13 @@ const Services = dynamic(() => import("./services"), {
 	ssr: true,
 });
 
+const StrategicPartner = dynamic(() => import("./strategic-partner"), {
+	loading: () => (
+		<HomeSectionPlaceholder minHeight="22rem" aria-label="Loading partner" />
+	),
+	ssr: true,
+});
+
 const AboutUsCom = dynamic(() => import("./about-us"), {
 	loading: () => (
 		<HomeSectionPlaceholder minHeight="28rem" aria-label="Loading about section" />
@@ -41,6 +48,7 @@ const HomePageComponent: FC = () => {
 			<MainNavigation />
 			<Hero />
 			<Services />
+			<StrategicPartner />
 			<AboutUsCom />
 			<Work />
 			<TESTIMONIAL />
