@@ -117,7 +117,7 @@ const Footer: React.FC = () => {
 						</ContactItem>
 						<ContactItem>
 							<CallIcon />
-							<a href={`tel:${companyInfo.phone}`}>{companyInfo.phone}</a>
+							<a href={`tel:${companyInfo.phoneTel}`}>{companyInfo.phone}</a>
 						</ContactItem>
 						<ContactItem>
 							<HomeIcon />

@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 		description: pageDescription,
 		url: siteUrl,
 		email: companyInfo.email,
-		telephone: companyInfo.phone,
+		telephone: companyInfo.phoneTel,
 		address: {
 			"@type": "PostalAddress",
 			streetAddress: companyInfo.address,

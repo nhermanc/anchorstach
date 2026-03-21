@@ -9,10 +9,10 @@ const Grid: FC = () => {
 		<GridWrapper>
 			<GridContainer>
 				<GridItem
-					src='/about-us/tem-img.png'
-					title='Founder'
-					founder='Founder'
-					name='Otoniel Cortez'
+					src='/about-us/nelson.webp'
+					title='Founder & CEO'
+					founder='Founder & CEO'
+					name='Nelson Hermance'
 				/>
 
 				<GridItem

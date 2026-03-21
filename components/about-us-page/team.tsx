@@ -36,25 +36,23 @@ const Team: FC = () => {
 					<InnerContainer>
 						<RightContainer>
 							<p>
-								We are a remote design studio situated in Omaha that
-								works with clients worldwide. As enthusiastic designers,
-								we take pride in creating things that are simple to use,
-								accessible, engaging, and delicious. Every morning, we
-								get out of bed by making people smile. Through
-								deliberate design,
+								AnchorStackTech is rooted in <strong>Chicago, IL</strong>, with
+								a distributed team that partners with organizations around
+								the world. We care about clear communication, disciplined
+								delivery, and technology that supports measurable business
+								outcomes—not buzzwords.
 							</p>
 						</RightContainer>
 						<LeftContainer>
 							<p>
-								We build delightful digital experiences that simplify
-								and enhance everyday living. We design enterprise
-								software that is human-centered and has the polished,
-								snappy feel of the finest consumer apps.
+								We build digital products that are straightforward to use
+								and maintain—from internal tools to customer-facing apps—with
+								the polish people expect from modern software.
 							</p>
 							<p>
-								We collaborate with marketing departments at huge
-								organizations and startups to create award-winning
-								websites, ranging from Slack to Facebook.
+								Whether you are a growing startup or an established team, we
+								work with you through discovery, implementation, and launch so
+								your roadmap stays aligned with your goals.
 							</p>
 						</LeftContainer>
 					</InnerContainer>

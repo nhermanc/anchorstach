@@ -200,7 +200,15 @@ const ContactFormComponent: FC = () => {
 											<CallIcon style={{ color: "white" }} />
 										</ModifiedArrows>
 									</ArrowsWrapper>
-									<p>{companyInfo.phone}</p>
+									<p>
+										<a
+											className='contact-link'
+											href={`tel:${companyInfo.phoneTel}`}
+											aria-label={`Call ${companyInfo.phone}`}>
+											{companyInfo.phone}
+										</a>
+										<span className='phone-note'> (Google Voice)</span>
+									</p>
 								</div>
 								<div className='first-contact'>
 									<ArrowsWrapper>
@@ -208,7 +216,15 @@ const ContactFormComponent: FC = () => {
 											<HomeIcon style={{ color: "white" }} />
 										</ModifiedArrows>
 									</ArrowsWrapper>
-									<p>{companyInfo.address}</p>
+									<p>
+										<a
+											className='contact-link'
+											href={companyInfo.officeMapOpenUrl}
+											target='_blank'
+											rel='noopener noreferrer'>
+											{companyInfo.address}
+										</a>
+									</p>
 								</div>
 							</div>
 						</ContactInfo>
@@ -316,6 +332,28 @@ const ContactFormComponent: FC = () => {
 							</section>
 						</ContactForm>
 					</ContactContainer>
+
+					<MapSection aria-labelledby='contact-map-heading'>
+						<h2 id='contact-map-heading'>Visit us</h2>
+						<p className='map-intro'>
+							Chicago office (Fischer Software Company / AnchorStackTech).{" "}
+							<a
+								href={companyInfo.officeMapOpenUrl}
+								target='_blank'
+								rel='noopener noreferrer'>
+								Open in Google Maps
+							</a>
+						</p>
+						<MapFrameWrap>
+							<iframe
+								title='Map: AnchorStackTech office, 6550 N Damen Ave, Chicago'
+								src={companyInfo.officeMapEmbedUrl}
+								loading='lazy'
+								referrerPolicy='no-referrer-when-downgrade'
+								allowFullScreen
+							/>
+						</MapFrameWrap>
+					</MapSection>
 				</CustomContainer>
 			</BottomWrapper>
 
@@ -393,6 +431,64 @@ const ContactInfo = styled.div`
 			font-size: 1rem;
 			font-weight: normal;
 		}
+		.contact-link {
+			color: inherit;
+			text-decoration: underline;
+			text-underline-offset: 2px;
+		}
+		.contact-link:hover {
+			color: var(--color-secondary);
+		}
+		.phone-note {
+			color: #6f6d85;
+			font-size: 0.9rem;
+		}
+	}
+`;
+
+const MapSection = styled.section`
+	width: 100%;
+	margin-top: 3rem;
+	padding-top: 2rem;
+	border-top: 1px solid #d0d5e0;
+
+	h2 {
+		margin-bottom: 0.75rem;
+		color: var(--color-secondary-second);
+		font-size: 1.5rem;
+	}
+
+	.map-intro {
+		color: #6f6d85;
+		line-height: 1.6;
+		margin-bottom: 1rem;
+		max-width: 40rem;
+
+		a {
+			color: var(--color-secondary);
+			font-weight: 600;
+			text-decoration: underline;
+			text-underline-offset: 2px;
+		}
+	}
+`;
+
+const MapFrameWrap = styled.div`
+	position: relative;
+	width: 100%;
+	max-width: 56rem;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 12px rgba(15, 11, 51, 0.12);
+	border: 1px solid #d7ddeb;
+	background: #e8ecf4;
+
+	iframe {
+		display: block;
+		width: 100%;
+		height: min(420px, 55vw);
+		min-height: 280px;
+		border: 0;
 	}
 `;
 

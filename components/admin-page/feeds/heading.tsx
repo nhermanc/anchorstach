@@ -28,14 +28,14 @@ const Heading: React.FC = () => {
 				<User>
 					<IconButton>
 						<Avatar
-							src='/admin/user.jpg'
+							src='/about-us/nelson.webp'
 							style={{
 								height: "2.813rem",
 								width: "2.813rem",
 							}}
 						/>
 					</IconButton>
-					<Name>Otoniel Cortez </Name>
+					<Name>Nelson Hermance</Name>
 				</User>
 			</HeadingRight>
 		</Wrapper>
