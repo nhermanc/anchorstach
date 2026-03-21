@@ -1,14 +1,10 @@
 /** @format */
 
 import { companyInfo } from "../app/company-data";
+import { getContactSubmitInquiryUrl } from "./contact-submit-endpoint";
 import type { ContactApiPayload } from "./contact-payload";
-
-/**
- * Web3Forms delivers to the inbox configured at web3forms.com — no FormSubmit “activate form” step.
- * Baked in so static export / CI (e.g. IONOS) works without build-time secrets. Override with
- * `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`; restrict allowed domains in the Web3Forms dashboard.
- */
-const DEFAULT_WEB3FORMS_ACCESS_KEY = "c12c2493-5c4f-4314-b892-e77d3d6baeeb";
+import { getContactRecaptchaSiteKey } from "./contact-recaptcha";
+import { DEFAULT_WEB3FORMS_ACCESS_KEY } from "./web3forms-access-key";
 
 export type SubmitContactInput = {
 	name: string;
@@ -17,6 +13,8 @@ export type SubmitContactInput = {
 	subject: string;
 	/** Email subject line for the notification. */
 	emailSubject: string;
+	/** Google reCAPTCHA response when the site key is configured at build time. */
+	recaptchaToken?: string;
 };
 
 /**
@@ -75,6 +73,51 @@ async function submitViaWeb3Forms(
 	}
 }
 
+async function submitViaInquiryApi(
+	input: SubmitContactInput,
+	signal?: AbortSignal,
+): Promise<void> {
+	const token = input.recaptchaToken?.trim();
+	if (!token) {
+		throw new Error("Please complete the reCAPTCHA verification.");
+	}
+
+	const payload = {
+		name: input.name,
+		email: input.email,
+		message: input.subject,
+		emailSubject: input.emailSubject,
+		recaptchaToken: token,
+	};
+
+	const response = await fetch(getSubmitInquiryUrl(), {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			Accept: "application/json",
+		},
+		body: JSON.stringify(payload),
+		signal,
+	});
+
+	const text = await response.text();
+	let data: { success?: boolean; message?: string };
+	try {
+		data = JSON.parse(text) as typeof data;
+	} catch {
+		throw new Error(
+			"The server returned an unexpected response. If this keeps happening, email us directly.",
+		);
+	}
+
+	if (!response.ok || !data.success) {
+		throw new Error(
+			data.message ||
+				"Could not send your message. Please try again or email us directly.",
+		);
+	}
+}
+
 async function submitViaFormSubmit(
 	input: SubmitContactInput,
 	signal?: AbortSignal,
@@ -128,6 +171,10 @@ async function submitViaNextApi(
 		message: input.subject,
 		emailSubject: input.emailSubject,
 	};
+	const tok = input.recaptchaToken?.trim();
+	if (tok) {
+		payload.recaptchaToken = tok;
+	}
 
 	const response = await fetch(getContactApiUrl(), {
 		method: "POST",
@@ -165,12 +212,17 @@ function envFlagTrue(v: string | undefined): boolean {
 /**
  * Contact + Hire Us.
  *
+ * **reCAPTCHA:** site key defaults in **`next.config.js`**; **`RECAPTCHA_SECRET_KEY`** lives only on
+ * the API host (e.g. **`servers/contact-submit`** on **Render**). Static sites POST to
+ * **`getContactSubmitInquiryUrl()`** — by default
+ * **`https://contact-api.<your-domain>/api/submit-inquiry`** (see **`docs/RECAPTCHA_CONTACT_API.md`**)
+ * or override with **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`**.
+ *
  * **SMTP (static IONOS + `contact-smtp-api`):** set **`NEXT_PUBLIC_CONTACT_API_BASE_URL`**
  * in the **static** build (no trailing slash). That always wins over FormSubmit flags.
  *
- * **Web3Forms (static, no activation email):** a default access key is used when you are not on the Node
- * API path; override with **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`** from [web3forms.com](https://web3forms.com)
- * to rotate the key.
+ * **Web3Forms (no reCAPTCHA):** default access key when not on the Node API path; override with
+ * **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`** or **`WEB3FORMS_ACCESS_KEY`** on the server.
  *
  * **FormSubmit:** requires a one-time “Activate form” click in **hello@anchorstacktech.com** (or use
  * **`NEXT_PUBLIC_FORMSUBMIT_FORM_ID`** after activation). Otherwise visitors see an activation error.
@@ -188,6 +240,7 @@ export async function submitContactMessage(
 		process.env.NEXT_PUBLIC_USE_NODE_CONTACT_API?.trim(),
 	);
 	const apiBase = process.env.NEXT_PUBLIC_CONTACT_API_BASE_URL?.trim();
+	const recaptchaSiteKey = getContactRecaptchaSiteKey();
 	const web3FromEnv = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY?.trim();
 	const web3Key =
 		web3FromEnv ||
@@ -207,7 +260,26 @@ export async function submitContactMessage(
 	try {
 		/* External SMTP API always first (so STATIC_ONLY cannot block it). */
 		if (apiBase) {
+			if (recaptchaSiteKey && !input.recaptchaToken?.trim()) {
+				throw new Error("Please complete the reCAPTCHA verification.");
+			}
 			await submitViaNextApi(input, signal);
+			return;
+		}
+		/* Local / Node: same-origin /api/contact can verify reCAPTCHA + SMTP */
+		if (recaptchaSiteKey && useNodeApi) {
+			if (!input.recaptchaToken?.trim()) {
+				throw new Error("Please complete the reCAPTCHA verification.");
+			}
+			await submitViaNextApi(input, signal);
+			return;
+		}
+		/* Static + Web3Forms: reCAPTCHA verified in /api/submit-inquiry before Web3Forms */
+		if (recaptchaSiteKey) {
+			if (!input.recaptchaToken?.trim()) {
+				throw new Error("Please complete the reCAPTCHA verification.");
+			}
+			await submitViaInquiryApi(input, signal);
 			return;
 		}
 		/* Static-friendly: Web3Forms needs no visitor-facing FormSubmit activation. */

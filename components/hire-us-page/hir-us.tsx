@@ -3,12 +3,15 @@
 import styled from "styled-components";
 import Image from "next/image";
 import AttachmentIcon from "@material-ui/icons/Attachment";
-import { FC, memo, useState } from "react";
+import { FC, memo, useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 
 import UIParagraph from "../ui/paragraph";
+import ContactRecaptchaWidget from "../contact-page/contact-recaptcha-widget";
+import { getContactRecaptchaSiteKey } from "../../lib/contact-recaptcha";
 import { submitContactMessage } from "../../lib/submit-contact-form";
 
 type UserSubmitForm = {
@@ -19,6 +22,7 @@ type UserSubmitForm = {
 };
 
 const HirUsPageComponent: FC = () => {
+	const recaptchaRef = useRef<ReCAPTCHA>(null);
 	const [submitState, setSubmitState] = useState<{
 		loading: boolean;
 		successMessage: string;
@@ -73,6 +77,7 @@ const HirUsPageComponent: FC = () => {
 				errorMessage: "",
 			});
 		} catch (error: any) {
+			recaptchaRef.current?.reset();
 			setSubmitState({
 				loading: false,
 				successMessage: "",
@@ -230,6 +235,9 @@ const HirUsPageComponent: FC = () => {
 								/>
 							</div>
 
+							<div className='recaptcha-slot'>
+								<ContactRecaptchaWidget ref={recaptchaRef} />
+							</div>
 							<div className='actions'>
 								<CustomButton disabled={submitState.loading}>
 									{submitState.loading ? "SENDING..." : "SUBMIT"}
@@ -411,6 +419,10 @@ const ContactContainer = styled.div`
 		transition: 0.3s;
 	}
 
+	.recaptcha-slot {
+		margin-top: 1rem;
+		min-height: 4.5rem;
+	}
 	.actions {
 		margin-top: 1.5rem;
 	}

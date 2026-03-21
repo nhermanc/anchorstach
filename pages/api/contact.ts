@@ -4,47 +4,21 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 
 import { companyInfo } from "../../app/company-data";
+import { applyContactApiCors } from "../../lib/contact-api-cors";
 import {
 	escapeHtml,
 	validateContactBody,
 } from "../../lib/contact-api-validation";
+import { verifyRecaptchaResponse } from "../../lib/recaptcha-verify";
 
 type SuccessJson = { success: true; message: string };
 type ErrorJson = { success: false; message: string; errors?: string[] };
-
-function applyCors(
-	req: NextApiRequest,
-	res: NextApiResponse,
-): boolean {
-	const raw = process.env.CONTACT_ALLOWED_ORIGINS?.trim();
-	if (!raw) return false;
-
-	const allowed = raw
-		.split(",")
-		.map((o) => o.trim())
-		.filter(Boolean);
-	const origin = req.headers.origin;
-
-	if (origin && allowed.includes(origin)) {
-		res.setHeader("Access-Control-Allow-Origin", origin);
-		res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-		res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-		res.setHeader("Vary", "Origin");
-	}
-
-	if (req.method === "OPTIONS") {
-		res.status(204).end();
-		return true;
-	}
-
-	return false;
-}
 
 export default async function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<SuccessJson | ErrorJson>,
 ) {
-	if (applyCors(req, res)) return;
+	if (applyContactApiCors(req, res)) return;
 
 	if (req.method !== "POST") {
 		return res.status(405).json({
@@ -72,6 +46,29 @@ export default async function handler(
 			message: validated.errors[0] || "Validation failed.",
 			errors: validated.errors,
 		});
+	}
+
+	const rawBody =
+		body && typeof body === "object" ? (body as Record<string, unknown>) : {};
+	const recaptchaToken =
+		typeof rawBody.recaptchaToken === "string"
+			? rawBody.recaptchaToken.trim()
+			: "";
+
+	if (process.env.RECAPTCHA_SECRET_KEY?.trim()) {
+		if (!recaptchaToken) {
+			return res.status(400).json({
+				success: false,
+				message: "Please complete the reCAPTCHA verification.",
+			});
+		}
+		const captchaOk = await verifyRecaptchaResponse(recaptchaToken);
+		if (!captchaOk) {
+			return res.status(400).json({
+				success: false,
+				message: "reCAPTCHA verification failed. Please try again.",
+			});
+		}
 	}
 
 	const { name, email, message, emailSubject } = validated.data;

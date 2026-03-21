@@ -23,6 +23,14 @@ const withAnalyzer =
 
 module.exports = {
 	distDir,
+	/**
+	 * Public reCAPTCHA v2 site key (safe in the client bundle). Override via env in CI if you rotate keys.
+	 */
+	env: {
+		NEXT_PUBLIC_RECAPTCHA_SITE_KEY:
+			process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ||
+			"6LcK4JEsAAAAAEVfrg8Frb7d6sS-0TuysfSNHexl",
+	},
 	reactStrictMode: true,
 	swcMinify: true,
 	compress: true,

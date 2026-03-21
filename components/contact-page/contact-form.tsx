@@ -7,14 +7,17 @@ import ScheduleIcon from "@material-ui/icons/Schedule";
 import CallIcon from "@material-ui/icons/Call";
 import HomeIcon from "@material-ui/icons/Home";
 import EmailIcon from "@material-ui/icons/Email";
-import { FC, memo, useState } from "react";
+import { FC, memo, useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { companyInfo } from "../../app/company-data";
+import { getContactRecaptchaSiteKey } from "../../lib/contact-recaptcha";
 import { submitContactMessage } from "../../lib/submit-contact-form";
+import ContactRecaptchaWidget from "./contact-recaptcha-widget";
 
 type UserSubmitForm = {
 	name: string;
@@ -24,6 +27,7 @@ type UserSubmitForm = {
 
 const ContactFormComponent: FC = () => {
 	const router = useRouter();
+	const recaptchaRef = useRef<ReCAPTCHA>(null);
 	const [submitState, setSubmitState] = useState<{
 		loading: boolean;
 		successMessage: string;
@@ -61,15 +65,31 @@ const ContactFormComponent: FC = () => {
 			errorMessage: "",
 		});
 
+		const siteKey = getContactRecaptchaSiteKey();
+		let recaptchaToken: string | undefined;
+		if (siteKey) {
+			recaptchaToken = recaptchaRef.current?.getValue() || undefined;
+			if (!recaptchaToken) {
+				setSubmitState({
+					loading: false,
+					successMessage: "",
+					errorMessage: "Please complete the reCAPTCHA verification.",
+				});
+				return;
+			}
+		}
+
 		try {
 			await submitContactMessage({
 				name: data.name,
 				email: data.email,
 				subject: data.subject,
 				emailSubject: `New contact form message from ${data.name}`,
+				...(recaptchaToken ? { recaptchaToken } : {}),
 			});
 
 			reset();
+			recaptchaRef.current?.reset();
 			setSubmitState({
 				loading: false,
 				successMessage:
@@ -77,6 +97,7 @@ const ContactFormComponent: FC = () => {
 				errorMessage: "",
 			});
 		} catch (error: any) {
+			recaptchaRef.current?.reset();
 			setSubmitState({
 				loading: false,
 				successMessage: "",
@@ -264,6 +285,9 @@ const ContactFormComponent: FC = () => {
 												errors.email ? "is-invalid" : "custom-input"
 											}`}></textarea>
 									</div>
+									<div className='recaptcha-slot'>
+										<ContactRecaptchaWidget ref={recaptchaRef} />
+									</div>
 									<div className='actions'>
 										<CustomButton disabled={submitState.loading}>
 											{submitState.loading ? "SENDING..." : "SUBMIT"}
@@ -437,6 +461,10 @@ const ContactForm = styled.div`
 			color: white;
 			color: #6f6d85;
 		}
+	}
+	.recaptcha-slot {
+		margin-top: 1rem;
+		min-height: 4.5rem;
 	}
 	.actions {
 		margin-top: 1.5rem;

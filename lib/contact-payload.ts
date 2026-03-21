@@ -8,4 +8,6 @@ export type ContactApiPayload = {
 	message: string;
 	/** Optional SMTP subject line; defaults server-side if omitted. */
 	emailSubject?: string;
+	/** Google reCAPTCHA token when `RECAPTCHA_SECRET_KEY` is set on the server. */
+	recaptchaToken?: string;
 };
