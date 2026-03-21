@@ -17,7 +17,14 @@ const ContactRecaptchaWidget = forwardRef<ReCAPTCHA, object>(
 			return null;
 		}
 
-		return <ReCAPTCHA ref={ref} sitekey={siteKey} size='normal' />;
+		return (
+			<ReCAPTCHA
+				ref={ref}
+				sitekey={siteKey}
+				size='normal'
+				hl='en'
+			/>
+		);
 	},
 );
 

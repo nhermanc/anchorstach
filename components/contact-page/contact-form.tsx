@@ -285,13 +285,22 @@ const ContactFormComponent: FC = () => {
 												errors.email ? "is-invalid" : "custom-input"
 											}`}></textarea>
 									</div>
-									<div className='recaptcha-slot'>
-										<ContactRecaptchaWidget ref={recaptchaRef} />
-									</div>
+									{getContactRecaptchaSiteKey() ? (
+										<div className='recaptcha-slot'>
+											<ContactRecaptchaWidget ref={recaptchaRef} />
+											<p className='recaptcha-hint'>
+												Google often verifies with a single click—image
+												challenges only appear when needed. If submit fails,
+												check the message below and try again.
+											</p>
+										</div>
+									) : null}
 									<div className='actions'>
-										<CustomButton disabled={submitState.loading}>
+										<SubmitButton
+											type='submit'
+											disabled={submitState.loading}>
 											{submitState.loading ? "SENDING..." : "SUBMIT"}
-										</CustomButton>
+										</SubmitButton>
 									</div>
 									{submitState.successMessage && (
 										<p className='submit-success'>
@@ -332,7 +341,7 @@ const ContactContainer = styled.div`
 const CustomContainer = styled.div`
 	width: 100%;
 	max-width: var(--max-width1250);
-	overflow: hidden;
+	overflow: visible;
 	margin: 0 auto;
 `;
 
@@ -389,13 +398,16 @@ const ContactInfo = styled.div`
 
 const ContactForm = styled.div`
 	background: #ffffff;
-	height: 38.188rem;
+	min-height: 0;
+	height: auto;
+	overflow: visible;
 	color: #0f0b33;
 	width: 100%;
 	max-width: 35.625rem;
 	border-radius: 6px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 	padding: 2rem;
+	padding-bottom: 2.5rem;
 
 	position: relative;
 	z-index: 3;
@@ -464,10 +476,20 @@ const ContactForm = styled.div`
 	}
 	.recaptcha-slot {
 		margin-top: 1rem;
-		min-height: 4.5rem;
+		min-height: 78px;
+		overflow: visible;
+		position: relative;
+		z-index: 4;
+	}
+	.recaptcha-hint {
+		font-size: 0.75rem;
+		color: #6f6d85;
+		line-height: 1.35;
+		margin-top: 0.5rem;
+		max-width: 304px;
 	}
 	.actions {
-		margin-top: 1.5rem;
+		margin-top: 1rem;
 	}
 	.submit-success {
 		margin-top: 1rem;
@@ -602,4 +624,9 @@ const CustomButton = styled.button`
 		cursor: not-allowed;
 		opacity: 0.7;
 	}
+`;
+
+/** Tighter top margin so reCAPTCHA + submit stay visible in the card */
+const SubmitButton = styled(CustomButton)`
+	margin-top: 0.75rem;
 `;

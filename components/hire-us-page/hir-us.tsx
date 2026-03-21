@@ -235,13 +235,22 @@ const HirUsPageComponent: FC = () => {
 								/>
 							</div>
 
-							<div className='recaptcha-slot'>
-								<ContactRecaptchaWidget ref={recaptchaRef} />
-							</div>
+							{getContactRecaptchaSiteKey() ? (
+								<div className='recaptcha-slot'>
+									<ContactRecaptchaWidget ref={recaptchaRef} />
+									<p className='recaptcha-hint'>
+										Google often verifies with a single click—image challenges
+										only appear when needed. If submit fails, read the message
+										below.
+									</p>
+								</div>
+							) : null}
 							<div className='actions'>
-								<CustomButton disabled={submitState.loading}>
+								<HireSubmitButton
+									type='submit'
+									disabled={submitState.loading}>
 									{submitState.loading ? "SENDING..." : "SUBMIT"}
-								</CustomButton>
+								</HireSubmitButton>
 								{submitState.successMessage && (
 									<p className='submit-success'>
 										{submitState.successMessage}
@@ -266,7 +275,7 @@ export default memo(HirUsPageComponent);
 const CustomContainer = styled.div`
 	width: 100%;
 	max-width: var(--max-width1250);
-	overflow: hidden;
+	overflow: visible;
 	margin: 0 auto;
 `;
 
@@ -330,7 +339,7 @@ const HiddenImageContainer = styled.div`
 `;
 
 const ContactContainer = styled.div`
-	min-height: 36.688rem;
+	min-height: 0;
 	width: 100%;
 	max-width: 73.125rem;
 	display: flex;
@@ -341,6 +350,8 @@ const ContactContainer = styled.div`
 	flex-wrap: wrap;
 	background-color: white;
 	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	overflow: visible;
+	padding-bottom: 2.5rem;
 	@media (min-width: 768px) {
 		margin-top: 12rem;
 		min-width: 34.813rem;
@@ -421,10 +432,20 @@ const ContactContainer = styled.div`
 
 	.recaptcha-slot {
 		margin-top: 1rem;
-		min-height: 4.5rem;
+		min-height: 78px;
+		overflow: visible;
+		position: relative;
+		z-index: 2;
+	}
+	.recaptcha-hint {
+		font-size: 0.75rem;
+		color: #878599;
+		line-height: 1.35;
+		margin-top: 0.5rem;
+		max-width: 304px;
 	}
 	.actions {
-		margin-top: 1.5rem;
+		margin-top: 1rem;
 	}
 `;
 
@@ -508,4 +529,12 @@ const CustomButton = styled.button`
 		background: #1d1852;
 		border-color: #1d1852;
 	}
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.7;
+	}
+`;
+
+const HireSubmitButton = styled(CustomButton)`
+	margin-top: 0.75rem;
 `;
