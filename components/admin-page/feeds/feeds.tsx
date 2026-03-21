@@ -1,7 +1,7 @@
 /** @format */
 
 import styled from "styled-components";
-import SearchIcon from "@mui/icons-material/Search";
+import SearchIcon from "@material-ui/icons/Search";
 import { IconButton } from "@material-ui/core";
 
 import Heading from "./heading";

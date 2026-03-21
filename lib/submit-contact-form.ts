@@ -90,7 +90,7 @@ async function submitViaInquiryApi(
 		recaptchaToken: token,
 	};
 
-	const response = await fetch(getSubmitInquiryUrl(), {
+	const response = await fetch(getContactSubmitInquiryUrl(), {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",

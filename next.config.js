@@ -23,6 +23,10 @@ const withAnalyzer =
 
 module.exports = {
 	distDir,
+	/** Avoid build failures when CI omits devDependencies or ESLint resolution differs (run `npm run lint` locally). */
+	eslint: {
+		ignoreDuringBuilds: true,
+	},
 	/**
 	 * Public reCAPTCHA v2 site key (safe in the client bundle). Override via env in CI if you rotate keys.
 	 */

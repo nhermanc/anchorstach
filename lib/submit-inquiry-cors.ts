@@ -7,7 +7,14 @@ import { companyInfo } from "../app/company-data";
 function allowedOriginsForSubmitInquiry(): string[] {
 	const raw = process.env.CONTACT_ALLOWED_ORIGINS?.trim();
 	if (raw) {
-		return raw.split(",").map((o) => o.trim()).filter(Boolean);
+		return Array.from(
+			new Set(
+				raw
+					.split(",")
+					.map((o) => o.trim())
+					.filter(Boolean),
+			),
+		);
 	}
 
 	const out: string[] = [];
@@ -31,7 +38,7 @@ function allowedOriginsForSubmitInquiry(): string[] {
 		out.push("http://localhost:3000", "http://127.0.0.1:3000");
 	}
 
-	return [...new Set(out)];
+	return Array.from(new Set(out));
 }
 
 /**
