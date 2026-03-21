@@ -5,6 +5,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { applySubmitInquiryCors } from "../../lib/submit-inquiry-cors";
 import { validateContactBody } from "../../lib/contact-api-validation";
 import { verifyRecaptchaResponse } from "../../lib/recaptcha-verify";
+import { messageFromWeb3FormsResponse } from "../../lib/web3forms-error-message";
 import { resolveWeb3FormsAccessKey } from "../../lib/web3forms-access-key";
 
 type SuccessJson = { success: true; message: string };
@@ -93,17 +94,19 @@ export default async function handler(
 		}),
 	});
 
-	const w3Data = (await w3Res.json().catch(() => ({}))) as {
-		success?: boolean;
-		message?: string;
-	};
+	const w3Raw = await w3Res.text();
+	let w3Data: unknown = {};
+	try {
+		w3Data = JSON.parse(w3Raw) as object;
+	} catch {
+		w3Data = {};
+	}
+	const w3Obj = w3Data as { success?: boolean; message?: string };
 
-	if (!w3Res.ok || w3Data.success !== true) {
+	if (!w3Res.ok || w3Obj.success !== true) {
 		return res.status(502).json({
 			success: false,
-			message:
-				w3Data.message ||
-				"Could not send your message. Please try again or email us directly.",
+			message: messageFromWeb3FormsResponse(w3Res.status, w3Raw, w3Data),
 		});
 	}
 

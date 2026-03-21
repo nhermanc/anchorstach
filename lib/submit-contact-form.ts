@@ -4,6 +4,7 @@ import { companyInfo } from "../app/company-data";
 import { getContactSubmitInquiryUrl } from "./contact-submit-endpoint";
 import type { ContactApiPayload } from "./contact-payload";
 import { getContactRecaptchaSiteKey } from "./contact-recaptcha";
+import { messageFromWeb3FormsResponse } from "./web3forms-error-message";
 import { DEFAULT_WEB3FORMS_ACCESS_KEY } from "./web3forms-access-key";
 
 export type SubmitContactInput = {
@@ -123,19 +124,26 @@ async function submitViaInquiryApi(
 	}
 
 	const text = await response.text();
-	let data: { success?: boolean; message?: string };
+	let data: {
+		success?: boolean;
+		message?: string;
+		errors?: string[];
+	};
 	try {
 		data = JSON.parse(text) as typeof data;
 	} catch {
 		throw new Error(
-			"The server returned an unexpected response. If this keeps happening, email us directly.",
+			`The server returned an unexpected response (HTTP ${response.status}). If this keeps happening, email ${companyInfo.email}.`,
 		);
 	}
 
 	if (!response.ok || !data.success) {
-		throw new Error(
+		const fromServer =
 			data.message ||
-				"Could not send your message. Please try again or email us directly.",
+			(Array.isArray(data.errors) ? data.errors[0] : undefined);
+		throw new Error(
+			fromServer ||
+				`Message server error (HTTP ${response.status}). Check Render logs, Web3Forms access key, and RECAPTCHA_SECRET_KEY. Email ${companyInfo.email} if needed.`,
 		);
 	}
 }

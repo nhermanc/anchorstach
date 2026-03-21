@@ -123,7 +123,9 @@ function corsHeaders(req) {
 }
 
 async function verifyRecaptcha(token) {
-	if (!RECAPTCHA_SECRET || !token?.trim()) return false;
+	if (!RECAPTCHA_SECRET || !token?.trim()) {
+		return { ok: false, reason: "missing-secret-or-token" };
+	}
 	const params = new URLSearchParams();
 	params.append("secret", RECAPTCHA_SECRET);
 	params.append("response", token.trim());
@@ -133,7 +135,25 @@ async function verifyRecaptcha(token) {
 		body: params.toString(),
 	});
 	const data = await res.json().catch(() => ({}));
-	return data.success === true;
+	if (data.success === true) return { ok: true, reason: "" };
+	const codes = data["error-codes"];
+	const reason = Array.isArray(codes) ? codes.join(", ") : "unknown";
+	return { ok: false, reason };
+}
+
+function messageFromWeb3FormsFailure(httpStatus, rawText, parsed) {
+	if (parsed && typeof parsed === "object") {
+		const o = parsed;
+		if (typeof o.message === "string" && o.message.trim()) return o.message.trim();
+		if (typeof o.error === "string" && o.error.trim()) return o.error.trim();
+	}
+	const slice = String(rawText || "").trim().slice(0, 240);
+	if (slice) return `Web3Forms returned HTTP ${httpStatus}: ${slice}`;
+	return (
+		`Web3Forms error (HTTP ${httpStatus}). ` +
+		`Confirm your access key at web3forms.com and allow domain anchorstacktech.com (and www). ` +
+		`Or email hello@anchorstacktech.com.`
+	);
 }
 
 async function submitWeb3Forms({ name, email, message, emailSubject }) {
@@ -154,8 +174,18 @@ async function submitWeb3Forms({ name, email, message, emailSubject }) {
 			message,
 		}),
 	});
-	const data = await res.json().catch(() => ({}));
-	return { ok: res.ok && data.success === true, message: data.message };
+	const raw = await res.text();
+	let parsed = {};
+	try {
+		parsed = JSON.parse(raw);
+	} catch {
+		parsed = {};
+	}
+	const success = res.ok && parsed && parsed.success === true;
+	const messageOut = success
+		? ""
+		: messageFromWeb3FormsFailure(res.status, raw, parsed);
+	return { ok: success, message: messageOut };
 }
 
 function readJsonBody(req) {
@@ -249,11 +279,13 @@ const server = http.createServer(async (req, res) => {
 		return;
 	}
 
-	const captchaOk = await verifyRecaptcha(recaptchaToken);
-	if (!captchaOk) {
+	const captcha = await verifyRecaptcha(recaptchaToken);
+	if (!captcha.ok) {
 		sendJson(res, req, 400, {
 			success: false,
-			message: "reCAPTCHA verification failed. Please try again.",
+			message:
+				`reCAPTCHA verification failed (${captcha.reason}). ` +
+				`On Render, set RECAPTCHA_SECRET_KEY to the secret for the same key pair as the site key in your static build.`,
 		});
 		return;
 	}
