@@ -4,7 +4,7 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { serviceItems, workProjectItems } from "../../app/company-data";
 
 const SITE_URL =
-	process.env.NEXT_PUBLIC_SITE_URL || "https://www.anchorstacktech.com";
+	process.env.NEXT_PUBLIC_SITE_URL || "https://anchorstacktech.com";
 
 const staticRoutes = [
 	"",

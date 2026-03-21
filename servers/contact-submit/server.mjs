@@ -58,41 +58,62 @@ function validateBody(body) {
 	};
 }
 
-function allowedOrigins() {
-	const raw = process.env.CONTACT_ALLOWED_ORIGINS?.trim();
-	if (raw) {
-		return [
-			...new Set(
-				raw
-					.split(",")
-					.map((o) => o.trim())
-					.filter(Boolean),
-			),
-		];
-	}
-	const site =
-		process.env.SITE_URL?.trim() ||
-		process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
-		"https://www.anchorstacktech.com";
+function defaultOriginsFromSite(site) {
+	const out = [];
 	try {
 		const u = new URL(site);
 		const host = u.hostname.replace(/^www\./i, "");
 		const p = u.protocol === "http:" ? "http:" : "https:";
 		const apex = `${p}//${host}`;
 		const www = `${p}//www.${host}`;
-		const out = [apex];
+		out.push(apex);
 		if (apex !== www) out.push(www);
-		return [...new Set(out)];
 	} catch {
-		return [];
+		// ignore
+	}
+	return Array.from(new Set(out));
+}
+
+function originMatchesSiteFamily(origin, siteUrl) {
+	try {
+		const o = new URL(origin);
+		const s = new URL(siteUrl);
+		const strip = (h) => h.replace(/^www\./i, "").toLowerCase();
+		const siteApex = strip(s.hostname);
+		const oh = o.hostname.toLowerCase();
+		if (strip(oh) === siteApex) return true;
+		if (oh.endsWith("." + siteApex)) return true;
+		return false;
+	} catch {
+		return false;
 	}
 }
 
-function corsHeaders(req) {
+function resolveAllowedOrigin(req) {
 	const origin = req.headers.origin;
-	const allow = allowedOrigins();
+	if (!origin) return null;
+	const explicit = process.env.CONTACT_ALLOWED_ORIGINS?.trim();
+	if (explicit) {
+		const list = explicit
+			.split(",")
+			.map((o) => o.trim())
+			.filter(Boolean);
+		return list.includes(origin) ? origin : null;
+	}
+	const site =
+		process.env.SITE_URL?.trim() ||
+		process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+		"https://anchorstacktech.com";
+	const defaults = defaultOriginsFromSite(site);
+	if (defaults.includes(origin)) return origin;
+	if (originMatchesSiteFamily(origin, site)) return origin;
+	return null;
+}
+
+function corsHeaders(req) {
+	const origin = resolveAllowedOrigin(req);
 	const h = {};
-	if (origin && allow.includes(origin)) {
+	if (origin) {
 		h["Access-Control-Allow-Origin"] = origin;
 		h["Access-Control-Allow-Methods"] = "POST, OPTIONS";
 		h["Access-Control-Allow-Headers"] = "Content-Type";
@@ -262,7 +283,11 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, () => {
+	const site =
+		process.env.SITE_URL?.trim() ||
+		process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
+		"https://anchorstacktech.com";
 	console.log(
-		`[contact-submit] listening on :${PORT} allowedOrigins=${allowedOrigins().join("|") || "(none — set SITE_URL or CONTACT_ALLOWED_ORIGINS)"}`,
+		`[contact-submit] listening on :${PORT} site=${site} CORS=family+defaults (override with CONTACT_ALLOWED_ORIGINS)`,
 	);
 });

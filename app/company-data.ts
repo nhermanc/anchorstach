@@ -10,7 +10,7 @@ export const companyInfo = {
 	googleCalendarBookingUrl:
 		"https://calendar.google.com/calendar/u/0/r/eventedit?text=Meeting%20with%20AnchorStackTech&details=Please%20share%20your%20project%20goals%20and%20timeline.",
 	siteUrl:
-		process.env.NEXT_PUBLIC_SITE_URL || "https://www.anchorstacktech.com",
+		process.env.NEXT_PUBLIC_SITE_URL || "https://anchorstacktech.com",
 	seoDescription:
 		"AnchorStackTech provides web, app, Odoo, blockchain, AI integration, and desktop application development services. Empowering innovation.",
 };

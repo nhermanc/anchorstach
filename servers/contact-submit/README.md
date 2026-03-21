@@ -36,10 +36,10 @@ In the service → **Environment** → add:
 | Key | Value |
 |-----|--------|
 | **`RECAPTCHA_SECRET_KEY`** | Your Google reCAPTCHA **secret** (mark as **Secret** in Render) |
-| **`SITE_URL`** | Your live marketing site, e.g. `https://www.anchorstacktech.com` *(needed for **CORS** — apex + `www` are allowed)* |
+| **`SITE_URL`** | Your live marketing site, e.g. `https://anchorstacktech.com` *(CORS also allows `www` on the same domain)* |
 | **`WEB3FORMS_ACCESS_KEY`** | Optional; if omitted, the default from `lib/web3forms-access-key.ts` in the main repo is used |
 
-Optional: **`CONTACT_ALLOWED_ORIGINS`** — comma-separated list if you need extra origins (e.g. staging URLs). If unset, CORS is derived from **`SITE_URL`**.
+Optional: **`CONTACT_ALLOWED_ORIGINS`** — comma-separated list if you need extra origins (e.g. IONOS preview URLs on another domain). If unset, CORS allows **`SITE_URL`** plus **www/apex** and **subdomains of the same site** (e.g. `www` vs non-`www`). **Redeploy** this service after changing CORS env vars.
 
 **Node version:** If Render defaults to an old Node, add **`NODE_VERSION`** = `22` (or `20`) in Environment.
 

@@ -3,7 +3,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const SITE_URL =
-	process.env.NEXT_PUBLIC_SITE_URL || "https://www.anchorstacktech.com";
+	process.env.NEXT_PUBLIC_SITE_URL || "https://anchorstacktech.com";
 
 export default function handler(
 	req: NextApiRequest,

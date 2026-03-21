@@ -111,7 +111,12 @@ const Footer: React.FC = () => {
 						</ContactItem>
 						<ContactItem>
 							<LanguageIcon />
-							<span>www.anchorstacktech.com</span>
+							<a
+								href={companyInfo.siteUrl}
+								target='_blank'
+								rel='noreferrer'>
+								{new URL(companyInfo.siteUrl).hostname}
+							</a>
 						</ContactItem>
 						<SocialRow>
 							{socialLinks.map((social) => {

@@ -3,23 +3,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { companyInfo } from "../app/company-data";
+import { originMatchesSiteFamily } from "./cors-site-family";
 
-function allowedOriginsForSubmitInquiry(): string[] {
-	const raw = process.env.CONTACT_ALLOWED_ORIGINS?.trim();
-	if (raw) {
-		return Array.from(
-			new Set(
-				raw
-					.split(",")
-					.map((o) => o.trim())
-					.filter(Boolean),
-			),
-		);
-	}
-
+function defaultOriginsFromSite(site: string): string[] {
 	const out: string[] = [];
-	const site =
-		process.env.NEXT_PUBLIC_SITE_URL?.trim() || companyInfo.siteUrl;
 	try {
 		const u = new URL(site);
 		const host = u.hostname.replace(/^www\./i, "");
@@ -33,12 +20,60 @@ function allowedOriginsForSubmitInquiry(): string[] {
 	} catch {
 		// ignore
 	}
+	return Array.from(new Set(out));
+}
 
-	if (process.env.NODE_ENV !== "production") {
-		out.push("http://localhost:3000", "http://127.0.0.1:3000");
+/**
+ * Resolves allowed `Access-Control-Allow-Origin` value, or null if disallowed.
+ */
+function resolveAllowedOrigin(req: NextApiRequest): string | null {
+	const origin = req.headers.origin;
+	if (!origin || typeof origin !== "string") {
+		return null;
 	}
 
-	return Array.from(new Set(out));
+	const explicit = process.env.CONTACT_ALLOWED_ORIGINS?.trim();
+	if (explicit) {
+		const list = Array.from(
+			new Set(
+				explicit
+					.split(",")
+					.map((o) => o.trim())
+					.filter(Boolean),
+			),
+		);
+		return list.includes(origin) ? origin : null;
+	}
+
+	const site =
+		process.env.NEXT_PUBLIC_SITE_URL?.trim() || companyInfo.siteUrl;
+	const defaults = defaultOriginsFromSite(site);
+	if (defaults.includes(origin)) {
+		return origin;
+	}
+	if (originMatchesSiteFamily(origin, site)) {
+		return origin;
+	}
+
+	if (process.env.NODE_ENV !== "production") {
+		if (
+			origin === "http://localhost:3000" ||
+			origin === "http://127.0.0.1:3000"
+		) {
+			return origin;
+		}
+	}
+
+	return null;
+}
+
+function applyCorsHeaders(res: NextApiResponse, origin: string | null): void {
+	if (origin) {
+		res.setHeader("Access-Control-Allow-Origin", origin);
+		res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+		res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+		res.setHeader("Vary", "Origin");
+	}
 }
 
 /**
@@ -48,15 +83,8 @@ export function applySubmitInquiryCors(
 	req: NextApiRequest,
 	res: NextApiResponse,
 ): boolean {
-	const allowed = allowedOriginsForSubmitInquiry();
-	const origin = req.headers.origin;
-
-	if (origin && allowed.includes(origin)) {
-		res.setHeader("Access-Control-Allow-Origin", origin);
-		res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-		res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-		res.setHeader("Vary", "Origin");
-	}
+	const allowedOrigin = resolveAllowedOrigin(req);
+	applyCorsHeaders(res, allowedOrigin);
 
 	if (req.method === "OPTIONS") {
 		res.status(204).end();

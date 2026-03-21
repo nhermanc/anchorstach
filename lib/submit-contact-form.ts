@@ -90,15 +90,34 @@ async function submitViaInquiryApi(
 		recaptchaToken: token,
 	};
 
-	const response = await fetch(getContactSubmitInquiryUrl(), {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-		},
-		body: JSON.stringify(payload),
-		signal,
-	});
+	const inquiryUrl = getContactSubmitInquiryUrl();
+	let response: Response;
+	try {
+		response = await fetch(inquiryUrl, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify(payload),
+			signal,
+			mode: "cors",
+		});
+	} catch (err) {
+		const isNetwork =
+			err instanceof TypeError &&
+			(String((err as Error).message).includes("fetch") ||
+				String((err as Error).message).includes("Failed to fetch"));
+		if (isNetwork) {
+			throw new Error(
+				"Could not reach the message server (network or security block). " +
+					"Confirm NEXT_PUBLIC_CONTACT_SUBMIT_API_URL in your static build matches your Render URL ending in /api/submit-inquiry, " +
+					"and on Render set SITE_URL to this website’s address (https://www… or https://…). " +
+					`Trying: ${inquiryUrl}`,
+			);
+		}
+		throw err;
+	}
 
 	const text = await response.text();
 	let data: { success?: boolean; message?: string };
