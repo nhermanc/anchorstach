@@ -1,16 +1,20 @@
 # Contact submit API (reCAPTCHA + Web3Forms)
 
-Tiny **Node 18+** HTTP server — **no Next.js**. Use this when the marketing site is **static** (e.g. IONOS `next export`) and the contact form needs **server-side reCAPTCHA** + **Web3Forms**.
+Tiny **Node 18+** HTTP server — **no Next.js**. The main site’s static build expects this API at:
 
-The static site must set **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** to your public API URL, for example:
+**`https://anchorstacktech-contact-api.onrender.com/api/submit-inquiry`**
 
-`https://YOUR-SERVICE.onrender.com/api/submit-inquiry`
+(defined in repo root **`render.yaml`** and **`next.config.js`**). First deploy: see **`docs/RENDER_CONTACT_API_FIRST_DEPLOY.md`**.
 
 ---
 
 ## Deploy on Render (recommended)
 
-### 1. Create the Web Service
+### 0. Blueprint (easiest)
+
+**New → Blueprint** → connect this repo → Render uses **`render.yaml`**. Add **`RECAPTCHA_SECRET_KEY`** when prompted.
+
+### 1. Or: manual Web Service
 
 1. In [Render Dashboard](https://dashboard.render.com/) → **New +** → **Web Service**.
 2. Connect your **GitHub** repository (same repo as the main site).
@@ -18,7 +22,7 @@ The static site must set **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** to your public
 
    | Setting | Value |
    |--------|--------|
-   | **Name** | e.g. `anchorstack-contact-submit` |
+   | **Name** | **`anchorstacktech-contact-api`** *(must match `next.config.js` default URL)* |
    | **Region** | Closest to your users |
    | **Branch** | `main` (or your production branch) |
    | **Root Directory** | `servers/contact-submit` |
@@ -47,15 +51,7 @@ Optional: **`CONTACT_ALLOWED_ORIGINS`** — comma-separated list if you need ext
 
 1. **Create Web Service** → wait for the first deploy.
 2. Copy your service URL, e.g. `https://anchorstack-contact-submit.onrender.com`.
-3. On **IONOS** (or wherever you run `npm run build:deploy`), set:
-
-   ```bash
-   NEXT_PUBLIC_CONTACT_SUBMIT_API_URL=https://anchorstack-contact-submit.onrender.com/api/submit-inquiry
-   ```
-
-   Use your **exact** hostname, **HTTPS**, path **`/api/submit-inquiry`**, **no trailing slash**.
-
-4. Rebuild and redeploy the **static** site so the new URL is in the JS bundle.
+3. If your Render **hostname differs**, set **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** on the static build or edit **`DEFAULT_CONTACT_SUBMIT_API_URL`** in **`next.config.js`**, then rebuild the static site.
 
 ### Free tier note
 

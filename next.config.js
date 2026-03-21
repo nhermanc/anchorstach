@@ -13,6 +13,13 @@ const distDir =
 	process.env.NEXT_USE_DEV_DIST === "true" ? ".next-dev" : ".next";
 
 /**
+ * Public contact API (Render `servers/contact-submit`). Must match your Render service URL.
+ * Override with env `NEXT_PUBLIC_CONTACT_SUBMIT_API_URL` if Render assigns a different hostname.
+ */
+const DEFAULT_CONTACT_SUBMIT_API_URL =
+	"https://anchorstacktech-contact-api.onrender.com/api/submit-inquiry";
+
+/**
  * Single object export so `next export` always sees `images.unoptimized` (required for static / IONOS).
  * A phase-based function can be resolved differently during export on some Next.js versions.
  */
@@ -34,6 +41,9 @@ module.exports = {
 		NEXT_PUBLIC_RECAPTCHA_SITE_KEY:
 			process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ||
 			"6LcK4JEsAAAAAEVfrg8Frb7d6sS-0TuysfSNHexl",
+		NEXT_PUBLIC_CONTACT_SUBMIT_API_URL:
+			process.env.NEXT_PUBLIC_CONTACT_SUBMIT_API_URL?.trim() ||
+			DEFAULT_CONTACT_SUBMIT_API_URL,
 	},
 	reactStrictMode: true,
 	swcMinify: true,

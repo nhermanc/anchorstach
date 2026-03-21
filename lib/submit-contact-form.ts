@@ -109,11 +109,14 @@ async function submitViaInquiryApi(
 			(String((err as Error).message).includes("fetch") ||
 				String((err as Error).message).includes("Failed to fetch"));
 		if (isNetwork) {
+			const contactApiFallback = inquiryUrl.includes("contact-api.");
 			throw new Error(
-				"Could not reach the message server (network or security block). " +
-					"Confirm NEXT_PUBLIC_CONTACT_SUBMIT_API_URL in your static build matches your Render URL ending in /api/submit-inquiry, " +
-					"and on Render set SITE_URL to this website’s address (https://www… or https://…). " +
-					`Trying: ${inquiryUrl}`,
+				(contactApiFallback
+					? "The static site was built without NEXT_PUBLIC_CONTACT_SUBMIT_API_URL, so it is calling contact-api… (that host usually does not exist). "
+					: "Could not reach the message server (network or CORS). ") +
+					"Rebuild the site with NEXT_PUBLIC_CONTACT_SUBMIT_API_URL set to your Render URL, e.g. https://YOUR-SERVICE.onrender.com/api/submit-inquiry. " +
+					"On Render, set SITE_URL=https://anchorstacktech.com. " +
+					`Attempted: ${inquiryUrl}`,
 			);
 		}
 		throw err;

@@ -28,6 +28,8 @@ run: |
 
 **`npm ci` requires a committed `package-lock.json` that matches `package.json`.** After adding or changing dependencies locally, run `npm install` and commit the updated lockfile. This repo’s **`.npmrc`** sets `legacy-peer-deps=true` (peer conflicts with Next 11 + MUI); ensure `.npmrc` is committed so CI uses the same behavior.
 
+**Contact form (Render):** the static bundle defaults to **`https://anchorstacktech-contact-api.onrender.com/api/submit-inquiry`** (see **`next.config.js`**). Deploy that API on Render (**`render.yaml`** Blueprint or **`servers/contact-submit/README.md`**). One-time: set **`RECAPTCHA_SECRET_KEY`** on the Render service. Override the URL with **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** only if Render gives a different hostname.
+
 Set the **publish / deployment folder** to:
 
 ```text
@@ -51,7 +53,7 @@ Optional: set `NEXT_PUBLIC_SITE_URL` in IONOS build env so sitemap URLs match yo
 
 ## Notes
 
-- **Contact / Hire Us (static):** **Web3Forms** by default. **reCAPTCHA:** site key in **`next.config.js`**; deploy **`servers/contact-submit/`** on **Render** (see **`servers/contact-submit/README.md`**) and set IONOS build env **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** to `https://<your-service>.onrender.com/api/submit-inquiry` — **`docs/RECAPTCHA_CONTACT_API.md`**. **`RECAPTCHA_SECRET_KEY`** only on Render (never commit). **`NEXT_PUBLIC_SITE_URL`** comes from Deploy Now **`site-url`** in the workflow. **SMTP:** **`docs/IONOS_CONTACT_SMTP.md`**. **`.env.example`**.
+- **Contact / Hire Us (static):** **Web3Forms** + **reCAPTCHA**; default API URL in **`next.config.js`**. Deploy **`servers/contact-submit`** via **`render.yaml`** (service name **`anchorstacktech-contact-api`**) and set **`RECAPTCHA_SECRET_KEY`** on Render once — **`docs/RECAPTCHA_CONTACT_API.md`**, **`servers/contact-submit/README.md`**. **`NEXT_PUBLIC_SITE_URL`** from Deploy Now **`site-url`**. **SMTP:** **`docs/IONOS_CONTACT_SMTP.md`**. **`.env.example`**.
 - **Testimonials:** Static data from `app/company-data.ts` only (no **`/api/upwork-testimonials`**).
 - **Local dev + SMTP:** **`next dev`** + **`SMTP_*`** + **`NEXT_PUBLIC_USE_NODE_CONTACT_API=1`** → same-origin **`/api/contact`**.
 - Standard **`npm run build`** still only creates `.next/` (for `next start` or Node hosting). Use **`npm run build:deploy`** for IONOS **static** hosting only.
