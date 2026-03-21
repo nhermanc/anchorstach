@@ -1,6 +1,9 @@
-# Contact API (reCAPTCHA verify only)
+# Contact API (reCAPTCHA + optional site assistant)
 
-Tiny **Node 18+** HTTP server — **no Next.js**. It exposes **`POST /api/verify-recaptcha`** (body: `{ "recaptchaToken": "..." }`). The **browser** submits to [Web3Forms](https://api.web3forms.com/submit) after verification — Web3Forms blocks many **server→API** requests from datacenter IPs (Cloudflare 403).
+Tiny **Node 18+** HTTP server — **no Next.js**. It exposes:
+
+- **`POST /api/verify-recaptcha`** — body `{ "recaptchaToken": "..." }`; the **browser** then posts to [Web3Forms](https://api.web3forms.com/submit) (Web3Forms blocks many datacenter server calls).
+- **`POST /api/site-chat`** — knowledge-grounded assistant; use **`GROQ_API_KEY`** (free tier at [console.groq.com](https://console.groq.com/)) or **`OPENAI_API_KEY`**. See **`docs/SITE_CHAT.md`** and **`site-chat-knowledge.txt`**.
 
 The static build still sets **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** to a URL ending in **`/api/submit-inquiry`** (legacy path segment); the client derives **`/api/verify-recaptcha`** on the same host. Default host: **`https://anchorstacktech-contact-api.onrender.com`** (see **`render.yaml`**, **`next.config.js`**). First deploy: **`docs/RENDER_CONTACT_API_FIRST_DEPLOY.md`**.
 
@@ -10,7 +13,7 @@ The static build still sets **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** to a URL en
 
 ### 0. Blueprint (easiest)
 
-**New → Blueprint** → connect this repo → Render uses **`render.yaml`**. Add **`RECAPTCHA_SECRET_KEY`** when prompted.
+**New → Blueprint** → connect this repo → Render uses **`render.yaml`**. Add **`RECAPTCHA_SECRET_KEY`** and **`OPENAI_API_KEY`** (for the floating site chat) when prompted.
 
 ### 1. Or: manual Web Service
 
@@ -39,6 +42,11 @@ In the service → **Environment** → add:
 |-----|--------|
 | **`RECAPTCHA_SECRET_KEY`** | Your Google reCAPTCHA **secret** (mark as **Secret** in Render) |
 | **`SITE_URL`** | Your live marketing site, e.g. `https://anchorstacktech.com` *(CORS also allows `www` on the same domain)* |
+| **`GROQ_API_KEY`** | **Free-tier** key from [Groq Console](https://console.groq.com/) for **`POST /api/site-chat`** (used first if set) |
+| **`GROQ_MODEL`** | Optional Groq model id, default **`llama-3.1-8b-instant`** |
+| **`OPENAI_API_KEY`** | Alternative paid OpenAI key if you do not use Groq |
+| **`OPENAI_MODEL`** | Optional, default **`gpt-4o-mini`** |
+| **`SITE_CHAT_LLM`** | Optional **`groq`** or **`openai`** to force provider |
 
 Optional: **`CONTACT_ALLOWED_ORIGINS`** — comma-separated list if you need extra origins (e.g. IONOS preview URLs on another domain). If unset, CORS allows **`SITE_URL`** plus **www/apex** and **subdomains of the same site** (e.g. `www` vs non-`www`). **Redeploy** this service after changing CORS env vars.
 

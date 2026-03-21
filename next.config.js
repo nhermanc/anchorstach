@@ -19,6 +19,19 @@ const distDir =
 const DEFAULT_CONTACT_SUBMIT_API_URL =
 	"https://anchorstacktech-contact-api.onrender.com/api/submit-inquiry";
 
+function defaultSiteChatApiUrl() {
+	const contact =
+		process.env.NEXT_PUBLIC_CONTACT_SUBMIT_API_URL?.trim() ||
+		DEFAULT_CONTACT_SUBMIT_API_URL;
+	try {
+		const u = new URL(contact);
+		u.pathname = "/api/site-chat";
+		return u.toString();
+	} catch {
+		return "https://anchorstacktech-contact-api.onrender.com/api/site-chat";
+	}
+}
+
 /**
  * Single object export so `next export` always sees `images.unoptimized` (required for static / IONOS).
  * A phase-based function can be resolved differently during export on some Next.js versions.
@@ -44,6 +57,9 @@ module.exports = {
 		NEXT_PUBLIC_CONTACT_SUBMIT_API_URL:
 			process.env.NEXT_PUBLIC_CONTACT_SUBMIT_API_URL?.trim() ||
 			DEFAULT_CONTACT_SUBMIT_API_URL,
+		NEXT_PUBLIC_SITE_CHAT_API_URL:
+			process.env.NEXT_PUBLIC_SITE_CHAT_API_URL?.trim() ||
+			defaultSiteChatApiUrl(),
 	},
 	reactStrictMode: true,
 	swcMinify: true,
