@@ -28,7 +28,7 @@ run: |
 
 **`npm ci` requires a committed `package-lock.json` that matches `package.json`.** After adding or changing dependencies locally, run `npm install` and commit the updated lockfile. This repo’s **`.npmrc`** sets `legacy-peer-deps=true` (peer conflicts with Next 11 + MUI); ensure `.npmrc` is committed so CI uses the same behavior.
 
-**Contact form (Render):** the static bundle defaults to **`https://anchorstacktech-contact-api.onrender.com/api/submit-inquiry`** (see **`next.config.js`**). Deploy that API on Render (**`render.yaml`** Blueprint or **`servers/contact-submit/README.md`**). One-time: set **`RECAPTCHA_SECRET_KEY`** on the Render service. Override the URL with **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** only if Render gives a different hostname.
+**Contact form (Render):** the static bundle defaults to **`https://anchorstacktech-contact-api.onrender.com/api/submit-inquiry`** (see **`next.config.js`**) to resolve the API host; the app calls **`/api/verify-recaptcha`** there, then Web3Forms from the browser. Deploy that API on Render (**`render.yaml`** or **`servers/contact-submit/README.md`**). Set **`RECAPTCHA_SECRET_KEY`** on Render. Override with **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** if the hostname differs.
 
 Set the **publish / deployment folder** to:
 

@@ -1,6 +1,7 @@
 /**
- * Standalone contact submit API: verify Google reCAPTCHA v2/v3, forward to Web3Forms.
- * No Next.js — deploy on Railway, Render, Fly.io, Docker, or any VPS with Node 18+.
+ * Standalone contact API: verify Google reCAPTCHA v2/v3 for the static marketing site.
+ * The browser submits to Web3Forms directly — Web3Forms blocks server→API calls from many
+ * datacenter IPs (Cloudflare). See https://docs.web3forms.com/getting-started/api-reference
  *
  * @format
  */
@@ -9,54 +10,6 @@ import http from "node:http";
 
 const PORT = parseInt(process.env.PORT || "3000", 10);
 const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY?.trim();
-const WEB3_KEY =
-	process.env.WEB3FORMS_ACCESS_KEY?.trim() ||
-	"c12c2493-5c4f-4314-b892-e77d3d6baeeb";
-
-const EMAIL_RE =
-	/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-
-const MAX_NAME = 200;
-const MAX_EMAIL = 254;
-const MIN_MESSAGE = 6;
-const MAX_MESSAGE = 7000;
-const MAX_SUBJECT_LINE = 200;
-
-function trimStr(v, max) {
-	if (typeof v !== "string") return "";
-	const t = v.trim();
-	return t.length > max ? t.slice(0, max) : t;
-}
-
-function validateBody(body) {
-	const errors = [];
-	const o = body && typeof body === "object" ? body : {};
-
-	const name = trimStr(o.name, MAX_NAME);
-	const emailRaw = trimStr(o.email, MAX_EMAIL);
-	const message =
-		trimStr(o.message, MAX_MESSAGE) || trimStr(o.subject, MAX_MESSAGE);
-	const emailSubjectRaw = o.emailSubject;
-	const emailSubject =
-		typeof emailSubjectRaw === "string"
-			? emailSubjectRaw.trim().slice(0, MAX_SUBJECT_LINE)
-			: undefined;
-
-	if (!name) errors.push("Name is required.");
-	if (!emailRaw) errors.push("Email is required.");
-	else if (!EMAIL_RE.test(emailRaw)) errors.push("Email is invalid.");
-	if (!message) errors.push("Message is required.");
-	else if (message.length < MIN_MESSAGE)
-		errors.push(`Message must be at least ${MIN_MESSAGE} characters.`);
-	else if (message.length > MAX_MESSAGE) errors.push("Message is too long.");
-
-	if (errors.length) return { ok: false, errors };
-
-	return {
-		ok: true,
-		data: { name, email: emailRaw, message, emailSubject },
-	};
-}
 
 function defaultOriginsFromSite(site) {
 	const out = [];
@@ -141,53 +94,6 @@ async function verifyRecaptcha(token) {
 	return { ok: false, reason };
 }
 
-function messageFromWeb3FormsFailure(httpStatus, rawText, parsed) {
-	if (parsed && typeof parsed === "object") {
-		const o = parsed;
-		if (typeof o.message === "string" && o.message.trim()) return o.message.trim();
-		if (typeof o.error === "string" && o.error.trim()) return o.error.trim();
-	}
-	const slice = String(rawText || "").trim().slice(0, 240);
-	if (slice) return `Web3Forms returned HTTP ${httpStatus}: ${slice}`;
-	return (
-		`Web3Forms error (HTTP ${httpStatus}). ` +
-		`Confirm your access key at web3forms.com and allow domain anchorstacktech.com (and www). ` +
-		`Or email hello@anchorstacktech.com.`
-	);
-}
-
-async function submitWeb3Forms({ name, email, message, emailSubject }) {
-	const res = await fetch("https://api.web3forms.com/submit", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-		},
-		body: JSON.stringify({
-			access_key: WEB3_KEY,
-			name,
-			email,
-			subject:
-				emailSubject && emailSubject.length > 0
-					? emailSubject
-					: `New message from ${name}`,
-			message,
-		}),
-	});
-	const raw = await res.text();
-	let parsed = {};
-	try {
-		parsed = JSON.parse(raw);
-	} catch {
-		parsed = {};
-	}
-	const success = res.ok && parsed && parsed.success === true;
-	const messageOut = success
-		? ""
-		: messageFromWeb3FormsFailure(res.status, raw, parsed);
-	return { ok: success, message: messageOut };
-}
-
 function readJsonBody(req) {
 	return new Promise((resolve, reject) => {
 		const chunks = [];
@@ -216,10 +122,16 @@ function sendJson(res, req, status, obj) {
 	res.end(body);
 }
 
+function isCorsPreflightPath(pathname) {
+	return (
+		pathname === "/api/submit-inquiry" || pathname === "/api/verify-recaptcha"
+	);
+}
+
 const server = http.createServer(async (req, res) => {
 	const url = new URL(req.url || "/", `http://${req.headers.host}`);
 
-	if (req.method === "OPTIONS" && url.pathname === "/api/submit-inquiry") {
+	if (req.method === "OPTIONS" && isCorsPreflightPath(url.pathname)) {
 		const h = corsHeaders(req);
 		res.writeHead(204, h);
 		res.end();
@@ -232,7 +144,16 @@ const server = http.createServer(async (req, res) => {
 		return;
 	}
 
-	if (req.method !== "POST" || url.pathname !== "/api/submit-inquiry") {
+	if (req.method === "POST" && url.pathname === "/api/submit-inquiry") {
+		sendJson(res, req, 410, {
+			success: false,
+			message:
+				"POST /api/submit-inquiry is retired. The site should POST { recaptchaToken } to /api/verify-recaptcha, then submit the form from the browser to https://api.web3forms.com/submit. Rebuild the static bundle.",
+		});
+		return;
+	}
+
+	if (req.method !== "POST" || url.pathname !== "/api/verify-recaptcha") {
 		sendJson(res, req, 404, { success: false, message: "Not found." });
 		return;
 	}
@@ -261,16 +182,6 @@ const server = http.createServer(async (req, res) => {
 			? body.recaptchaToken.trim()
 			: "";
 
-	const validated = validateBody(body);
-	if (!validated.ok) {
-		sendJson(res, req, 400, {
-			success: false,
-			message: validated.errors[0] || "Validation failed.",
-			errors: validated.errors,
-		});
-		return;
-	}
-
 	if (!recaptchaToken) {
 		sendJson(res, req, 400, {
 			success: false,
@@ -290,27 +201,9 @@ const server = http.createServer(async (req, res) => {
 		return;
 	}
 
-	const { name, email, message, emailSubject } = validated.data;
-	const w3 = await submitWeb3Forms({
-		name,
-		email,
-		message,
-		emailSubject,
-	});
-
-	if (!w3.ok) {
-		sendJson(res, req, 502, {
-			success: false,
-			message:
-				w3.message ||
-				"Could not send your message. Please try again or email us directly.",
-		});
-		return;
-	}
-
 	sendJson(res, req, 200, {
 		success: true,
-		message: "Message sent successfully.",
+		message: "reCAPTCHA verified.",
 	});
 });
 
@@ -320,6 +213,6 @@ server.listen(PORT, () => {
 		process.env.NEXT_PUBLIC_SITE_URL?.trim() ||
 		"https://anchorstacktech.com";
 	console.log(
-		`[contact-submit] listening on :${PORT} site=${site} CORS=family+defaults (override with CONTACT_ALLOWED_ORIGINS)`,
+		`[contact-submit] listening on :${PORT} site=${site} POST /api/verify-recaptcha CORS=family+defaults (override with CONTACT_ALLOWED_ORIGINS)`,
 	);
 });

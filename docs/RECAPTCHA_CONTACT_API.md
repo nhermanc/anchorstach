@@ -1,10 +1,19 @@
 # reCAPTCHA + static site (contact / hire us)
 
-The marketing site is built with **`next export`** (folder **`deploy/`**). **Static hosting cannot run Next.js API routes**, so **`POST /api/submit-inquiry` must run somewhere else.**
+The marketing site is built with **`next export`** (folder **`deploy/`**). **Static hosting cannot run Next.js API routes**, so **Google reCAPTCHA must be verified on a small API** you host separately (e.g. **Render**).
+
+## Why two steps (verify, then Web3Forms)
+
+[Web3Forms’ API reference](https://docs.web3forms.com/getting-started/api-reference) recommends **browser-side** submission. **Server-side** calls from datacenter IPs (e.g. Render) are often blocked by **Cloudflare** — you may see HTTP **403** with HTML titled **“Just a moment…”**.
+
+This repo therefore:
+
+1. **`POST /api/verify-recaptcha`** on your API (Render or **`next dev`**) — body `{ "recaptchaToken": "..." }` — verifies the token with Google using **`RECAPTCHA_SECRET_KEY`**.
+2. The **browser** then **`POST`s to `https://api.web3forms.com/submit`** with the form fields and your public access key (same as the no–reCAPTCHA static path).
 
 ## Recommended approach (no Vercel)
 
-Use the **standalone Node server** in this repo — **`servers/contact-submit/`**. It verifies Google reCAPTCHA and forwards to Web3Forms (same idea as `pages/api/submit-inquiry.ts`). **Preferred host: [Render](https://render.com/)** — step-by-step in **`servers/contact-submit/README.md`**.
+Use the **standalone Node server** — **`servers/contact-submit/`**. **Preferred host: [Render](https://render.com/)** — **`servers/contact-submit/README.md`**.
 
 | Where | What you deploy |
 |-------|------------------|
@@ -15,38 +24,38 @@ Use the **standalone Node server** in this repo — **`servers/contact-submit/`*
 
 1. **Google reCAPTCHA** — [Admin console](https://www.google.com/recaptcha/admin): v2 “I’m not a robot” for **`yourdomain.com`** and **`www.yourdomain.com`**. (You do not list the API host — the widget only runs on the public site.)
 
-2. **Deploy `servers/contact-submit` on Render** — Follow **`servers/contact-submit/README.md`**. Set **`RECAPTCHA_SECRET_KEY`**, **`SITE_URL`**, and optionally **`WEB3FORMS_ACCESS_KEY`**.
+2. **Deploy `servers/contact-submit` on Render** — Set **`RECAPTCHA_SECRET_KEY`**, **`SITE_URL`**. You do **not** need **`WEB3FORMS_ACCESS_KEY`** on Render; Web3Forms is called from the visitor’s browser.
 
-3. **Point the static build at the API** — On IONOS / CI, when running **`npm run build:deploy`**:
+3. **Point the static build at the API** — When running **`npm run build:deploy`**:
 
    ```bash
    NEXT_PUBLIC_CONTACT_SUBMIT_API_URL=https://YOUR-SERVICE.onrender.com/api/submit-inquiry
    ```
 
-   Use the **exact** HTTPS URL Render shows (no trailing slash).
+   The app **derives** **`/api/verify-recaptcha`** on the **same host** from that URL. Use the **exact** HTTPS URL (path **`/api/submit-inquiry`** is kept for backward compatibility with env examples; the live endpoint is **`/api/verify-recaptcha`**).
 
-4. **Public site key** — Default site key is in **`next.config.js`**. Override with **`NEXT_PUBLIC_RECAPTCHA_SITE_KEY`** if you rotate keys.
+4. **Web3Forms access key** — Set **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`** in the **static** build if you do not use the default in code.
 
-5. **`NEXT_PUBLIC_SITE_URL`** — Set to your canonical URL when building the static site (sitemap + default `contact-api.*` URL if you omit `NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`).
+5. **Public site key** — Default site key is in **`next.config.js`**. Override with **`NEXT_PUBLIC_RECAPTCHA_SITE_KEY`** if you rotate keys.
+
+6. **`NEXT_PUBLIC_SITE_URL`** — Canonical URL (sitemap + default `contact-api.*` URL if you omit **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`**).
 
 ## URL the browser uses
 
-`lib/contact-submit-endpoint.ts` resolves the POST target in this order:
+`lib/contact-submit-endpoint.ts`:
 
-1. **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** if set → use this (required for **Render** URLs like `*.onrender.com`).
-2. **Local dev** (`localhost` / `127.0.0.1`) → same-origin **`/api/submit-inquiry`** (Next **`next dev`**).
-3. **Else** → **`https://contact-api.<apex>/api/submit-inquiry`** from `NEXT_PUBLIC_SITE_URL` — only if you put a server at that hostname (optional).
-
-For most setups, **set `NEXT_PUBLIC_CONTACT_SUBMIT_API_URL` explicitly** so you don’t depend on a `contact-api` subdomain.
+- **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** — full URL ending in **`/api/submit-inquiry`** (used only to resolve the API **host**; the client calls **`/api/verify-recaptcha`** on that host).
+- **Local dev** (`localhost`) → same-origin **`/api/verify-recaptcha`** (**`pages/api/verify-recaptcha.ts`**).
+- **Else** → **`https://contact-api.<apex>/api/verify-recaptcha`** if you rely on the `contact-api` fallback.
 
 ## CORS (standalone server)
 
-The standalone server allows origins from **`SITE_URL`** (apex + `www`), or **`CONTACT_ALLOWED_ORIGINS`** (comma-separated) if set.
+Allows origins from **`SITE_URL`** (apex + `www`), or **`CONTACT_ALLOWED_ORIGINS`** (comma-separated) if set.
 
 ## Local Next.js development
 
-With **`next dev`**, the app can use same-origin **`/api/submit-inquiry`** from **`pages/api/submit-inquiry.ts`**. Add **`RECAPTCHA_SECRET_KEY`** to **`.env.local`**.
+With **`next dev`**, add **`RECAPTCHA_SECRET_KEY`** to **`.env.local`**. The form uses **`POST /api/verify-recaptcha`**, then Web3Forms from the browser.
 
-## Optional: full Next.js API elsewhere
+## Retired: `POST /api/submit-inquiry`
 
-If you already run **`next start`** (or similar) for this repo on another host, you can use **`POST /api/submit-inquiry`** there instead of the standalone server — same contract and CORS rules as in **`lib/submit-inquiry-cors.ts`**.
+That route is **410 Gone** on the standalone server and Next — it used server-side Web3Forms, which breaks behind Cloudflare for many hosts. Rebuild the static site from this repo if you still see errors mentioning **`submit-inquiry`**.

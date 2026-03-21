@@ -4,7 +4,7 @@ After you **push** this repo, the static site already points at:
 
 `https://anchorstacktech-contact-api.onrender.com/api/submit-inquiry`
 
-That only works after the matching **Render Web Service** exists.
+That URL is only used to locate the API **host**; the browser calls **`POST …/api/verify-recaptcha`**, then submits to Web3Forms from the page (see **`docs/RECAPTCHA_CONTACT_API.md`**). Deploy the matching **Render Web Service** first.
 
 ## Option A — Blueprint (fastest)
 

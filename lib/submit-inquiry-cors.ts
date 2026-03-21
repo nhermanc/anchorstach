@@ -77,7 +77,7 @@ function applyCorsHeaders(res: NextApiResponse, origin: string | null): void {
 }
 
 /**
- * CORS for `POST /api/submit-inquiry` from the static marketing site (different subdomain).
+ * CORS for contact API routes (`/api/verify-recaptcha`, retired `/api/submit-inquiry`) from the static site.
  */
 export function applySubmitInquiryCors(
 	req: NextApiRequest,

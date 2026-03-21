@@ -3,17 +3,16 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
 import { applySubmitInquiryCors } from "../../lib/submit-inquiry-cors";
-import { validateContactBody } from "../../lib/contact-api-validation";
-import { verifyRecaptchaResponse } from "../../lib/recaptcha-verify";
-import { messageFromWeb3FormsResponse } from "../../lib/web3forms-error-message";
-import { resolveWeb3FormsAccessKey } from "../../lib/web3forms-access-key";
 
-type SuccessJson = { success: true; message: string };
-type ErrorJson = { success: false; message: string; errors?: string[] };
+type ErrorJson = { success: false; message: string };
 
-export default async function handler(
+/**
+ * Retired: the contact flow verifies reCAPTCHA via **`/api/verify-recaptcha`**, then POSTs to Web3Forms
+ * from the **browser** (Web3Forms blocks many server-to-server requests from datacenter IPs).
+ */
+export default function handler(
 	req: NextApiRequest,
-	res: NextApiResponse<SuccessJson | ErrorJson>,
+	res: NextApiResponse<ErrorJson>,
 ) {
 	if (applySubmitInquiryCors(req, res)) return;
 
@@ -24,94 +23,9 @@ export default async function handler(
 		});
 	}
 
-	let body: unknown = req.body;
-	if (typeof body === "string") {
-		try {
-			body = JSON.parse(body) as unknown;
-		} catch {
-			return res.status(400).json({
-				success: false,
-				message: "Invalid JSON body.",
-			});
-		}
-	}
-
-	const o = body && typeof body === "object" ? (body as Record<string, unknown>) : {};
-	const recaptchaToken =
-		typeof o.recaptchaToken === "string" ? o.recaptchaToken.trim() : "";
-
-	const validated = validateContactBody(body);
-	if (!validated.ok) {
-		return res.status(400).json({
-			success: false,
-			message: validated.errors[0] || "Validation failed.",
-			errors: validated.errors,
-		});
-	}
-
-	const secret = process.env.RECAPTCHA_SECRET_KEY?.trim();
-	if (!secret) {
-		return res.status(503).json({
-			success: false,
-			message:
-				"Contact form is not fully configured. Please try again later.",
-		});
-	}
-
-	if (!recaptchaToken) {
-		return res.status(400).json({
-			success: false,
-			message: "Please complete the reCAPTCHA verification.",
-		});
-	}
-
-	const captchaOk = await verifyRecaptchaResponse(recaptchaToken);
-	if (!captchaOk) {
-		return res.status(400).json({
-			success: false,
-			message: "reCAPTCHA verification failed. Please try again.",
-		});
-	}
-
-	const { name, email, message, emailSubject } = validated.data;
-	const accessKey = resolveWeb3FormsAccessKey();
-
-	const w3Res = await fetch("https://api.web3forms.com/submit", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-			Accept: "application/json",
-		},
-		body: JSON.stringify({
-			access_key: accessKey,
-			name,
-			email,
-			subject:
-				emailSubject && emailSubject.length > 0
-					? emailSubject
-					: `New message from ${name}`,
-			message,
-		}),
-	});
-
-	const w3Raw = await w3Res.text();
-	let w3Data: unknown = {};
-	try {
-		w3Data = JSON.parse(w3Raw) as object;
-	} catch {
-		w3Data = {};
-	}
-	const w3Obj = w3Data as { success?: boolean; message?: string };
-
-	if (!w3Res.ok || w3Obj.success !== true) {
-		return res.status(502).json({
-			success: false,
-			message: messageFromWeb3FormsResponse(w3Res.status, w3Raw, w3Data),
-		});
-	}
-
-	return res.status(200).json({
-		success: true,
-		message: "Message sent successfully.",
+	return res.status(410).json({
+		success: false,
+		message:
+			"POST /api/submit-inquiry is retired. Use POST /api/verify-recaptcha with { \"recaptchaToken\": \"...\" }, then submit to Web3Forms from the browser. Rebuild the static site from the latest main.",
 	});
 }

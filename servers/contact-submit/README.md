@@ -1,10 +1,8 @@
-# Contact submit API (reCAPTCHA + Web3Forms)
+# Contact API (reCAPTCHA verify only)
 
-Tiny **Node 18+** HTTP server — **no Next.js**. The main site’s static build expects this API at:
+Tiny **Node 18+** HTTP server — **no Next.js**. It exposes **`POST /api/verify-recaptcha`** (body: `{ "recaptchaToken": "..." }`). The **browser** submits to [Web3Forms](https://api.web3forms.com/submit) after verification — Web3Forms blocks many **server→API** requests from datacenter IPs (Cloudflare 403).
 
-**`https://anchorstacktech-contact-api.onrender.com/api/submit-inquiry`**
-
-(defined in repo root **`render.yaml`** and **`next.config.js`**). First deploy: see **`docs/RENDER_CONTACT_API_FIRST_DEPLOY.md`**.
+The static build still sets **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** to a URL ending in **`/api/submit-inquiry`** (legacy path segment); the client derives **`/api/verify-recaptcha`** on the same host. Default host: **`https://anchorstacktech-contact-api.onrender.com`** (see **`render.yaml`**, **`next.config.js`**). First deploy: **`docs/RENDER_CONTACT_API_FIRST_DEPLOY.md`**.
 
 ---
 
@@ -41,7 +39,6 @@ In the service → **Environment** → add:
 |-----|--------|
 | **`RECAPTCHA_SECRET_KEY`** | Your Google reCAPTCHA **secret** (mark as **Secret** in Render) |
 | **`SITE_URL`** | Your live marketing site, e.g. `https://anchorstacktech.com` *(CORS also allows `www` on the same domain)* |
-| **`WEB3FORMS_ACCESS_KEY`** | Optional; if omitted, the default from `lib/web3forms-access-key.ts` in the main repo is used |
 
 Optional: **`CONTACT_ALLOWED_ORIGINS`** — comma-separated list if you need extra origins (e.g. IONOS preview URLs on another domain). If unset, CORS allows **`SITE_URL`** plus **www/apex** and **subdomains of the same site** (e.g. `www` vs non-`www`). **Redeploy** this service after changing CORS env vars.
 
@@ -66,7 +63,6 @@ Render’s **free** web services **sleep after idle**; the first request after s
 | `RECAPTCHA_SECRET_KEY` | **Yes** | Google reCAPTCHA **secret** |
 | `SITE_URL` or `NEXT_PUBLIC_SITE_URL` | Recommended | Canonical site URL → **CORS** (apex + `www`) |
 | `CONTACT_ALLOWED_ORIGINS` | Optional | Overrides CORS list (comma-separated) |
-| `WEB3FORMS_ACCESS_KEY` | Optional | Defaults to main repo’s Web3Forms key |
 | `PORT` | Optional | Render sets this automatically; default `3000` locally |
 
 ---
@@ -75,7 +71,7 @@ Render’s **free** web services **sleep after idle**; the first request after s
 
 ### Railway
 
-New project → deploy from GitHub → **Root Directory** `servers/contact-submit` → set the same env vars → use the Railway public URL + `/api/submit-inquiry` for `NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`.
+New project → deploy from GitHub → **Root Directory** `servers/contact-submit` → set the same env vars → use the Railway public URL + `/api/submit-inquiry` for `NEXT_PUBLIC_CONTACT_SUBMIT_API_URL` (the app calls `/api/verify-recaptcha` on that host).
 
 ### Docker (any VPS)
 

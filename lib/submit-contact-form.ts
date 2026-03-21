@@ -1,11 +1,14 @@
 /** @format */
 
 import { companyInfo } from "../app/company-data";
-import { getContactSubmitInquiryUrl } from "./contact-submit-endpoint";
+import { getContactVerifyRecaptchaUrl } from "./contact-submit-endpoint";
 import type { ContactApiPayload } from "./contact-payload";
 import { getContactRecaptchaSiteKey } from "./contact-recaptcha";
 import { messageFromWeb3FormsResponse } from "./web3forms-error-message";
-import { DEFAULT_WEB3FORMS_ACCESS_KEY } from "./web3forms-access-key";
+import {
+	DEFAULT_WEB3FORMS_ACCESS_KEY,
+	resolveWeb3FormsAccessKey,
+} from "./web3forms-access-key";
 
 export type SubmitContactInput = {
 	name: string;
@@ -61,16 +64,17 @@ async function submitViaWeb3Forms(
 		signal,
 	});
 
-	const data = (await res.json().catch(() => ({}))) as {
-		success?: boolean;
-		message?: string;
-	};
+	const raw = await res.text();
+	let parsed: unknown = {};
+	try {
+		parsed = JSON.parse(raw) as object;
+	} catch {
+		parsed = {};
+	}
+	const data = parsed as { success?: boolean };
 
 	if (!res.ok || data.success !== true) {
-		throw new Error(
-			data?.message ||
-				"Could not send your message. Please try again or email us directly.",
-		);
+		throw new Error(messageFromWeb3FormsResponse(res.status, raw, parsed));
 	}
 }
 
@@ -83,24 +87,17 @@ async function submitViaInquiryApi(
 		throw new Error("Please complete the reCAPTCHA verification.");
 	}
 
-	const payload = {
-		name: input.name,
-		email: input.email,
-		message: input.subject,
-		emailSubject: input.emailSubject,
-		recaptchaToken: token,
-	};
-
-	const inquiryUrl = getContactSubmitInquiryUrl();
+	const verifyUrl = getContactVerifyRecaptchaUrl();
+	const verifyPayload = { recaptchaToken: token };
 	let response: Response;
 	try {
-		response = await fetch(inquiryUrl, {
+		response = await fetch(verifyUrl, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "application/json",
 			},
-			body: JSON.stringify(payload),
+			body: JSON.stringify(verifyPayload),
 			signal,
 			mode: "cors",
 		});
@@ -110,14 +107,14 @@ async function submitViaInquiryApi(
 			(String((err as Error).message).includes("fetch") ||
 				String((err as Error).message).includes("Failed to fetch"));
 		if (isNetwork) {
-			const contactApiFallback = inquiryUrl.includes("contact-api.");
+			const contactApiFallback = verifyUrl.includes("contact-api.");
 			throw new Error(
 				(contactApiFallback
 					? "The static site was built without NEXT_PUBLIC_CONTACT_SUBMIT_API_URL, so it is calling contact-api… (that host usually does not exist). "
-					: "Could not reach the message server (network or CORS). ") +
-					"Rebuild the site with NEXT_PUBLIC_CONTACT_SUBMIT_API_URL set to your Render URL, e.g. https://YOUR-SERVICE.onrender.com/api/submit-inquiry. " +
+					: "Could not reach the reCAPTCHA server (network or CORS). ") +
+					"Rebuild the site with NEXT_PUBLIC_CONTACT_SUBMIT_API_URL set to your Render service URL including /api/submit-inquiry (the app derives /api/verify-recaptcha from it). " +
 					"On Render, set SITE_URL=https://anchorstacktech.com. " +
-					`Attempted: ${inquiryUrl}`,
+					`Attempted: ${verifyUrl}`,
 			);
 		}
 		throw err;
@@ -143,9 +140,12 @@ async function submitViaInquiryApi(
 			(Array.isArray(data.errors) ? data.errors[0] : undefined);
 		throw new Error(
 			fromServer ||
-				`Message server error (HTTP ${response.status}). Check Render logs, Web3Forms access key, and RECAPTCHA_SECRET_KEY. Email ${companyInfo.email} if needed.`,
+				`reCAPTCHA server error (HTTP ${response.status}). Check Render logs and RECAPTCHA_SECRET_KEY. Email ${companyInfo.email} if needed.`,
 		);
 	}
+
+	const web3Key = resolveWeb3FormsAccessKey();
+	await submitViaWeb3Forms(input, web3Key, signal);
 }
 
 async function submitViaFormSubmit(
@@ -244,9 +244,7 @@ function envFlagTrue(v: string | undefined): boolean {
  *
  * **reCAPTCHA:** site key defaults in **`next.config.js`**; **`RECAPTCHA_SECRET_KEY`** lives only on
  * the API host (e.g. **`servers/contact-submit`** on **Render**). Static sites POST to
- * **`getContactSubmitInquiryUrl()`** — by default
- * **`https://contact-api.<your-domain>/api/submit-inquiry`** (see **`docs/RECAPTCHA_CONTACT_API.md`**)
- * or override with **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`**.
+ * **`getContactVerifyRecaptchaUrl()`** (derived from **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`**, which should end with **`/api/submit-inquiry`**) — see **`docs/RECAPTCHA_CONTACT_API.md`**.
  *
  * **SMTP (static IONOS + `contact-smtp-api`):** set **`NEXT_PUBLIC_CONTACT_API_BASE_URL`**
  * in the **static** build (no trailing slash). That always wins over FormSubmit flags.
@@ -304,7 +302,7 @@ export async function submitContactMessage(
 			await submitViaNextApi(input, signal);
 			return;
 		}
-		/* Static + Web3Forms: reCAPTCHA verified in /api/submit-inquiry before Web3Forms */
+		/* Static + Web3Forms: reCAPTCHA verified via /api/verify-recaptcha, then browser POST to Web3Forms */
 		if (recaptchaSiteKey) {
 			if (!input.recaptchaToken?.trim()) {
 				throw new Error("Please complete the reCAPTCHA verification.");
