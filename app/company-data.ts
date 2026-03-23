@@ -2,9 +2,9 @@ export const companyInfo = {
 	name: "AnchorStackTech",
 	tagline: "Empowering innovation",
 	email: "hello@anchorstacktech.com",
-	phone: "+1 (312) 259-5012",
+	phone: "+1 (312) 259-5011",
 	/** Use for `tel:` links and structured data (Google Voice). */
-	phoneTel: "+13122595012",
+	phoneTel: "+13122595011",
 	address: "6550 N. Damen Ave. Apartment 107, Chicago, IL 60645",
 	/** Same location as Fischer Software Company on Google Maps (suite / office). */
 	officeMapOpenUrl:
@@ -13,7 +13,7 @@ export const companyInfo = {
 		"https://maps.google.com/maps?q=42.0010258,-87.6805104&z=17&hl=en&output=embed",
 	logoPath: "/logo/anchorstacktech-logo.svg",
 	faviconPath: "/favicon.svg",
-	liveChatUrl: "https://wa.me/13122595012",
+	liveChatUrl: "https://wa.me/13122595011",
 	googleCalendarBookingUrl:
 		"https://calendar.google.com/calendar/u/0/r/eventedit?text=Meeting%20with%20AnchorStackTech&details=Please%20share%20your%20project%20goals%20and%20timeline.",
 	siteUrl:
@@ -2095,7 +2095,7 @@ export const teamMembers = [
 		role: "Founder & CEO — Chicago, IL",
 		image: "/about-us/nelson.webp",
 		email: "nhermance@anchorstacktech.com",
-		whatsapp: "https://wa.me/13122595012",
+		whatsapp: "https://wa.me/13122595011",
 		linkedin: "https://www.linkedin.com/in/nelson-hermance-a7a67410/",
 	},
 	{
