@@ -1,0 +1,27 @@
+# Render Blueprint: deploy the contact + reCAPTCHA API (servers/contact-submit).
+# Dashboard → New → Blueprint → connect this repo, or `render deploy`.
+# After first deploy: set RECAPTCHA_SECRET_KEY in the service Environment (Google reCAPTCHA secret).
+#
+# @format
+
+services:
+  - type: web
+    name: anchorstacktech-contact-api
+    runtime: node
+    region: oregon
+    plan: free
+    rootDir: servers/contact-submit
+    buildCommand: echo "skip"
+    startCommand: node server.mjs
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: SITE_URL
+        value: https://anchorstacktech.com
+      - key: RECAPTCHA_SECRET_KEY
+        sync: false
+      - key: GROQ_API_KEY
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false

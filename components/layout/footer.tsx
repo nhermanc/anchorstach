@@ -16,7 +16,12 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import MusicNoteIcon from "@material-ui/icons/MusicNote";
 import ForumIcon from "@material-ui/icons/Forum";
 
-import { companyInfo, serviceItems, socialLinks } from "../../app/company-data";
+import {
+	companyInfo,
+	serviceItems,
+	socialLinks,
+	strategicPartner,
+} from "../../app/company-data";
 
 interface AdminProps {
 	isAdminPage: boolean;
@@ -54,6 +59,15 @@ const Footer: React.FC = () => {
 							</a>
 						</Link>
 						<p>{companyInfo.tagline}</p>
+						<PartnerLine>
+							Strategic partner:{" "}
+							<a
+								href={strategicPartner.url}
+								target='_blank'
+								rel='noopener noreferrer'>
+								{strategicPartner.name}
+							</a>
+						</PartnerLine>
 					</LogoBlock>
 
 					<Column>
@@ -108,7 +122,7 @@ const Footer: React.FC = () => {
 						</ContactItem>
 						<ContactItem>
 							<CallIcon />
-							<a href={`tel:${companyInfo.phone}`}>{companyInfo.phone}</a>
+							<a href={`tel:${companyInfo.phoneTel}`}>{companyInfo.phone}</a>
 						</ContactItem>
 						<ContactItem>
 							<HomeIcon />
@@ -116,7 +130,12 @@ const Footer: React.FC = () => {
 						</ContactItem>
 						<ContactItem>
 							<LanguageIcon />
-							<span>www.anchorstacktech.com</span>
+							<a
+								href={companyInfo.siteUrl}
+								target='_blank'
+								rel='noreferrer'>
+								{new URL(companyInfo.siteUrl).hostname}
+							</a>
 						</ContactItem>
 						<SocialRow>
 							{socialLinks.map((social) => {
@@ -224,6 +243,25 @@ const LogoBlock = styled.div`
 	p {
 		max-width: 16rem;
 		line-height: 1.6;
+	}
+`;
+
+const PartnerLine = styled.p`
+	margin-top: 1rem;
+	max-width: 18rem;
+	font-size: 0.9rem;
+	line-height: 1.5;
+	color: #3d3a5c;
+
+	a {
+		color: var(--color-secondary);
+		font-weight: 600;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	a:hover {
+		color: #00b89a;
 	}
 `;
 

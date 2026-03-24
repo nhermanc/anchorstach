@@ -11,7 +11,7 @@ const root = join(__dirname, "..");
 const companyDataPath = join(root, "app", "company-data.ts");
 
 const SITE_URL =
-	process.env.NEXT_PUBLIC_SITE_URL || "https://www.anchorstacktech.com";
+	process.env.NEXT_PUBLIC_SITE_URL || "https://anchorstacktech.com";
 
 const staticRoutes = [
 	"",

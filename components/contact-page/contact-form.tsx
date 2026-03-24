@@ -7,14 +7,17 @@ import ScheduleIcon from "@material-ui/icons/Schedule";
 import CallIcon from "@material-ui/icons/Call";
 import HomeIcon from "@material-ui/icons/Home";
 import EmailIcon from "@material-ui/icons/Email";
-import { FC, memo, useState } from "react";
+import { FC, memo, useRef, useState } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import { useRouter } from "next/router";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import { companyInfo } from "../../app/company-data";
+import { getContactRecaptchaSiteKey } from "../../lib/contact-recaptcha";
 import { submitContactMessage } from "../../lib/submit-contact-form";
+import ContactRecaptchaWidget from "./contact-recaptcha-widget";
 
 type UserSubmitForm = {
 	name: string;
@@ -24,6 +27,7 @@ type UserSubmitForm = {
 
 const ContactFormComponent: FC = () => {
 	const router = useRouter();
+	const recaptchaRef = useRef<ReCAPTCHA>(null);
 	const [submitState, setSubmitState] = useState<{
 		loading: boolean;
 		successMessage: string;
@@ -61,15 +65,31 @@ const ContactFormComponent: FC = () => {
 			errorMessage: "",
 		});
 
+		const siteKey = getContactRecaptchaSiteKey();
+		let recaptchaToken: string | undefined;
+		if (siteKey) {
+			recaptchaToken = recaptchaRef.current?.getValue() || undefined;
+			if (!recaptchaToken) {
+				setSubmitState({
+					loading: false,
+					successMessage: "",
+					errorMessage: "Please complete the reCAPTCHA verification.",
+				});
+				return;
+			}
+		}
+
 		try {
 			await submitContactMessage({
 				name: data.name,
 				email: data.email,
 				subject: data.subject,
 				emailSubject: `New contact form message from ${data.name}`,
+				...(recaptchaToken ? { recaptchaToken } : {}),
 			});
 
 			reset();
+			recaptchaRef.current?.reset();
 			setSubmitState({
 				loading: false,
 				successMessage:
@@ -77,6 +97,7 @@ const ContactFormComponent: FC = () => {
 				errorMessage: "",
 			});
 		} catch (error: any) {
+			recaptchaRef.current?.reset();
 			setSubmitState({
 				loading: false,
 				successMessage: "",
@@ -179,7 +200,15 @@ const ContactFormComponent: FC = () => {
 											<CallIcon style={{ color: "white" }} />
 										</ModifiedArrows>
 									</ArrowsWrapper>
-									<p>{companyInfo.phone}</p>
+									<p>
+										<a
+											className='contact-link'
+											href={`tel:${companyInfo.phoneTel}`}
+											aria-label={`Call ${companyInfo.phone}`}>
+											{companyInfo.phone}
+										</a>
+										<span className='phone-note'> (Google Voice)</span>
+									</p>
 								</div>
 								<div className='first-contact'>
 									<ArrowsWrapper>
@@ -187,7 +216,15 @@ const ContactFormComponent: FC = () => {
 											<HomeIcon style={{ color: "white" }} />
 										</ModifiedArrows>
 									</ArrowsWrapper>
-									<p>{companyInfo.address}</p>
+									<p>
+										<a
+											className='contact-link'
+											href={companyInfo.officeMapOpenUrl}
+											target='_blank'
+											rel='noopener noreferrer'>
+											{companyInfo.address}
+										</a>
+									</p>
 								</div>
 							</div>
 						</ContactInfo>
@@ -264,10 +301,22 @@ const ContactFormComponent: FC = () => {
 												errors.email ? "is-invalid" : "custom-input"
 											}`}></textarea>
 									</div>
+									{getContactRecaptchaSiteKey() ? (
+										<div className='recaptcha-slot'>
+											<ContactRecaptchaWidget ref={recaptchaRef} />
+											<p className='recaptcha-hint'>
+												Google often verifies with a single click—image
+												challenges only appear when needed. If submit fails,
+												check the message below and try again.
+											</p>
+										</div>
+									) : null}
 									<div className='actions'>
-										<CustomButton disabled={submitState.loading}>
+										<SubmitButton
+											type='submit'
+											disabled={submitState.loading}>
 											{submitState.loading ? "SENDING..." : "SUBMIT"}
-										</CustomButton>
+										</SubmitButton>
 									</div>
 									{submitState.successMessage && (
 										<p className='submit-success'>
@@ -283,6 +332,28 @@ const ContactFormComponent: FC = () => {
 							</section>
 						</ContactForm>
 					</ContactContainer>
+
+					<MapSection aria-labelledby='contact-map-heading'>
+						<h2 id='contact-map-heading'>Visit us</h2>
+						<p className='map-intro'>
+							Chicago office (Fischer Software Company / AnchorStackTech).{" "}
+							<a
+								href={companyInfo.officeMapOpenUrl}
+								target='_blank'
+								rel='noopener noreferrer'>
+								Open in Google Maps
+							</a>
+						</p>
+						<MapFrameWrap>
+							<iframe
+								title='Map: AnchorStackTech office, 6550 N Damen Ave, Chicago'
+								src={companyInfo.officeMapEmbedUrl}
+								loading='lazy'
+								referrerPolicy='no-referrer-when-downgrade'
+								allowFullScreen
+							/>
+						</MapFrameWrap>
+					</MapSection>
 				</CustomContainer>
 			</BottomWrapper>
 
@@ -308,7 +379,7 @@ const ContactContainer = styled.div`
 const CustomContainer = styled.div`
 	width: 100%;
 	max-width: var(--max-width1250);
-	overflow: hidden;
+	overflow: visible;
 	margin: 0 auto;
 `;
 
@@ -360,18 +431,79 @@ const ContactInfo = styled.div`
 			font-size: 1rem;
 			font-weight: normal;
 		}
+		.contact-link {
+			color: inherit;
+			text-decoration: underline;
+			text-underline-offset: 2px;
+		}
+		.contact-link:hover {
+			color: var(--color-secondary);
+		}
+		.phone-note {
+			color: #6f6d85;
+			font-size: 0.9rem;
+		}
+	}
+`;
+
+const MapSection = styled.section`
+	width: 100%;
+	margin-top: 3rem;
+	padding-top: 2rem;
+	border-top: 1px solid #d0d5e0;
+
+	h2 {
+		margin-bottom: 0.75rem;
+		color: var(--color-secondary-second);
+		font-size: 1.5rem;
+	}
+
+	.map-intro {
+		color: #6f6d85;
+		line-height: 1.6;
+		margin-bottom: 1rem;
+		max-width: 40rem;
+
+		a {
+			color: var(--color-secondary);
+			font-weight: 600;
+			text-decoration: underline;
+			text-underline-offset: 2px;
+		}
+	}
+`;
+
+const MapFrameWrap = styled.div`
+	position: relative;
+	width: 100%;
+	max-width: 56rem;
+	border-radius: 8px;
+	overflow: hidden;
+	box-shadow: 0 2px 12px rgba(15, 11, 51, 0.12);
+	border: 1px solid #d7ddeb;
+	background: #e8ecf4;
+
+	iframe {
+		display: block;
+		width: 100%;
+		height: min(420px, 55vw);
+		min-height: 280px;
+		border: 0;
 	}
 `;
 
 const ContactForm = styled.div`
 	background: #ffffff;
-	height: 38.188rem;
+	min-height: 0;
+	height: auto;
+	overflow: visible;
 	color: #0f0b33;
 	width: 100%;
 	max-width: 35.625rem;
 	border-radius: 6px;
 	box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
 	padding: 2rem;
+	padding-bottom: 2.5rem;
 
 	position: relative;
 	z-index: 3;
@@ -438,8 +570,22 @@ const ContactForm = styled.div`
 			color: #6f6d85;
 		}
 	}
+	.recaptcha-slot {
+		margin-top: 1rem;
+		min-height: 78px;
+		overflow: visible;
+		position: relative;
+		z-index: 4;
+	}
+	.recaptcha-hint {
+		font-size: 0.75rem;
+		color: #6f6d85;
+		line-height: 1.35;
+		margin-top: 0.5rem;
+		max-width: 304px;
+	}
 	.actions {
-		margin-top: 1.5rem;
+		margin-top: 1rem;
 	}
 	.submit-success {
 		margin-top: 1rem;
@@ -574,4 +720,9 @@ const CustomButton = styled.button`
 		cursor: not-allowed;
 		opacity: 0.7;
 	}
+`;
+
+/** Tighter top margin so reCAPTCHA + submit stay visible in the card */
+const SubmitButton = styled(CustomButton)`
+	margin-top: 0.75rem;
 `;

@@ -2,10 +2,10 @@
 
 import React from "react";
 import styled from "styled-components";
-import AddIcon from "@mui/icons-material/Add";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import EventNoteIcon from "@mui/icons-material/EventNote";
-import FolderIcon from "@mui/icons-material/Folder";
+import AddIcon from "@material-ui/icons/Add";
+import AccessTimeIcon from "@material-ui/icons/AccessTime";
+import EventNoteIcon from "@material-ui/icons/EventNote";
+import FolderIcon from "@material-ui/icons/Folder";
 
 const Grid: React.FC = () => {
 	return (

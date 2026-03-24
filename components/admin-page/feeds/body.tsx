@@ -8,7 +8,7 @@ const Body: React.FC = () => {
 	return (
 		<Wrapper>
 			<Greeting>
-				<h3>Good morning, Otoniel</h3>
+				<h3>Good morning, Nelson</h3>
 				<p>Here what&apos;s happening in your VL account today!</p>
 			</Greeting>
 

@@ -11,6 +11,7 @@ import { teamMembers } from "../../app/company-data";
 
 const Meeting: FC = () => {
 	const router = useRouter();
+	const teamCount = teamMembers.length;
 	return (
 		<Wrapper>
 			<AbsoluteContainer>
@@ -19,8 +20,10 @@ const Meeting: FC = () => {
 						<div className='content-container'>
 							<h2 style={{ color: "var(--color-grey-800)" }}>Lets Meet Our Team </h2>
 							<div>
-								<p>9 Member</p>
-								<span>DESIGNER - DEVELOPER - MARKETING</span>
+								<p>
+									{teamCount} team member{teamCount === 1 ? "" : "s"}
+								</p>
+								<span>ENGINEERING · PRODUCT · OPERATIONS</span>
 							</div>
 						</div>
 					</FirstContainer>
@@ -30,9 +33,9 @@ const Meeting: FC = () => {
 							{" "}
 							<h2 style={{ color: "var(--color-grey-800)" }}>OUR TEAM</h2>
 							<p style={{ maxWidth: "620px" }}>
-								Making people smile gets us out of bed every morning.
-								Through thoughtful design, we create delightful digital
-								experiences that make life simpler and more enjoyable.
+								Headquartered in Chicago, IL, we are a cross-functional team
+								building web, mobile, AI, and business software for clients
+								across the U.S. and worldwide.
 							</p>
 						</div>
 					</SecondContainer>
@@ -54,8 +57,10 @@ const Meeting: FC = () => {
 						<div className='inner-info-container'>
 							<h2>Lets Meet Our Team</h2>
 							<div>
-								<p>8 Member</p>
-								<span>DESIGNER - DEVELOPER - MARKETING</span>
+								<p>
+									{teamCount} team member{teamCount === 1 ? "" : "s"}
+								</p>
+								<span>ENGINEERING · PRODUCT · OPERATIONS</span>
 							</div>
 						</div>
 					</TeamInfo>

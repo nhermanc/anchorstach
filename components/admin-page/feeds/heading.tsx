@@ -1,9 +1,9 @@
 /** @format */
 
 import styled from "styled-components";
-import SearchIcon from "@mui/icons-material/Search";
-import SettingsIcon from "@mui/icons-material/Settings";
-import NotificationsActiveIcon from "@mui/icons-material/NotificationsActive";
+import SearchIcon from "@material-ui/icons/Search";
+import SettingsIcon from "@material-ui/icons/Settings";
+import NotificationsActiveIcon from "@material-ui/icons/NotificationsActive";
 import React from "react";
 import { Avatar } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
@@ -28,14 +28,14 @@ const Heading: React.FC = () => {
 				<User>
 					<IconButton>
 						<Avatar
-							src='/admin/user.jpg'
+							src='/about-us/nelson.webp'
 							style={{
 								height: "2.813rem",
 								width: "2.813rem",
 							}}
 						/>
 					</IconButton>
-					<Name>Otoniel Cortez </Name>
+					<Name>Nelson Hermance</Name>
 				</User>
 			</HeadingRight>
 		</Wrapper>

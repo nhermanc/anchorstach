@@ -28,6 +28,8 @@ run: |
 
 **`npm ci` requires a committed `package-lock.json` that matches `package.json`.** After adding or changing dependencies locally, run `npm install` and commit the updated lockfile. This repo’s **`.npmrc`** sets `legacy-peer-deps=true` (peer conflicts with Next 11 + MUI); ensure `.npmrc` is committed so CI uses the same behavior.
 
+**Contact form (Render):** the static bundle defaults to **`https://anchorstacktech-contact-api.onrender.com/api/submit-inquiry`** (see **`next.config.js`**) to resolve the API host; the app calls **`/api/verify-recaptcha`** there, then Web3Forms from the browser. Deploy that API on Render (**`render.yaml`** or **`servers/contact-submit/README.md`**). Set **`RECAPTCHA_SECRET_KEY`** on Render. Override with **`NEXT_PUBLIC_CONTACT_SUBMIT_API_URL`** if the hostname differs.
+
 Set the **publish / deployment folder** to:
 
 ```text
@@ -51,7 +53,7 @@ Optional: set `NEXT_PUBLIC_SITE_URL` in IONOS build env so sitemap URLs match yo
 
 ## Notes
 
-- **Contact / Hire Us (static):** **FormSubmit** shows “needs Activation” until you click the link in email sent to **hello@anchorstacktech.com**. Easiest fix without Node: set **`NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`** from [web3forms.com](https://web3forms.com) on the static build. **SMTP:** **`NEXT_PUBLIC_CONTACT_API_BASE_URL`** + **`contact-smtp-api`** — see **`docs/IONOS_CONTACT_SMTP.md`**. Details in **`.env.example`**.
+- **Contact / Hire Us (static):** **Web3Forms** + **reCAPTCHA**; default API URL in **`next.config.js`**. Deploy **`servers/contact-submit`** via **`render.yaml`** (service name **`anchorstacktech-contact-api`**) and set **`RECAPTCHA_SECRET_KEY`** on Render once — **`docs/RECAPTCHA_CONTACT_API.md`**, **`servers/contact-submit/README.md`**. **`NEXT_PUBLIC_SITE_URL`** from Deploy Now **`site-url`**. **SMTP:** **`docs/IONOS_CONTACT_SMTP.md`**. **`.env.example`**.
 - **Testimonials:** Static data from `app/company-data.ts` only (no **`/api/upwork-testimonials`**).
 - **Local dev + SMTP:** **`next dev`** + **`SMTP_*`** + **`NEXT_PUBLIC_USE_NODE_CONTACT_API=1`** → same-origin **`/api/contact`**.
 - Standard **`npm run build`** still only creates `.next/` (for `next start` or Node hosting). Use **`npm run build:deploy`** for IONOS **static** hosting only.

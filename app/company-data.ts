@@ -2,23 +2,53 @@ export const companyInfo = {
 	name: "AnchorStackTech",
 	tagline: "Custom Software Development Company in Chicago",
 	email: "hello@anchorstacktech.com",
+<<<<<<< HEAD
 	phone: "+1 (312) 259-5012",
 	address: "6550 N. Damen Ave. Apartment 107, Chicago, IL 60645",
 	city: "Chicago",
 	state: "IL",
 	zip: "60645",
 	country: "US",
+=======
+	phone: "+1 (312) 259-5011",
+	/** Use for `tel:` links and structured data (Google Voice). */
+	phoneTel: "+13122595011",
+	address: "6550 N. Damen Ave. Apartment 107, Chicago, IL 60645",
+	/** Same location as Fischer Software Company on Google Maps (suite / office). */
+	officeMapOpenUrl:
+		"https://www.google.com/maps/place/Fischer+Software+Company/@42.0010258,-87.6805104,17z/data=!3m1!4b1!4m6!3m5!1s0x880fd1aa0713cb89:0xb0869c93b7307314!8m2!3d42.0010258!4d-87.6805104!16s%2Fg%2F11z2jdj0pg?entry=ttu",
+	officeMapEmbedUrl:
+		"https://maps.google.com/maps?q=42.0010258,-87.6805104&z=17&hl=en&output=embed",
+>>>>>>> 14b3240634bdc2e281e41970b17db844714a2dd2
 	logoPath: "/logo/anchorstacktech-logo.svg",
 	faviconPath: "/favicon.svg",
 	liveChatUrl: "https://wa.me/13122595011",
 	googleCalendarBookingUrl:
 		"https://calendar.google.com/calendar/u/0/r/eventedit?text=Meeting%20with%20AnchorStackTech&details=Please%20share%20your%20project%20goals%20and%20timeline.",
 	siteUrl:
-		process.env.NEXT_PUBLIC_SITE_URL || "https://www.anchorstacktech.com",
+		process.env.NEXT_PUBLIC_SITE_URL || "https://anchorstacktech.com",
 	seoDescription:
 		"AnchorStackTech is a Chicago-based software development company specializing in custom web development, mobile apps, Odoo ERP, blockchain solutions, AI integration, and desktop applications. Get a free consultation today.",
 	seoKeywords:
 		"AnchorStackTech, software development company Chicago, Chicago software developers, custom software development, web development Chicago, web application development, responsive website design, mobile app development, iOS development, Android development, cross-platform apps, Odoo ERP, Odoo customization, ERP implementation, business automation, blockchain development, smart contracts, AI integration, machine learning solutions, desktop software, full stack development, API development, cloud applications, SaaS development, IT consulting Chicago, Illinois software company, enterprise software, startup development, offshore development team, hire developers, software agency USA",
+};
+
+/**
+ * Strategic partner — surfaced on the homepage and footer. Opens in a new tab.
+ * @see https://www.linka.ai/
+ */
+export const strategicPartner = {
+	name: "Linka AI",
+	url: "https://www.linka.ai/",
+	tagline: "Custom AI sales agents for websites, social, and messaging",
+	intro:
+		"We are proud to partner with Linka AI—a platform that helps businesses launch personalized AI agents trained on their content to answer questions, capture leads, and drive sales across their website and social channels.",
+	bullets: [
+		"Deploy agents where buyers already are: your site, link-in-bio, DMs, and more.",
+		"Ground responses in your real pages, products, and FAQs so answers stay accurate and on-brand.",
+		"Connect to the tools you already use and turn conversations into qualified leads and revenue.",
+	],
+	ctaLabel: "Explore Linka AI",
 };
 
 export type ServiceItem = {
@@ -1545,7 +1575,7 @@ export const blogItems = [
 		title: "Web Performance Strategies That Improve Conversions",
 		category: "Web Development",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Faster websites create better user experiences and stronger business results.",
@@ -1557,7 +1587,7 @@ export const blogItems = [
 		title: "What Makes a Modern Business Website Effective",
 		category: "Web Development",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"A strong business website should communicate value clearly and guide users to action.",
@@ -1569,7 +1599,7 @@ export const blogItems = [
 		title: "SEO-Ready Development from the Start",
 		category: "Web Development",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Technical SEO decisions made early can save time and improve visibility later.",
@@ -1581,7 +1611,7 @@ export const blogItems = [
 		title: "Scalable Web Architecture for Growing Companies",
 		category: "Web Development",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Scalability starts with decisions made long before traffic begins to grow.",
@@ -1593,7 +1623,7 @@ export const blogItems = [
 		title: "How to Build Landing Pages That Actually Convert",
 		category: "Web Development",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"High-converting landing pages focus on clarity, trust, and a strong next step.",
@@ -1605,7 +1635,7 @@ export const blogItems = [
 		title: "Planning Enterprise Portals for Real-World Operations",
 		category: "Web Development",
 		image: "/services/services10.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Internal portals should simplify work, not add more complexity for teams.",
@@ -1617,7 +1647,7 @@ export const blogItems = [
 		title: "How to Define a Mobile App MVP Clearly",
 		category: "Mobile App Solutions",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"A well-defined MVP reduces waste and helps teams release with confidence.",
@@ -1629,7 +1659,7 @@ export const blogItems = [
 		title: "Planning iOS and Android Apps for Long-Term Growth",
 		category: "Mobile App Solutions",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Strong mobile planning balances user experience, engineering quality, and release speed.",
@@ -1641,7 +1671,7 @@ export const blogItems = [
 		title: "Why Mobile Onboarding Deserves More Attention",
 		category: "Mobile App Solutions",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"First impressions on mobile are short, and onboarding often determines retention.",
@@ -1653,7 +1683,7 @@ export const blogItems = [
 		title: "Cross-Platform vs Native: Choosing the Right Mobile Approach",
 		category: "Mobile App Solutions",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"The right mobile stack depends on product goals, team structure, and future roadmap.",
@@ -1665,7 +1695,7 @@ export const blogItems = [
 		title: "A Practical Checklist for App Store Launch Readiness",
 		category: "Mobile App Solutions",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Launch success depends on more than finishing the codebase.",
@@ -1677,7 +1707,7 @@ export const blogItems = [
 		title: "Setting Up Mobile Analytics the Right Way",
 		category: "Mobile App Solutions",
 		image: "/services/services10.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Good analytics reveal how users behave, where they drop off, and what needs improvement.",
@@ -1689,7 +1719,7 @@ export const blogItems = [
 		title: "How Odoo Helps Streamline Daily Operations",
 		category: "Odoo Development",
 		image: "/services/services10.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Odoo becomes most valuable when it is aligned with real business processes.",
@@ -1701,7 +1731,7 @@ export const blogItems = [
 		title: "When Custom Odoo Modules Make Sense",
 		category: "Odoo Development",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Customization should solve a real operational problem, not create unnecessary complexity.",
@@ -1713,7 +1743,7 @@ export const blogItems = [
 		title: "Improving Sales Workflows with Odoo CRM",
 		category: "Odoo Development",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Structured CRM workflows help teams move faster and follow up more consistently.",
@@ -1725,7 +1755,7 @@ export const blogItems = [
 		title: "Better Inventory Visibility Through Odoo",
 		category: "Odoo Development",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Inventory clarity supports faster operations and more reliable decision-making.",
@@ -1737,7 +1767,7 @@ export const blogItems = [
 		title: "The ROI of Business Automation with Odoo",
 		category: "Odoo Development",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Automation creates value when it saves time, reduces errors, and improves accountability.",
@@ -1749,7 +1779,7 @@ export const blogItems = [
 		title: "Common Odoo Implementation Mistakes to Avoid",
 		category: "Odoo Development",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Many implementation issues come from unclear scope and weak process mapping.",
@@ -1761,7 +1791,7 @@ export const blogItems = [
 		title: "Using AI to Improve Support Workflows",
 		category: "AI Integration & Platforms",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"AI can reduce repetitive support effort while keeping teams focused on high-value work.",
@@ -1773,7 +1803,7 @@ export const blogItems = [
 		title: "Practical AI for Internal Operations",
 		category: "AI Integration & Platforms",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Internal AI use-cases often create fast value with lower risk than customer-facing systems.",
@@ -1785,7 +1815,7 @@ export const blogItems = [
 		title: "Designing AI Features Users Actually Trust",
 		category: "AI Integration & Platforms",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Trust in AI comes from clarity, transparency, and predictable system behavior.",
@@ -1797,7 +1827,7 @@ export const blogItems = [
 		title: "Creating an AI Integration Roadmap for Business",
 		category: "AI Integration & Platforms",
 		image: "/services/services10.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"A roadmap prevents scattered experiments and keeps AI aligned with business goals.",
@@ -1809,7 +1839,7 @@ export const blogItems = [
 		title: "AI Knowledge Assistants for Faster Decision-Making",
 		category: "AI Integration & Platforms",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Knowledge assistants help teams find answers quickly across fragmented information sources.",
@@ -1821,7 +1851,7 @@ export const blogItems = [
 		title: "Why AI Automation Needs Strong Guardrails",
 		category: "AI Integration & Platforms",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Automation becomes useful when quality, accountability, and review are built in.",
@@ -1833,7 +1863,7 @@ export const blogItems = [
 		title: "When Blockchain Is the Right Fit for Enterprise",
 		category: "Blockchain Solutions",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Blockchain is most effective when trust, auditability, and shared records are essential.",
@@ -1845,7 +1875,7 @@ export const blogItems = [
 		title: "Smart Contract Planning Before Development",
 		category: "Blockchain Solutions",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Smart contracts should reflect real process rules, not just technical possibilities.",
@@ -1857,7 +1887,7 @@ export const blogItems = [
 		title: "Tokenized Workflows for Modern Platforms",
 		category: "Blockchain Solutions",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Tokenization can create new process models when linked to actual business value.",
@@ -1869,7 +1899,7 @@ export const blogItems = [
 		title: "A Practical Guide to Wallet Integration",
 		category: "Blockchain Solutions",
 		image: "/services/services10.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Wallet integration should feel secure, simple, and understandable for end users.",
@@ -1881,7 +1911,7 @@ export const blogItems = [
 		title: "Designing Blockchain Products with Audit Readiness in Mind",
 		category: "Blockchain Solutions",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Security review should shape how blockchain products are designed from the start.",
@@ -1893,7 +1923,7 @@ export const blogItems = [
 		title: "Why User Experience Matters in dApp Development",
 		category: "Blockchain Solutions",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Complex blockchain products still need simple, human-centered product design.",
@@ -1905,7 +1935,7 @@ export const blogItems = [
 		title: "The Modern Role of Desktop Applications in Business",
 		category: "Desktop Software",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Desktop software remains valuable for secure, stable, and performance-heavy workflows.",
@@ -1917,7 +1947,7 @@ export const blogItems = [
 		title: "Why Offline-First Desktop Tools Still Matter",
 		category: "Desktop Software",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Offline capability is critical in many real operational environments.",
@@ -1929,7 +1959,7 @@ export const blogItems = [
 		title: "Building Desktop Tools for Internal Teams",
 		category: "Desktop Software",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Internal tools should support speed, clarity, and operational consistency.",
@@ -1941,7 +1971,7 @@ export const blogItems = [
 		title: "Security Considerations in Desktop Software Development",
 		category: "Desktop Software",
 		image: "/services/services10.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Business desktop applications need strong security planning beyond basic access control.",
@@ -1953,7 +1983,7 @@ export const blogItems = [
 		title: "Designing Desktop Dashboards for Operational Clarity",
 		category: "Desktop Software",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Operational dashboards should help teams act faster, not just display more data.",
@@ -1965,7 +1995,7 @@ export const blogItems = [
 		title: "Why Custom Software Can Outperform Generic Tools",
 		category: "Custom Software",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Custom software creates value when a business needs process fit, not feature overload.",
@@ -1977,7 +2007,7 @@ export const blogItems = [
 		title: "Why Product Discovery Should Come Before Development",
 		category: "Custom Software",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Discovery helps teams define problems clearly before committing time and budget.",
@@ -1989,7 +2019,7 @@ export const blogItems = [
 		title: "The Benefits of API-First Platform Design",
 		category: "Custom Software",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"API-first thinking improves flexibility, integration readiness, and long-term maintainability.",
@@ -2001,7 +2031,7 @@ export const blogItems = [
 		title: "Core Foundations of a Scalable SaaS Product",
 		category: "Custom Software",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Scalable SaaS products require more than feature delivery alone.",
@@ -2013,7 +2043,7 @@ export const blogItems = [
 		title: "Designing Workflow Platforms That Teams Will Actually Use",
 		category: "Custom Software",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Adoption depends on usability, relevance, and clear operational benefit.",
@@ -2025,7 +2055,7 @@ export const blogItems = [
 		title: "Connecting Business Systems for Better Visibility",
 		category: "Business Systems",
 		image: "/services/services10.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Disconnected systems often create reporting delays and operational blind spots.",
@@ -2037,7 +2067,7 @@ export const blogItems = [
 		title: "ERP Implementation Strategy for Sustainable Growth",
 		category: "Business Systems",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"ERP success depends on process alignment, not just software installation.",
@@ -2049,7 +2079,7 @@ export const blogItems = [
 		title: "Modernizing Internal Systems Without Disrupting Operations",
 		category: "Business Systems",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Modernization works best when it respects how teams operate today.",
@@ -2061,7 +2091,7 @@ export const blogItems = [
 		title: "Building Reporting Dashboards That Drive Action",
 		category: "Business Systems",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Useful dashboards turn operational data into faster and better decisions.",
@@ -2073,7 +2103,7 @@ export const blogItems = [
 		title: "A Better Approach to Workflow Automation",
 		category: "Business Systems",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Automation should remove bottlenecks while keeping control and visibility intact.",
@@ -2085,7 +2115,7 @@ export const blogItems = [
 		title: "Why Design Thinking Still Matters in Software Projects",
 		category: "Web Development",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Strong products are built around real user needs, not assumptions.",
@@ -2097,7 +2127,7 @@ export const blogItems = [
 		title: "How Better Documentation Improves Software Delivery",
 		category: "Custom Software",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Clear documentation supports stronger collaboration and fewer project surprises.",
@@ -2109,7 +2139,7 @@ export const blogItems = [
 		title: "QA Strategies for Growing Digital Products",
 		category: "Custom Software",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Quality assurance becomes more important as features, users, and integrations increase.",
@@ -2121,7 +2151,7 @@ export const blogItems = [
 		title: "Release Management That Supports Stable Delivery",
 		category: "Custom Software",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Stable releases depend on planning, communication, and clear deployment processes.",
@@ -2133,7 +2163,7 @@ export const blogItems = [
 		title: "How to Prioritize a Product Roadmap More Effectively",
 		category: "Custom Software",
 		image: "/services/services10.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Prioritization becomes easier when features are tied to outcomes instead of opinions.",
@@ -2145,7 +2175,7 @@ export const blogItems = [
 		title: "UI and UX Principles for Business Platforms",
 		category: "Web Development",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Business software should feel clear, efficient, and easy to navigate.",
@@ -2157,7 +2187,7 @@ export const blogItems = [
 		title: "Using Product Data to Improve Digital Experiences",
 		category: "AI Integration & Platforms",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Better product decisions come from meaningful signals, not just more data.",
@@ -2169,7 +2199,7 @@ export const blogItems = [
 		title: "Best Practices for Building Customer Portals",
 		category: "Web Development",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Customer portals should reduce support effort while improving the client experience.",
@@ -2181,7 +2211,7 @@ export const blogItems = [
 		title: "Building One Product Across Web, Mobile, and Desktop",
 		category: "Custom Software",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Multi-platform products need a clear strategy for consistency and maintainability.",
@@ -2193,7 +2223,7 @@ export const blogItems = [
 		title: "Why Ongoing Software Maintenance Protects Business Value",
 		category: "Custom Software",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Maintenance keeps products secure, stable, and ready for future growth.",
@@ -2205,7 +2235,7 @@ export const blogItems = [
 		title: "Scaling Business Automation Without Losing Control",
 		category: "Business Systems",
 		image: "/home/work2.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Automation at scale needs visibility, exception handling, and responsible governance.",
@@ -2217,7 +2247,7 @@ export const blogItems = [
 		title: "What Makes a Software Platform Future-Ready",
 		category: "Custom Software",
 		image: "/services/services10.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Future-ready platforms are built to adapt without constant rework.",
@@ -2229,7 +2259,7 @@ export const blogItems = [
 		title: "A Practical View of Digital Transformation",
 		category: "Business Systems",
 		image: "/home/work3.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Digital transformation succeeds when it improves daily work in measurable ways.",
@@ -2241,7 +2271,7 @@ export const blogItems = [
 		title: "Engineering Practices That Support Reliable Delivery",
 		category: "Custom Software",
 		image: "/home/work4.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Reliable delivery comes from disciplined engineering, not rushed execution.",
@@ -2253,7 +2283,7 @@ export const blogItems = [
 		title: "Building Digital Products Around Client Goals",
 		category: "Custom Software",
 		image: "/home/work5.jpg",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"The best software projects are shaped by business goals, not just feature lists.",
@@ -2265,7 +2295,7 @@ export const blogItems = [
 export const teamMembers = [
 	{
 		name: "Nelson Hermance",
-		role: "Founder & CEO",
+		role: "Founder & CEO — Chicago, IL",
 		image: "/about-us/nelson.webp",
 		email: "nhermance@anchorstacktech.com",
 		whatsapp: "https://wa.me/13122595011",

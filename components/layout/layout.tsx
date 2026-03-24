@@ -9,6 +9,10 @@ const ScrollToTopComponent = dynamic(() => import("./scroll-to-top"), {
 	ssr: false,
 });
 
+const SiteChatWidget = dynamic(() => import("./site-chat-widget"), {
+	ssr: false,
+});
+
 type LayoutProps = {
 	children: React.ReactNode;
 };
@@ -19,6 +23,7 @@ const Layout: React.FC<LayoutProps> = (props) => {
 			<main>{props.children}</main>
 			<Footer />
 			<ScrollToTopComponent />
+			<SiteChatWidget />
 		</Fragment>
 	);
 };
