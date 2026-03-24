@@ -112,7 +112,7 @@ const WorkDetailComponent: FC = () => {
 
 				<RelatedWork>
 					<h2>THERE’S MORE</h2>
-					<h1 style={{ color: "var(--color-grey-800)" }}>Explore Other Works</h1>
+					<h2 style={{ color: "var(--color-grey-800)" }}>Explore Other Works</h2>
 
 					<GridWrapper>
 						<GridContainer>
@@ -309,7 +309,7 @@ const RelatedWork = styled.div`
 		}
 	}
 
-	h1 {
+	h2:last-of-type {
 		color: var(--color-primary);
 		font-style: normal;
 		text-align: center;

@@ -6,16 +6,22 @@ import React, { Fragment } from "react";
 
 import AboutUsComponent from "../components/about-us-page/about-us";
 import { companyInfo } from "../app/company-data";
+import { pageKeywords } from "../lib/seo-metadata";
 
 const AboutUsPage: NextPage = () => {
 	return (
 		<React.Fragment>
 			<Head>
-				<title>About Us | {companyInfo.name} - Software Development Company</title>
+				<title>About AnchorStackTech | Chicago Software Development Team & Mission</title>
 				<meta
 					name="description"
-					content="AnchorStackTech is a software development company delivering web, mobile, Odoo, AI, and blockchain solutions. Learn about our team, process, and commitment to quality."
+					content="Learn about AnchorStackTech — a Chicago-based software development team building custom web, mobile, Odoo ERP, blockchain, and AI solutions. Discover our mission, values, and development process."
 				/>
+				<meta
+					name="keywords"
+					content={`${companyInfo.seoKeywords}, ${pageKeywords.about}`}
+				/>
+				<link rel="canonical" href={`${companyInfo.siteUrl}/about-us`} />
 			</Head>
 			<AboutUsComponent />
 		</React.Fragment>

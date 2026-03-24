@@ -100,7 +100,7 @@ const Meeting: FC = () => {
 					<WorkSection>
 						<h2>WORK WITH US</h2>
 						<div className='bottom-inner-container'>
-							<h1>Have you decided to work on a project with us?</h1>
+							<h2>Have you decided to work on a project with us?</h2>
 
 							<p>
 								Interested in joining our team and impacting the world?
@@ -324,7 +324,7 @@ const WorkSection = styled.div`
 		}
 	}
 
-	h1 {
+	h2:last-of-type {
 		max-width: 477px;
 		color: #0f0b33;
 

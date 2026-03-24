@@ -1,9 +1,13 @@
 export const companyInfo = {
 	name: "AnchorStackTech",
-	tagline: "Empowering innovation",
+	tagline: "Custom Software Development Company in Chicago",
 	email: "hello@anchorstacktech.com",
-	phone: "+1 (312) 259-5011",
+	phone: "+1 (312) 259-5012",
 	address: "6550 N. Damen Ave. Apartment 107, Chicago, IL 60645",
+	city: "Chicago",
+	state: "IL",
+	zip: "60645",
+	country: "US",
 	logoPath: "/logo/anchorstacktech-logo.svg",
 	faviconPath: "/favicon.svg",
 	liveChatUrl: "https://wa.me/13122595011",
@@ -12,7 +16,9 @@ export const companyInfo = {
 	siteUrl:
 		process.env.NEXT_PUBLIC_SITE_URL || "https://www.anchorstacktech.com",
 	seoDescription:
-		"AnchorStackTech provides web, app, Odoo, blockchain, AI integration, and desktop application development services. Empowering innovation.",
+		"AnchorStackTech is a Chicago-based software development company specializing in custom web development, mobile apps, Odoo ERP, blockchain solutions, AI integration, and desktop applications. Get a free consultation today.",
+	seoKeywords:
+		"AnchorStackTech, software development company Chicago, Chicago software developers, custom software development, web development Chicago, web application development, responsive website design, mobile app development, iOS development, Android development, cross-platform apps, Odoo ERP, Odoo customization, ERP implementation, business automation, blockchain development, smart contracts, AI integration, machine learning solutions, desktop software, full stack development, API development, cloud applications, SaaS development, IT consulting Chicago, Illinois software company, enterprise software, startup development, offshore development team, hire developers, software agency USA",
 };
 
 export type ServiceItem = {
@@ -1342,6 +1348,198 @@ export const blogCategoryItems: BlogCategoryItem[] = [
 ];
 
 export const blogItems = [
+	{
+		id: "web-performance-conversion-strategy",
+		title: "How Modern Web Development Improves Performance, SEO, and Conversion",
+		category: "Web Development",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Modern web development helps businesses improve speed, search visibility, and customer conversion.",
+		content:
+			"Modern web development is no longer only about visual design. It directly affects search engine visibility, conversion rates, and user trust. Fast-loading pages, responsive layouts, optimized code, and clear user flows help businesses reduce bounce rates and guide visitors toward meaningful actions such as inquiries, bookings, and purchases. A well-built website becomes a reliable digital asset that supports both brand credibility and long-term growth.",
+	},
+	{
+		id: "website-rebuild-vs-refactor",
+		title: "When a Business Website Needs a Rebuild Instead of a Simple Redesign",
+		category: "Web Development",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Some websites need structural improvement, not just a visual refresh.",
+		content:
+			"A redesign can improve appearance, but it does not always solve deeper technical issues. Businesses often need a full rebuild when their website suffers from poor performance, outdated architecture, limited scalability, weak mobile usability, or difficult content management. Rebuilding with a stronger technical foundation allows teams to improve maintainability, SEO, security, and future feature expansion without carrying forward old limitations.",
+	},
+	{
+		id: "mobile-app-value-customer-engagement",
+		title: "Why Mobile App Solutions Create Stronger Customer Engagement",
+		category: "Mobile App Solutions",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Mobile apps help businesses build direct, consistent, and valuable user engagement.",
+		content:
+			"Mobile app solutions give businesses a direct channel to serve users more efficiently. Features such as push notifications, account access, real-time updates, personalized experiences, and simplified transactions create stronger engagement than many web-only experiences. When designed around real customer behavior, a mobile app becomes more than a product extension—it becomes a practical tool for retention, convenience, and long-term brand loyalty.",
+	},
+	{
+		id: "native-vs-cross-platform-app-strategy",
+		title: "Native vs Cross-Platform Mobile App Solutions: Choosing the Right Strategy",
+		category: "Mobile App Solutions",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"The right mobile development approach depends on performance, budget, and product goals.",
+		content:
+			"Choosing between native and cross-platform development is a strategic decision. Native apps usually offer stronger device-level performance, deeper platform integration, and maximum flexibility, while cross-platform solutions can reduce time to market and streamline maintenance across iOS and Android. The right choice depends on product complexity, expected scale, feature requirements, and the level of user experience a business wants to deliver.",
+	},
+	{
+		id: "odoo-customization-business-efficiency",
+		title: "How Odoo Development Improves Operational Efficiency Across Teams",
+		category: "Odoo Development",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Odoo development helps businesses unify workflows and reduce manual operations.",
+		content:
+			"Odoo development allows businesses to connect departments, automate repetitive work, and centralize critical business data. With the right customization, companies can align sales, inventory, accounting, CRM, procurement, and reporting inside one structured system. This reduces duplication, improves visibility, and gives decision-makers a more reliable operational foundation. A well-implemented Odoo environment supports efficiency today while remaining flexible enough to grow with the business.",
+	},
+	{
+		id: "odoo-migration-planning-guide",
+		title: "What Businesses Should Plan Before an Odoo Migration or Upgrade",
+		category: "Odoo Development",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Successful Odoo upgrades require planning around data, custom modules, and integrations.",
+		content:
+			"An Odoo migration or upgrade should never be treated as a simple technical switch. Businesses need to review custom modules, workflows, integrations, reporting logic, data quality, and user permissions before moving to a new version or hosting environment. Careful planning helps reduce downtime, avoid broken processes, and protect business continuity. The goal is not only to upgrade the system, but to improve reliability and future maintainability at the same time.",
+	},
+	{
+		id: "ai-integration-practical-business-roadmap",
+		title: "A Practical AI Integration Roadmap for Modern Businesses",
+		category: "AI Integration & Platforms",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"AI integration works best when it starts with clear business problems and measurable outcomes.",
+		content:
+			"AI integration delivers value when it is tied to operational goals rather than trends. Businesses should begin by identifying repetitive tasks, support bottlenecks, decision-making delays, or content-heavy workflows that can benefit from automation or intelligence. From there, teams can define data requirements, security boundaries, implementation steps, and success metrics. A practical roadmap reduces risk and helps AI initiatives move from experimentation to real business impact.",
+	},
+	{
+		id: "internal-ai-tools-productivity",
+		title: "How Internal AI Platforms Reduce Repetitive Work and Improve Productivity",
+		category: "AI Integration & Platforms",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Internal AI tools can streamline support, analysis, and daily operational tasks.",
+		content:
+			"Internal AI platforms can help teams move faster by reducing the time spent on repetitive, low-value work. Common use cases include document analysis, internal search, knowledge assistance, workflow recommendations, support automation, and operational summarization. When built with proper controls and aligned to real use cases, internal AI tools improve response speed, reduce manual effort, and allow employees to focus on work that requires judgment and strategic thinking.",
+	},
+	{
+		id: "blockchain-business-use-cases",
+		title: "Blockchain Solutions Beyond Crypto: Practical Business Use Cases",
+		category: "Blockchain Solutions",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Blockchain can support trust, transparency, and secure digital processes across industries.",
+		content:
+			"Blockchain solutions are often misunderstood as cryptocurrency-only technology, but their value goes much further. Businesses can use blockchain for asset tracking, transaction verification, shared records, digital identity, auditability, and smart contract automation. The strongest blockchain projects focus on problems where trust, transparency, and verification are essential. When applied to the right business model, blockchain can create more secure and accountable digital systems.",
+	},
+	{
+		id: "smart-contract-development-risk-management",
+		title: "Why Smart Contract Development Requires Security-First Planning",
+		category: "Blockchain Solutions",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Smart contracts should be designed with security, testing, and long-term reliability in mind.",
+		content:
+			"Smart contracts can automate high-value logic, but they also introduce permanent risk when poorly designed. Security-first planning is essential because vulnerabilities, flawed business logic, and inadequate testing can lead to financial loss and reputational damage. Professional smart contract development includes architecture review, test coverage, validation of edge cases, and careful consideration of upgrade paths. Strong preparation protects both users and the long-term credibility of the platform.",
+	},
+	{
+		id: "desktop-software-business-reliability",
+		title: "Why Desktop Software Still Matters for Reliability and Operational Control",
+		category: "Desktop Software",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Desktop software remains important for performance, security, and specialized workflows.",
+		content:
+			"Desktop software continues to serve an important role in industries that require speed, local processing, hardware integration, stronger control, or offline capability. For internal tools, secure workstations, and specialized business operations, desktop applications often provide a more stable and focused environment than browser-based systems. When properly engineered, desktop software supports consistent performance, stronger access control, and efficient workflows tailored to operational needs.",
+	},
+	{
+		id: "desktop-security-software-strategy",
+		title: "How Secure Desktop Software Protects Sensitive Business Operations",
+		category: "Desktop Software",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Secure desktop applications help businesses protect devices, data, and internal workflows.",
+		content:
+			"Security is a major reason many businesses continue investing in desktop software. Applications that handle internal data, financial activity, regulated operations, or device-level integrations often require tighter control than standard web environments can provide. Secure desktop software can support role-based access, local encryption, protected workflows, and controlled system interaction. A strong desktop security strategy helps reduce operational risk while keeping critical tasks efficient and reliable.",
+	},
+	{
+		id: "custom-software-workflow-advantage",
+		title: "How Custom Software Solves Workflow Problems That Generic Tools Cannot",
+		category: "Custom Software",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Custom software gives businesses a better fit for their real processes and growth goals.",
+		content:
+			"Off-the-shelf tools are useful, but they often force teams to adjust their processes around product limitations. Custom software takes the opposite approach by being designed around the actual workflow, operational priorities, and customer needs of the business. This leads to fewer workarounds, stronger productivity, and better integration with existing systems. Over time, custom software becomes a competitive asset because it reflects how the business truly operates.",
+	},
+	{
+		id: "software-maintenance-protects-value",
+		title: "Why Ongoing Software Maintenance Protects Long-Term Business Value",
+		category: "Custom Software",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Maintenance keeps software secure, stable, efficient, and ready for future growth.",
+		content:
+			"Ongoing software maintenance is essential for protecting the value of a digital product after launch. It includes bug resolution, dependency updates, security patches, performance tuning, technical cleanup, and small functional improvements that keep the system reliable. Businesses that maintain their software proactively reduce the risk of downtime, security issues, and costly rebuilds. Maintenance is not just support work—it is a long-term investment in product stability and business continuity.",
+	},
+	{
+		id: "business-systems-integration-visibility",
+		title: "How Connected Business Systems Improve Visibility and Decision-Making",
+		category: "Business Systems",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Integrated business systems help leaders make faster and more accurate decisions.",
+		content:
+			"When business data is spread across disconnected tools, teams lose time and leadership loses visibility. Connected business systems allow organizations to bring together operations, finance, customer data, reporting, and internal workflows in a more unified structure. This reduces manual reconciliation, improves reporting accuracy, and supports stronger decision-making. Better systems integration creates a clearer operational picture and helps businesses respond more effectively to growth and change.",
+	},
+	{
+		id: "scalable-business-systems-foundation",
+		title: "Building Scalable Business Systems for Long-Term Operational Growth",
+		category: "Business Systems",
+		image: "/home/work1.webp",
+		authorName: "Nelson Hermous",
+		authorAvatar: "/about-us/avatar-placeholder.svg",
+		excerpt:
+			"Scalable business systems create a stronger foundation for growth, automation, and control.",
+		content:
+			"Scalable business systems are designed to support growth without creating operational chaos. As a company expands, manual processes, disconnected tools, and inconsistent reporting begin to slow execution. Building the right systems foundation means designing workflows, integrations, permissions, and automation that can grow with the organization. Businesses that invest early in scalable systems gain stronger control, better efficiency, and a clearer path for future expansion.",
+	},
 	{
 		id: "web-performance-strategy",
 		title: "Web Performance Strategies That Improve Conversions",

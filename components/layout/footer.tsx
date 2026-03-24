@@ -89,6 +89,11 @@ const Footer: React.FC = () => {
 							</Link>
 						</li>
 						<li>
+							<Link href='/blog'>
+								<a>Blog</a>
+							</Link>
+						</li>
+						<li>
 							<Link href='/contact'>
 								<a>Contact Us</a>
 							</Link>

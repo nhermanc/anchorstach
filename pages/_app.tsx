@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 	const organizationSchema = {
 		"@context": "https://schema.org",
-		"@type": "Organization",
+		"@type": "ProfessionalService",
 		"@id": `${siteUrl}#organization`,
 		name: companyInfo.name,
 		description: pageDescription,
@@ -32,9 +32,45 @@ function MyApp({ Component, pageProps }: AppProps) {
 		telephone: companyInfo.phone,
 		address: {
 			"@type": "PostalAddress",
-			streetAddress: companyInfo.address,
+			streetAddress: "6550 N. Damen Ave. Apartment 107",
+			addressLocality: "Chicago",
+			addressRegion: "IL",
+			postalCode: "60645",
+			addressCountry: "US",
+		},
+		geo: {
+			"@type": "GeoCoordinates",
+			latitude: 41.9981,
+			longitude: -87.6792,
 		},
 		logo: `${siteUrl}${companyInfo.logoPath}`,
+		image: `${siteUrl}${companyInfo.logoPath}`,
+		priceRange: "$$",
+		areaServed: [
+			{ "@type": "City", name: "Chicago" },
+			{ "@type": "Country", name: "United States" },
+		],
+		knowsAbout: [
+			"Web Development",
+			"Mobile App Development",
+			"Odoo ERP",
+			"Blockchain Development",
+			"Artificial Intelligence",
+			"Desktop Software",
+			"Custom Software Development",
+		],
+		hasOfferCatalog: {
+			"@type": "OfferCatalog",
+			name: "Software Development Services",
+			itemListElement: [
+				{ "@type": "Offer", itemOffered: { "@type": "Service", name: "Web Development" } },
+				{ "@type": "Offer", itemOffered: { "@type": "Service", name: "Mobile App Development" } },
+				{ "@type": "Offer", itemOffered: { "@type": "Service", name: "Odoo ERP Customization" } },
+				{ "@type": "Offer", itemOffered: { "@type": "Service", name: "Blockchain Solutions" } },
+				{ "@type": "Offer", itemOffered: { "@type": "Service", name: "AI Integration" } },
+				{ "@type": "Offer", itemOffered: { "@type": "Service", name: "Desktop Application Development" } },
+			],
+		},
 	};
 
 	const websiteSchema = {
@@ -59,6 +95,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 					<meta name="viewport" content="width=device-width, initial-scale=1" />
 					<title>{pageTitle}</title>
 					<meta name="description" content={pageDescription} />
+					<meta name="keywords" content={companyInfo.seoKeywords} />
+					<meta name="author" content={companyInfo.name} />
+					<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 					<link rel="canonical" href={canonicalUrl} />
 					<link rel="icon" href={companyInfo.faviconPath} />
 					{googleVerification && (

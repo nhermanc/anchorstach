@@ -207,7 +207,7 @@ const WorkFeed: FC = () => {
 			<WorkSection>
 				<h2>WORK WITH US</h2>
 				<div className='bottom-inner-container'>
-					<h1>Ready to build your next platform with us?</h1>
+					<h2>Ready to build your next platform with us?</h2>
 
 					<p>
 						Share your idea with {companyInfo.name} and we will help you
@@ -466,7 +466,7 @@ const WorkSection = styled.div`
 		}
 	}
 
-	h1 {
+	h2:last-of-type {
 		max-width: 477px;
 		color: #0f0b33;
 

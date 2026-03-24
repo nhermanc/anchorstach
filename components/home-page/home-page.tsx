@@ -28,6 +28,13 @@ const Work = dynamic(() => import("./work"), {
 	ssr: true,
 });
 
+const BlogTeaser = dynamic(() => import("./blog-teaser"), {
+	loading: () => (
+		<HomeSectionPlaceholder minHeight="28rem" aria-label="Loading blog highlights" />
+	),
+	ssr: true,
+});
+
 const TESTIMONIAL = dynamic(() => import("./testimonial"), {
 	loading: () => (
 		<HomeSectionPlaceholder minHeight="26rem" aria-label="Loading testimonials" />
@@ -43,6 +50,7 @@ const HomePageComponent: FC = () => {
 			<Services />
 			<AboutUsCom />
 			<Work />
+			<BlogTeaser />
 			<TESTIMONIAL />
 		</React.Fragment>
 	);

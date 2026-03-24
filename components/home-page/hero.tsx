@@ -77,16 +77,15 @@ const Hero: FC = () => {
 			<CustomContainer>
 				<ContentContainer>
 					<h1>
-						Software solutions built for growth
+						Custom Software Development Company in Chicago
 					</h1>
 
 					<p>
-						<b>AnchorStackTech</b> is the next step in the journey that began with <b>Fischer Software Company</b>. <br />
-						We continue the same dedication to quality, reliability, and client success while growing into a broader, future-focused technology brand.
+						<b>AnchorStackTech</b> builds high-performance web applications, mobile apps, AI-powered solutions, Odoo ERP systems, blockchain products, and desktop software — tailored to your business goals.
 					</p>
 
 					<p>
-						We build web and mobile applications, AI-powered solutions, business systems, blockchain products, and custom platforms tailored to your goals. 
+						With over 20 years of software engineering experience, we combine proven reliability with forward-thinking technology to help businesses grow.
 					</p>
 
 					<JobsContain>
@@ -103,6 +102,18 @@ const Hero: FC = () => {
 					<Link href='/contact' prefetch passHref>
 						<CustomButton>GET STARTED</CustomButton>
 					</Link>
+
+					<HeroQuickLinks aria-label="Explore services and blog">
+						<Link href="/services" prefetch passHref>
+							<QuickLink>All services</QuickLink>
+						</Link>
+						<span className="sep" aria-hidden>
+							·
+						</span>
+						<Link href="/blog" prefetch passHref>
+							<QuickLink>Blog &amp; insights</QuickLink>
+						</Link>
+					</HeroQuickLinks>
 				</ContentContainer>
 
 				<ImageContainer
@@ -314,6 +325,31 @@ const ImageContainer = styled.div`
 	/* Tablet + mobile: use stacked carousel (HiddenImageContainer) */
 	@media (max-width: 1199px) {
 		display: none;
+	}
+`;
+
+const HeroQuickLinks = styled.div`
+	margin-top: 1.25rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 0.35rem 0.5rem;
+	font-size: 1rem;
+
+	.sep {
+		color: #94a3b8;
+		user-select: none;
+	}
+`;
+
+const QuickLink = styled.a`
+	color: var(--color-secondary, #00d0b0);
+	font-weight: 600;
+	text-decoration: none;
+	border-bottom: 1px solid transparent;
+	transition: border-color 0.2s ease, color 0.2s ease;
+	&:hover {
+		border-bottom-color: var(--color-secondary, #00d0b0);
 	}
 `;
 

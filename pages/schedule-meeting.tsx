@@ -5,16 +5,22 @@ import Head from "next/head";
 import styled from "styled-components";
 import MainNavigation from "../components/layout/main-navigation";
 import { companyInfo } from "../app/company-data";
+import { pageKeywords } from "../lib/seo-metadata";
 
 const ScheduleMeetingPage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Schedule Meeting | {companyInfo.name}</title>
+				<title>Schedule a Free Consultation | Book a Meeting - AnchorStackTech</title>
 				<meta
 					name="description"
-					content="Schedule a meeting with AnchorStackTech. Book a consultation for web, app, Odoo, or AI projects via Google Calendar."
+					content="Book a free consultation with AnchorStackTech via Google Calendar. Discuss your web, mobile, Odoo ERP, blockchain, or AI project with our Chicago-based development team."
 				/>
+				<meta
+					name="keywords"
+					content={`${companyInfo.seoKeywords}, ${pageKeywords.scheduleMeeting}`}
+				/>
+				<link rel="canonical" href={`${companyInfo.siteUrl}/schedule-meeting`} />
 			</Head>
 			<MainNavigation />
 			<Wrapper>

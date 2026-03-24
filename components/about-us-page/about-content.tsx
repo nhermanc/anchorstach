@@ -34,7 +34,7 @@ const AboutContent: FC = () => {
 				</RightContainer>
 				<LeftContainer>
 					<p>
-						We are a remote design agency based in Omaha, Nebraska,
+						We are a remote design agency based in Chicago,
 						working with clients around the world. As passionate
 						designers, we love building products that are easy to use,
 						accessible, engaging, and delightful.

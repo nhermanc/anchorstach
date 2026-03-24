@@ -78,7 +78,7 @@ const BlogArticle2: FC<BlogArticle2Props> = ({ currentBlogId }) => {
 				<RelatedArticle>
 					<h2>OTHER BLOG</h2>
 					<div className='head-content'>
-						<h1 style={{ color: "var(--color-grey-800)" }}>Explore Other Article</h1>
+						<h2 style={{ color: "var(--color-grey-800)" }}>Explore Other Articles</h2>
 						<div
 							className='icons-arrow'
 							onClick={() => {
@@ -191,7 +191,7 @@ const RelatedArticle = styled(BlogContent)`
 		color: var(--color-secondary);
 	}
 
-	h1 {
+	.head-content h2 {
 		color: var(--color-primary);
 		font-style: normal;
 		font-weight: bold;

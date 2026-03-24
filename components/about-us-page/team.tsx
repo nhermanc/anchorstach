@@ -36,7 +36,7 @@ const Team: FC = () => {
 					<InnerContainer>
 						<RightContainer>
 							<p>
-								We are a remote design studio situated in Omaha that
+								We are a remote design studio situated in Chicago that
 								works with clients worldwide. As enthusiastic designers,
 								we take pride in creating things that are simple to use,
 								accessible, engaging, and delicious. Every morning, we

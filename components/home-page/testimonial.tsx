@@ -101,7 +101,7 @@ const TESTIMONIAL: FC = () => {
 					<WorkSection>
 						<h2>WORK WITH US</h2>
 						<div className='bottom-inner-container'>
-							<h1>Have you decided to work on a project with us?</h1>
+							<h2>Have you decided to work on a project with us?</h2>
 
 							<p>
 								Interested in building your platform with {companyInfo.name}
@@ -353,7 +353,7 @@ const WorkSection = styled.div`
 		}
 	}
 
-	h1 {
+	h2:not(:first-child) {
 		max-width: 477px;
 		color: #0f0b33;
 

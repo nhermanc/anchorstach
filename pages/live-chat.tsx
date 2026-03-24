@@ -5,13 +5,19 @@ import Head from "next/head";
 import styled from "styled-components";
 import MainNavigation from "../components/layout/main-navigation";
 import { companyInfo } from "../app/company-data";
+import { pageKeywords } from "../lib/seo-metadata";
 
 const LiveChatPage: NextPage = () => {
 	return (
 		<>
 			<Head>
-				<title>Live Chat | {companyInfo.name}</title>
-				<meta name="description" content="Chat with AnchorStackTech on WhatsApp. Get quick answers about our software development services." />
+				<title>Live Chat | Talk to Our Software Development Team - AnchorStackTech</title>
+				<meta name="description" content="Chat with AnchorStackTech on WhatsApp for quick answers about web development, mobile apps, Odoo ERP, and custom software projects. Chicago-based team, fast response." />
+				<meta
+					name="keywords"
+					content={`${companyInfo.seoKeywords}, ${pageKeywords.liveChat}`}
+				/>
+				<link rel="canonical" href={`${companyInfo.siteUrl}/live-chat`} />
 			</Head>
 			<MainNavigation />
 			<Wrapper>

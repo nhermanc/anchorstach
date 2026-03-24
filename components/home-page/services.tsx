@@ -1,5 +1,6 @@
 /** @format */
 
+import Link from "next/link";
 import styled from "styled-components";
 import WebIcon from "@material-ui/icons/Web";
 import PhoneIphoneIcon from "@material-ui/icons/PhoneIphone";
@@ -61,7 +62,7 @@ const Services: FC = () => {
 				<ServicesTop>
 					<h2>SERVICES</h2>
 					<div className='content-container'>
-						<h1>Software services designed for business growth</h1>
+						<h2 className="section-heading">Software services designed for business growth</h2>
 
 						<p>
 						From strategy and design to development and support, we build reliable digital solutions that help businesses launch faster, operate smarter, and scale with confidence.
@@ -90,6 +91,16 @@ const Services: FC = () => {
 						);
 					})}
 				</ServicesGrid>
+
+				<ServicesFooterCta>
+					<p>
+						See full service areas, deliverables, and how we scope projects on the
+						dedicated services page.
+					</p>
+					<Link href="/services" prefetch passHref>
+						<ServicesCtaLink>View all services</ServicesCtaLink>
+					</Link>
+				</ServicesFooterCta>
 			</CustomContainer>
 		</ServicesWrapper>
 	);
@@ -225,13 +236,53 @@ const GidItem = styled.div<{ bgSrc: string }>`
 	}
 `;
 
+const ServicesFooterCta = styled.div`
+	margin-top: 2.5rem;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1.25rem;
+	padding-top: 1.5rem;
+	border-top: 1px solid #e2e8f0;
+
+	p {
+		margin: 0;
+		max-width: 36rem;
+		line-height: 1.65;
+		color: #3d3a54;
+		font-size: 1.05rem;
+	}
+`;
+
+const ServicesCtaLink = styled.a`
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 48px;
+	padding: 0.55rem 1.5rem;
+	border-radius: 6px;
+	background: var(--color-secondary, #00d0b0);
+	color: #fff;
+	font-weight: 700;
+	font-size: 1rem;
+	text-decoration: none;
+	border: 1px solid var(--color-secondary, #00d0b0);
+	transition: filter 0.2s ease, transform 0.15s ease;
+	white-space: nowrap;
+	&:hover {
+		filter: brightness(1.05);
+		transform: translateY(-1px);
+	}
+`;
+
 const ServicesTop = styled.div`
 	margin-bottom: 40px;
 	h2 {
 		margin-bottom: 2rem;
 		color: var(--color-secondary-second);
 	}
-	h1 {
+	.section-heading {
 		font-style: normal;
 		font-weight: bold;
 		font-size: 32px;
