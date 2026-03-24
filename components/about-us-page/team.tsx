@@ -36,20 +36,11 @@ const Team: FC = () => {
 					<InnerContainer>
 						<RightContainer>
 							<p>
-<<<<<<< HEAD
-								We are a remote design studio situated in Chicago that
-								works with clients worldwide. As enthusiastic designers,
-								we take pride in creating things that are simple to use,
-								accessible, engaging, and delicious. Every morning, we
-								get out of bed by making people smile. Through
-								deliberate design,
-=======
 								AnchorStackTech is rooted in <strong>Chicago, IL</strong>, with
-								a distributed team that partners with organizations around
-								the world. We care about clear communication, disciplined
-								delivery, and technology that supports measurable business
-								outcomes—not buzzwords.
->>>>>>> 14b3240634bdc2e281e41970b17db844714a2dd2
+								a distributed team that partners with organizations around the
+								world. We care about clear communication, disciplined delivery,
+								and technology that supports measurable business outcomes—not
+								buzzwords.
 							</p>
 						</RightContainer>
 						<LeftContainer>

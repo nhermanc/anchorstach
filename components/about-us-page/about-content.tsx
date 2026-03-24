@@ -36,18 +36,11 @@ const AboutContent: FC = () => {
 				</RightContainer>
 				<LeftContainer>
 					<p>
-<<<<<<< HEAD
-						We are a remote design agency based in Chicago,
-						working with clients around the world. As passionate
-						designers, we love building products that are easy to use,
-						accessible, engaging, and delightful.
-=======
 						We are a software and engineering team based in{" "}
-						<strong>Chicago, IL</strong>, working with clients across
-						the U.S. and worldwide. We build web and mobile applications, AI
-						integrations, business systems, and custom platforms that are
-						reliable, accessible, and ready to scale.
->>>>>>> 14b3240634bdc2e281e41970b17db844714a2dd2
+						<strong>Chicago, IL</strong>, working with clients across the U.S.
+						and worldwide. We build web and mobile applications, AI integrations,
+						business systems, and custom platforms that are reliable, accessible,
+						and ready to scale.
 					</p>
 				</LeftContainer>
 			</Container>

@@ -2,24 +2,19 @@ export const companyInfo = {
 	name: "AnchorStackTech",
 	tagline: "Custom Software Development Company in Chicago",
 	email: "hello@anchorstacktech.com",
-<<<<<<< HEAD
-	phone: "+1 (312) 259-5012",
+	phone: "+1 (312) 259-5011",
+	/** Use for `tel:` links and structured data (Google Voice). */
+	phoneTel: "+13122595011",
 	address: "6550 N. Damen Ave. Apartment 107, Chicago, IL 60645",
 	city: "Chicago",
 	state: "IL",
 	zip: "60645",
 	country: "US",
-=======
-	phone: "+1 (312) 259-5011",
-	/** Use for `tel:` links and structured data (Google Voice). */
-	phoneTel: "+13122595011",
-	address: "6550 N. Damen Ave. Apartment 107, Chicago, IL 60645",
 	/** Same location as Fischer Software Company on Google Maps (suite / office). */
 	officeMapOpenUrl:
 		"https://www.google.com/maps/place/Fischer+Software+Company/@42.0010258,-87.6805104,17z/data=!3m1!4b1!4m6!3m5!1s0x880fd1aa0713cb89:0xb0869c93b7307314!8m2!3d42.0010258!4d-87.6805104!16s%2Fg%2F11z2jdj0pg?entry=ttu",
 	officeMapEmbedUrl:
 		"https://maps.google.com/maps?q=42.0010258,-87.6805104&z=17&hl=en&output=embed",
->>>>>>> 14b3240634bdc2e281e41970b17db844714a2dd2
 	logoPath: "/logo/anchorstacktech-logo.svg",
 	faviconPath: "/favicon.svg",
 	liveChatUrl: "https://wa.me/13122595011",
@@ -1383,7 +1378,7 @@ export const blogItems = [
 		title: "How Modern Web Development Improves Performance, SEO, and Conversion",
 		category: "Web Development",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Modern web development helps businesses improve speed, search visibility, and customer conversion.",
@@ -1395,7 +1390,7 @@ export const blogItems = [
 		title: "When a Business Website Needs a Rebuild Instead of a Simple Redesign",
 		category: "Web Development",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Some websites need structural improvement, not just a visual refresh.",
@@ -1407,7 +1402,7 @@ export const blogItems = [
 		title: "Why Mobile App Solutions Create Stronger Customer Engagement",
 		category: "Mobile App Solutions",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Mobile apps help businesses build direct, consistent, and valuable user engagement.",
@@ -1419,7 +1414,7 @@ export const blogItems = [
 		title: "Native vs Cross-Platform Mobile App Solutions: Choosing the Right Strategy",
 		category: "Mobile App Solutions",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"The right mobile development approach depends on performance, budget, and product goals.",
@@ -1431,7 +1426,7 @@ export const blogItems = [
 		title: "How Odoo Development Improves Operational Efficiency Across Teams",
 		category: "Odoo Development",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Odoo development helps businesses unify workflows and reduce manual operations.",
@@ -1443,7 +1438,7 @@ export const blogItems = [
 		title: "What Businesses Should Plan Before an Odoo Migration or Upgrade",
 		category: "Odoo Development",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Successful Odoo upgrades require planning around data, custom modules, and integrations.",
@@ -1455,7 +1450,7 @@ export const blogItems = [
 		title: "A Practical AI Integration Roadmap for Modern Businesses",
 		category: "AI Integration & Platforms",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"AI integration works best when it starts with clear business problems and measurable outcomes.",
@@ -1467,7 +1462,7 @@ export const blogItems = [
 		title: "How Internal AI Platforms Reduce Repetitive Work and Improve Productivity",
 		category: "AI Integration & Platforms",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Internal AI tools can streamline support, analysis, and daily operational tasks.",
@@ -1479,7 +1474,7 @@ export const blogItems = [
 		title: "Blockchain Solutions Beyond Crypto: Practical Business Use Cases",
 		category: "Blockchain Solutions",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Blockchain can support trust, transparency, and secure digital processes across industries.",
@@ -1491,7 +1486,7 @@ export const blogItems = [
 		title: "Why Smart Contract Development Requires Security-First Planning",
 		category: "Blockchain Solutions",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Smart contracts should be designed with security, testing, and long-term reliability in mind.",
@@ -1503,7 +1498,7 @@ export const blogItems = [
 		title: "Why Desktop Software Still Matters for Reliability and Operational Control",
 		category: "Desktop Software",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Desktop software remains important for performance, security, and specialized workflows.",
@@ -1515,7 +1510,7 @@ export const blogItems = [
 		title: "How Secure Desktop Software Protects Sensitive Business Operations",
 		category: "Desktop Software",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Secure desktop applications help businesses protect devices, data, and internal workflows.",
@@ -1527,7 +1522,7 @@ export const blogItems = [
 		title: "How Custom Software Solves Workflow Problems That Generic Tools Cannot",
 		category: "Custom Software",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Custom software gives businesses a better fit for their real processes and growth goals.",
@@ -1539,7 +1534,7 @@ export const blogItems = [
 		title: "Why Ongoing Software Maintenance Protects Long-Term Business Value",
 		category: "Custom Software",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Maintenance keeps software secure, stable, efficient, and ready for future growth.",
@@ -1551,7 +1546,7 @@ export const blogItems = [
 		title: "How Connected Business Systems Improve Visibility and Decision-Making",
 		category: "Business Systems",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Integrated business systems help leaders make faster and more accurate decisions.",
@@ -1563,7 +1558,7 @@ export const blogItems = [
 		title: "Building Scalable Business Systems for Long-Term Operational Growth",
 		category: "Business Systems",
 		image: "/home/work1.webp",
-		authorName: "Nelson Hermous",
+		authorName: "Nelson Hermance",
 		authorAvatar: "/about-us/avatar-placeholder.svg",
 		excerpt:
 			"Scalable business systems create a stronger foundation for growth, automation, and control.",
