@@ -2313,6 +2313,14 @@ export const teamMembers = [
 		linkedin: "https://www.linkedin.com/",
 	},
 	{
+		name: "Bjorn Andersson",
+		role: "Verified HR Business Partner",
+		image: "/about-us/Andersson.png",
+		email: "bjorn.andersson@anchorstacktech.com",
+		whatsapp: "https://wa.me/13122595011",
+		linkedin: "https://www.linkedin.com/",
+	},
+	{
 		name: "Chao Wang",
 		role: "Lead Software Engineer",
 		image: "/about-us/chao.webp",
@@ -2351,6 +2359,14 @@ export const teamMembers = [
 		email: "lesterpaderan@anchorstacktech.com",
 		whatsapp: "https://wa.me/639940294186",
 		linkedin: "https://www.linkedin.com/in/lester-bonganay-paderan-59030b3a8/",
+	},
+	{
+		name: "Jin Yin",
+		role: "Senior QA Engineer",
+		image: "/about-us/jinin.png",
+		email: "jinyin@anchorstacktech.com",
+		whatsapp: "https://wa.me/13122595011",
+		linkedin: "https://www.linkedin.com/in/jin-yin-525b1a396/",
 	},
 	{
 		name: "Zarah Santos Rivera",
