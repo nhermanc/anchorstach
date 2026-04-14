@@ -2315,7 +2315,7 @@ export const teamMembers = [
 	{
 		name: "Jin Yin",
 		role: "Verified HR Business Partner",
-		image: "/about-us/Anderjininsson.png",
+		image: "/about-us/jinin.png",
 		email: "jinin@anchorstacktech.com",
 		whatsapp: "",
 		linkedin: "https://www.linkedin.com/in/jin-yin-525b1a396/",
@@ -2366,7 +2366,7 @@ export const teamMembers = [
 		image: "/about-us/Andersson.png",
 		email: "",
 		whatsapp: "",
-		linkedin: "https://www.linkedin.com/in/jin-yin-525b1a396/",
+		linkedin: "",
 	},
 	{
 		name: "Zarah Santos Rivera",
