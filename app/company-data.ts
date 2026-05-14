@@ -2337,6 +2337,21 @@ export const teamMembers = [
 		linkedin: "https://www.linkedin.com/in/yaya-sow-a6135a38a/",
 	},
 	{
+		name: "Erik Wang",
+		role: "Senior Software Engineer",
+		image: "/about-us/erik-wang.jpg",
+		email: "hello@anchorstacktech.com",
+		linkedin: "http://www.linkedin.com/in/erik-wang-a578b340a",
+	},
+	{
+		name: "Ariel Cruz",
+		role: "Senior Software Engineer",
+		image: "/about-us/ariel-cruz.jpg",
+		email: "ariel.xceb@gmail.com",
+		whatsapp: "https://wa.me/12814063651",
+		linkedin: "https://www.linkedin.com/in/ariel-cruz-b0899a40a",
+	},
+	{
 		name: "Aboubacry Oumar Tall",
 		role: "Senior Odoo Developer",
 		image: "/about-us/tall.webp",
