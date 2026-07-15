@@ -2379,7 +2379,7 @@ export const teamMembers = [
 	{
 		name: "Andersson",
 		role: "Senior QA Engineer",
-		image: "/about-us/Andersson.png",
+		image: "/about-us/Andersson-1.png",
 		email: "",
 		whatsapp: "",
 		linkedin: "",
