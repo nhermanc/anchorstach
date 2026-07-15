@@ -2315,7 +2315,7 @@ export const teamMembers = [
 	{
 		name: "Jin Yin",
 		role: "Verified HR Business Partner",
-		image: "/about-us/jinin.png",
+		image: "/about-us/jinin-1.png",
 		email: "jinin@anchorstacktech.com",
 		whatsapp: "",
 		linkedin: "https://www.linkedin.com/in/jin-yin-525b1a396/",
@@ -2375,14 +2375,6 @@ export const teamMembers = [
 		email: "lesterpaderan@anchorstacktech.com",
 		whatsapp: "https://wa.me/639940294186",
 		linkedin: "https://www.linkedin.com/in/lester-bonganay-paderan-59030b3a8/",
-	},
-	{
-		name: "Andersson",
-		role: "Senior QA Engineer",
-		image: "/about-us/Andersson-1.png",
-		email: "",
-		whatsapp: "",
-		linkedin: "",
 	},
 	{
 		name: "Zarah Santos Rivera",
