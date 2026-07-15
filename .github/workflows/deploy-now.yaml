@@ -1,17 +1,32 @@
-# IONOS Deploy Now - Build workflow
-# Uses npm install instead of npm ci (works with or without package-lock.json)
-# If IONOS created a different workflow, edit it and change "npm ci" to "npm install"
+# DISABLED — conflicts with official IONOS Deploy Now.
+#
+# On every push, "Deploy Now: Orchestration" (anchorstach-orchestration.yaml)
+# already builds via anchorstach-build.yaml and deploys via deploy-to-ionos.yaml.
+#
+# This old v1 workflow used wrong inputs (project-id instead of project,
+# missing service-host / branch-id) and published the wrong folder (out vs deploy).
+# Left disabled so it cannot fail CI. Delete this file if you no longer need it.
+#
+# To re-enable a one-shot manual deploy with deploy-to-ionos-action@v1, you would need:
+#   project: ${{ secrets.IONOS_PROJECT_ID }}
+#   branch-id: ${{ secrets.IONOS_BRANCH_ID }}
+#   service-host: api-us.ionos.space
+#   dist-folder: deploy
+#   and: npm run build:deploy  (not npm run build)
 
-name: Deploy to IONOS
+name: Deploy to IONOS (legacy, disabled)
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type ENABLE only if you intentionally want this legacy path (prefer Deploy Now orchestration)"
+        required: true
+        type: string
 
 jobs:
   deploy:
+    if: ${{ inputs.confirm == 'ENABLE' }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,21 +39,18 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        env:
-          CI: true
-          SITE_URL: ${{ env.SITE_URL || 'https://example.com' }}
-        run: npm install
+        run: npm ci
 
-      - name: Build
+      - name: Build static site
         env:
           CI: true
-          SITE_URL: ${{ env.SITE_URL || 'https://example.com' }}
-          DEPLOYMENT_FOLDER: out
-        run: npm run build
+        run: npm run build:deploy
 
       - name: Deploy to IONOS
         uses: ionos-deploy-now/deploy-to-ionos-action@v1
         with:
-          project-id: ${{ secrets.IONOS_PROJECT_ID }}
+          project: ${{ secrets.IONOS_PROJECT_ID }}
+          branch-id: ${{ secrets.IONOS_BRANCH_ID }}
           api-key: ${{ secrets.IONOS_API_KEY }}
-          dist-folder: out
+          service-host: api-us.ionos.space
+          dist-folder: deploy
