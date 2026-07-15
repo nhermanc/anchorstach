@@ -2315,7 +2315,7 @@ export const teamMembers = [
 	{
 		name: "Jin Yin",
 		role: "Verified HR Business Partner",
-		image: "/about-us/jinin-1.png",
+		image: "/about-us/jinin-2.jpg",
 		email: "jinin@anchorstacktech.com",
 		whatsapp: "",
 		linkedin: "https://www.linkedin.com/in/jin-yin-525b1a396/",
