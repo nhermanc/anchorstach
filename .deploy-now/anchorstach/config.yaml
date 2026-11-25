@@ -1,0 +1,16 @@
+version: 1.0
+
+deploy:
+  # configuration part, which is taken at the FIRST deployment of each branch
+  bootstrap:
+    # commands that are executed at the real webspace NOT at build servers AFTER copying new files
+    post-deployment-remote-commands:
+
+  # configuration part, which is taken at ALL FURTHER deployments of this branch
+  recurring:
+
+# uncomment the following lines to configure cron jobs
+#runtime:
+#  cron-jobs:
+#    - command: my-cron-job-command # the deployment is located at $HOME/htdocs/ to execute a deployed script just prefix it accordingly
+#      schedule: 0 5 * * * # run every day at 5:00
