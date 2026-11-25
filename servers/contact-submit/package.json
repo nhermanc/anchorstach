@@ -6,6 +6,6 @@
     "node": ">=18"
   },
   "scripts": {
-    "start": "node api.js && node server.mjs"
+    "start": "node init && node server.mjs"
   }
 }

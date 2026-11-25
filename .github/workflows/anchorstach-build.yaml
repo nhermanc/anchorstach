@@ -14,7 +14,8 @@ on:
         type: string
 
 env:
-  DEPLOYMENT_FOLDER: out
+  # Must match `next export -o deploy` from `npm run build:deploy`
+  DEPLOYMENT_FOLDER: deploy
 
 jobs:
 # Please do not rename this job
@@ -36,9 +37,10 @@ jobs:
         env:
           CI: true
           SITE_URL: ${{ inputs.site-url }}
+          NEXT_PUBLIC_SITE_URL: ${{ inputs.site-url }}
         run: |
           npm ci
-          npm run build
+          npm run build:deploy
 
 # Please do not touch the following action
       - name: Store deployment content
