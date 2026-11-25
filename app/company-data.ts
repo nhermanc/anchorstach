@@ -2324,8 +2324,9 @@ export const teamMembers = [
 		name: "Erik Wang",
 		role: "Lead Software Engineer",
 		image: "/about-us/erik-wang.jpg",
-		email: "hello@anchorstacktech.com",
-		linkedin: "http://www.linkedin.com/in/erik-wang-a578b340a",
+		whatspp: "https://wa.me/12142644112",
+		email: "eric.wang@anchorstacktech.com",
+		linkedin: "https://linkedin.com/in/ericwang1992",
 	},
 	{
 		name: "Chao Wang",
